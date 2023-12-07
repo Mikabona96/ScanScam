@@ -2,10 +2,10 @@
 import React, { FC } from 'react';
 
 // Components
-import { ErrorBoundary } from '../../components';
+import { ErrorBoundary } from '@/view/components';
 
 // Elements
-import { HelloBurst } from '../../elements';
+import { HelloBurst } from '@/view/elements';
 
 // Styles
 import { Container } from './styles';

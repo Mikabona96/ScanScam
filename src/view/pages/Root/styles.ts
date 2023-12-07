@@ -1,4 +1,5 @@
 // Core
+// import { defaultTheme } from '@/assets';
 import styled from 'styled-components';
 
 export const Container = styled.section`
