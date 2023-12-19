@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 // Core
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 // Bus
 // import {} from '../../../bus/'
@@ -11,6 +11,8 @@ import CardImage from '@/assets/images/RootPage/Card.png';
 
 // Styles
 import * as S from './styles';
+import { CustomLink } from '@/view/elements';
+import { useComponentWidth } from '@/tools/hooks';
 
 // Types
 type PropTypes = {
@@ -18,6 +20,8 @@ type PropTypes = {
 }
 
 export const FifthBlock: FC<PropTypes> = () => {
+    const { ref, width } = useComponentWidth();
+    const [ currentSlide, setCurrentSlide ] = useState(0);
     const cards = [
         {
             date:        '20 March 2023',
@@ -68,15 +72,17 @@ export const FifthBlock: FC<PropTypes> = () => {
             <S.Title>Insights and Updates</S.Title>
             <S.Subtitle>Stay informed with our latest articles and helpful tips</S.Subtitle>
             <S.Slider>
-                <S.Track>
+                <S.Track $translate = { width * currentSlide }>
                     {
                         cards.map((card, idx) => {
                             return (
                                 <S.Card
-                                    key = { card.title +  idx }>
+                                    key = { card.title +  idx }
+                                    ref = { ref }>
                                     <S.ImageContainer>
                                         <img
                                             alt = ''
+                                            draggable = { false }
                                             src = { CardImage }
                                             style = {{ transition: '.3s ease' }}
                                         />
@@ -86,30 +92,54 @@ export const FifthBlock: FC<PropTypes> = () => {
                                     <S.CardDescription>
                                         {card.description}
                                     </S.CardDescription>
-                                    <S.LinkWrapper>
-                                        <CircleRightIcon />
-                                        <span>Find Out More</span>
-                                    </S.LinkWrapper>
+                                    <CustomLink
+                                        $styles = { S.LinkStyles }
+                                        to = { card.link }>
+                                        <S.LinkWrapper>
+                                            <CircleRightIcon />
+                                            <span style = {{ marginLeft: '4px' }}>Find Out More</span>
+                                        </S.LinkWrapper>
+                                    </CustomLink>
                                 </S.Card>
                             );
                         })
                     }
                 </S.Track>
                 <S.Navigation>
-                    <Arrow style = {{ cursor: 'pointer' }} />
+                    <Arrow
+                        style = {{ cursor: 'pointer' }}
+                        onClick = { () => {
+                        if (currentSlide === 0) {
+                            return;
+                        }
+                        setCurrentSlide((prev) => prev - 1);
+                    } }
+                    />
                     <S.ProgressButtonContainer>
                         {
                             cards.map((card, idx) => idx === 0
                                 ? <S.ProgressButton
-                                        $isActive
+                                        $isActive = { currentSlide === idx }
                                         key = { idx }
+                                        onClick = { () => setCurrentSlide(idx) }
                                   /> : <S.ProgressButton
-                                      $isActive = { false }
+                                      $isActive = { currentSlide === idx }
                                       key = { idx }
+                                      onClick = { () => setCurrentSlide(idx) }
                                        />)
                         }
                     </S.ProgressButtonContainer>
-                    <Arrow style = {{ transform: 'rotate(180deg)', cursor: 'pointer' }} />
+                    <Arrow
+                        style = {{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+                        onClick = { () => {
+                            if (cards.length - 1 <= currentSlide) {
+                                console.log('here', currentSlide);
+
+                               return;
+                            }
+                            setCurrentSlide((prev) => prev + 1);
+                        } }
+                    />
                 </S.Navigation>
             </S.Slider>
             <S.Button>Read More on Our Blog</S.Button>

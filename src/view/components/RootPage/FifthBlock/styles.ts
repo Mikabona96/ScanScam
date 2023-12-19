@@ -1,7 +1,11 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
 import { ButtonStyles } from '@/assets/styles/styles';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+export const LinkStyles = css`
+    padding:  0;
+`;
 
 export const Container = styled.section`
     width: 100%;
@@ -36,11 +40,13 @@ export const Slider = styled.div`
     height: 640px;
 `;
 
-export const Track = styled.div`
+export const Track = styled.div<{$translate: number}>`
     display: flex;
     width: fit-content;
     justify-content: space-between;
     flex-wrap: nowrap;
+    transform: translateX(${({ $translate }) => -$translate + 'px'});
+    transition: all.3s ease;
 `;
 
 
@@ -51,6 +57,14 @@ export const Card = styled.div`
     flex-direction: column;
     text-align: left;
     margin-right: 24px;
+    cursor: default;
+    &:hover img  {
+        scale: 1.2;
+        transition: all .3s ease;
+    }
+    ${({ theme }) => theme.media('max').md} {
+        width: 200px;
+    }
 `;
 
 export const CardDate = styled.span`
@@ -84,7 +98,7 @@ export const CardDescription = styled.p`
 `;
 
 export const LinkWrapper = styled.div`
-    font-family: ${MyFonts.THICCCBOI.regular};
+    font-family: ${MyFonts.THICCCBOI.medium};
     margin-top: 25px;
     display: flex;
     align-items: center;
@@ -135,8 +149,4 @@ export const ImageContainer = styled.div`
     width: '278px';
     height: '302px';
     overflow: hidden;
-    &:hover img  {
-        scale: 1.2;
-        transition: all .3s ease;
-    }
 `;

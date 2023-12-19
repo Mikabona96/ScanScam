@@ -53,6 +53,9 @@ export const SearchBar = styled.div`
         box-shadow: 0px 0px 0px 2px rgba(151, 71, 255, 0.20);
         border-radius: 2px;
     }
+    &:hover {
+        border-bottom: 1px solid ${({ theme }) => theme.palette.purple.main};
+    }
 `;
 
 export const Input = styled.input`

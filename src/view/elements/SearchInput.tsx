@@ -26,12 +26,17 @@ const Input = styled.input`
     padding: 12px;
     border-radius: 2px;
     border: 1px solid ${({ theme }) => theme.palette.gray.lightGrey};
+    outline: 0;
     &::placeholder {
         font-family: ${MyFonts.THICCCBOI.regular};
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         color: ${({ theme }) => theme.text.gray.secondary};
+    }
+    &:focus {
+        border: 1px solid ${({ theme }) => theme.palette.purple.main};
+        box-shadow: 0px 0px 0px 2px rgba(96, 35, 250, 0.20);
     }
 `;
 

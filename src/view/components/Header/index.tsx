@@ -12,7 +12,7 @@ import { SearchIcon } from '@/assets/images/icons';
 import { useTheme, css } from 'styled-components';
 import { CustomLink } from '@/view/elements';
 import { MyFonts } from '@/assets/fonts';
-import { useScroll } from '@/tools/hooks/useScroll';
+import { useScroll } from '@/tools/hooks';
 
 // Types
 type PropTypes = {
