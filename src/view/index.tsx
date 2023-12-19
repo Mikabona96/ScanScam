@@ -10,6 +10,7 @@ import { useTogglesRedux } from '../bus/client/toggles';
 
 // Assets
 import { GlobalStyles, defaultTheme, FontStyles } from '../assets';
+import { Footer, Header } from './components';
 
 // Styles
 export const AppContainer = styled.div`
@@ -38,7 +39,9 @@ export const App: FC = () => {
             <GlobalStyles />
             <FontStyles />
             <AppContainer>
+                <Header />
                 <Routes />
+                <Footer />
             </AppContainer>
         </ThemeProvider>
     );

@@ -56,9 +56,12 @@ export const Card = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-
+    transition: all.3s ease;
     background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(50px);
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
 `;
 
 export const CardTitle = styled.h5`

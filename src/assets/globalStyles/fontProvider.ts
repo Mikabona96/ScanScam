@@ -1,4 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components';
+import THICCCBOIMEDIUM from '../fonts/THICCCBOI/THICCCBOI-Medium.ttf';
 import THICCCBOIREGULAR from '../fonts/THICCCBOI/THICCCBOI-Regular.ttf';
 import THICCCBOIBOLD from '../fonts/THICCCBOI/THICCCBOI-Bold.ttf';
 import { MyFonts } from '../fonts';
@@ -14,10 +15,10 @@ const fontFaces = css`
     }
     /* font here */
 
-    /* @font-face {
-        font-family: 'THICCCBOIREGULAR';
-        src: url(${THICCCBOIREGULAR}) format('ttf'),
-    } */
+    @font-face {
+        font-family: ${MyFonts.THICCCBOI.medium};
+        src: url(${THICCCBOIMEDIUM}),
+    }
 `;
 
 export const FontStyles = createGlobalStyle`

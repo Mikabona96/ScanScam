@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 
 // Components
-import { ErrorBoundary, FifthBlock, FirstBlock, Footer, FourthBlock, SecondBlock, ThirdBlock } from '@/view/components';
+import { ErrorBoundary, FifthBlock, FirstBlock, FourthBlock, SecondBlock, ThirdBlock } from '@/view/components';
 
 // Styles
 import { Container, Bottom, BottomTextWrapper, Text, Button } from './styles';
@@ -21,7 +21,6 @@ const Root: FC = () => {
             <ThirdBlock />
             <FourthBlock />
             <FifthBlock />
-            <Footer />
         </Container>
     );
 };
