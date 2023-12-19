@@ -2,18 +2,21 @@
 import React, { FC } from 'react';
 
 // Components
-import { ErrorBoundary } from '@/view/components';
-
-// Elements
-import { HelloBurst } from '@/view/elements';
+import { ErrorBoundary, FirstBlock } from '@/view/components';
 
 // Styles
-import { Container } from './styles';
+import { Container, Bottom, BottomTextWrapper, Text, Button } from './styles';
 
 const Root: FC = () => {
     return (
         <Container>
-            <HelloBurst />
+            <FirstBlock />
+            <Bottom>
+                <BottomTextWrapper>
+                    <Text>Keep the web safe – report suspicious activity</Text>
+                    <Button>Report a Scam</Button>
+                </BottomTextWrapper>
+            </Bottom>
         </Container>
     );
 };

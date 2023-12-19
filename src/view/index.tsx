@@ -9,12 +9,14 @@ import { Routes } from './routes';
 import { useTogglesRedux } from '../bus/client/toggles';
 
 // Assets
-import { GlobalStyles, defaultTheme } from '../assets';
+import { GlobalStyles, defaultTheme, FontStyles } from '../assets';
 
 // Styles
 export const AppContainer = styled.div`
-    height: 100vh;
-    width: 100vw;
+    margin: 0 auto;
+    height: 100%;
+    max-width: 1440px;
+    width: 100%;
 `;
 
 export const App: FC = () => {
@@ -34,6 +36,7 @@ export const App: FC = () => {
     return (
         <ThemeProvider theme = { defaultTheme }>
             <GlobalStyles />
+            <FontStyles />
             <AppContainer>
                 <Routes />
             </AppContainer>
