@@ -10,9 +10,14 @@ export interface ITheme {
         purple: {
             main: string
             violet: string
+            dark: string
+            dark2: string
         },
         gray: {
             lightGrey: string
+        },
+        black: {
+            dark: string
         }
     },
     text: {
@@ -55,9 +60,14 @@ export const defaultTheme: ITheme = {
         purple: {
             main:   '#6023FA',
             violet: '#D939DE',
+            dark:   '#1F0D4C ',
+            dark2:  '#27115E  ',
         },
         gray: {
             lightGrey: '#D9D9D9',
+        },
+        black: {
+            dark: '#070411',
         },
     },
     text: {
