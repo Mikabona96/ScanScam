@@ -1,4 +1,6 @@
 // MarkerGen re-export
+export * from './Footer';
+export * from './RootPage/FifthBlock';
 export * from './RootPage/FourthBlock';
 export * from './RootPage/ThirdBlock';
 export * from './RootPage/SecondBlock';

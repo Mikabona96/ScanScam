@@ -3,3 +3,8 @@ export * from './ip';
 export * from './location';
 export * from './search';
 export * from './cardImage';
+export * from './circleRight';
+export * from './arrow';
+export * from './telegram';
+export * from './linkedIn';
+export * from './x';

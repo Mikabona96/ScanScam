@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 
 // Components
-import { ErrorBoundary, FirstBlock, FourthBlock, SecondBlock, ThirdBlock } from '@/view/components';
+import { ErrorBoundary, FifthBlock, FirstBlock, Footer, FourthBlock, SecondBlock, ThirdBlock } from '@/view/components';
 
 // Styles
 import { Container, Bottom, BottomTextWrapper, Text, Button } from './styles';
@@ -10,7 +10,7 @@ import { Container, Bottom, BottomTextWrapper, Text, Button } from './styles';
 const Root: FC = () => {
     return (
         <Container>
-            {/* <FirstBlock />
+            <FirstBlock />
             <Bottom>
                 <BottomTextWrapper>
                     <Text>Keep the web safe – report suspicious activity</Text>
@@ -18,8 +18,10 @@ const Root: FC = () => {
                 </BottomTextWrapper>
             </Bottom>
             <SecondBlock />
-            <ThirdBlock /> */}
+            <ThirdBlock />
             <FourthBlock />
+            <FifthBlock />
+            <Footer />
         </Container>
     );
 };
