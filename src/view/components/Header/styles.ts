@@ -11,12 +11,13 @@ export const appearanceAnimation = keyframes`
  100% { opacity: 1; }
 `;
 
-export const Header = styled.header<{$isActive?: boolean}>`
-    position: sticky;
+export const Header = styled.header`
+    position: fixed;
+    max-width: 1440px;
+    width: 100%;
     position: -webkit-sticky;
     top: 0; /* required */
     padding: 24px 80px;
-    background: ${({ $isActive }) => $isActive ? '#fff' : 'transparent'};
     transition: all 1s ease;
     z-index: 9999;
 `;
@@ -40,11 +41,11 @@ export const Column = styled.li<{$styles?: RuleSet<object>}>`
 
 export const SearchBar = styled.div`
     display: flex;
+    width: 100%;
     box-sizing: border-box;
     align-items: center;
     padding: 12px;
     animation-name: ${appearanceAnimation};
-    border: 1px solid transparent;
     border-bottom: 1px solid ${({ theme }) => theme.palette.gray.lightGrey};
     animation-duration: 1s;
     transition: all.3s ease;
@@ -117,4 +118,8 @@ export const ScamReportButton = styled(ButtonStyles)`
         border: 1px solid ${({ theme }) => theme.button.dark};
         color: ${({ theme }) => theme.button.dark};
     }
+`;
+
+export const AnchorLink = styled.span<{$styles: RuleSet<object> | undefined}>`
+    ${({ $styles }) => $styles}
 `;

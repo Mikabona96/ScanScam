@@ -32,7 +32,7 @@ export const CustomLink: FC<PropTypes> = ({ to, label, children, $styles }) => {
     return (
         <Container
             $styles = { $styles }
-            to = '#'
+            to = { to }
             onClick = { (event) => {
                 window.location.href = to;
                 event.preventDefault();

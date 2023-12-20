@@ -10,7 +10,7 @@ import { Container, Bottom, BottomTextWrapper, Text, Button } from './styles';
 const Root: FC = () => {
     return (
         <Container>
-            {/* <FirstBlock />
+            <FirstBlock />
             <Bottom>
                 <BottomTextWrapper>
                     <Text>Keep the web safe – report suspicious activity</Text>
@@ -19,7 +19,7 @@ const Root: FC = () => {
             </Bottom>
             <SecondBlock />
             <ThirdBlock />
-            <FourthBlock /> */}
+            <FourthBlock />
             <FifthBlock />
         </Container>
     );
