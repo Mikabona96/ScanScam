@@ -44,6 +44,7 @@ export const SearchBar = styled.div`
     align-items: center;
     padding: 12px;
     animation-name: ${appearanceAnimation};
+    border: 1px solid transparent;
     border-bottom: 1px solid ${({ theme }) => theme.palette.gray.lightGrey};
     animation-duration: 1s;
     transition: all.3s ease;

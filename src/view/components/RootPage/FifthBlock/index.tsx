@@ -72,7 +72,7 @@ export const FifthBlock: FC<PropTypes> = () => {
             <S.Title>Insights and Updates</S.Title>
             <S.Subtitle>Stay informed with our latest articles and helpful tips</S.Subtitle>
             <S.Slider>
-                <S.Track $translate = { width * currentSlide }>
+                <div style = {{ display: 'flex', transform: `translateX(-${currentSlide * width}px)`, transition: '.3s ease' }}>
                     {
                         cards.map((card, idx) => {
                             return (
@@ -104,13 +104,13 @@ export const FifthBlock: FC<PropTypes> = () => {
                             );
                         })
                     }
-                </S.Track>
+                </div>
                 <S.Navigation>
                     <Arrow
                         style = {{ cursor: 'pointer' }}
                         onClick = { () => {
                         if (currentSlide === 0) {
-                            return;
+                            setCurrentSlide(cards.length);
                         }
                         setCurrentSlide((prev) => prev - 1);
                     } }
@@ -133,9 +133,7 @@ export const FifthBlock: FC<PropTypes> = () => {
                         style = {{ transform: 'rotate(180deg)', cursor: 'pointer' }}
                         onClick = { () => {
                             if (cards.length - 1 <= currentSlide) {
-                                console.log('here', currentSlide);
-
-                               return;
+                               setCurrentSlide(-1);
                             }
                             setCurrentSlide((prev) => prev + 1);
                         } }

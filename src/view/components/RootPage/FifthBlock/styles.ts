@@ -118,6 +118,7 @@ export const Navigation = styled.div`
     left: 50%;
     width: fit-content;
     transform: translateX(calc(-50% - 10px));
+    user-select: none;
 `;
 
 export const ProgressButtonContainer = styled.div`

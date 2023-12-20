@@ -30,4 +30,5 @@ export const ButtonStyles = styled.button<PropTypes>`
     line-height: 24px;
     transition: all .3s ease;
     cursor: pointer;
+    user-select: none;
 `;

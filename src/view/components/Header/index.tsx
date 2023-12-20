@@ -64,7 +64,7 @@ export const Header: FC<PropTypes> = () => {
     `;
 
     return (
-        <S.Header $isActive = { scrolled } >
+        <S.Header $isActive >
             <S.Wrapper>
                 <S.Column>
                     <CustomLink to = '#'>
@@ -80,11 +80,14 @@ export const Header: FC<PropTypes> = () => {
                             <S.Input
                                 placeholder = 'Enter a domain or URL (e.g., www.example.com)'
                             />
-                            <SearchIcon
-                                color = { theme.palette.purple.main }
-                                height = { 24 }
-                                width = { 24 }
-                            />
+                            <div style = {{ width: '24px', height: '24px' }}>
+
+                                <SearchIcon
+                                    color = { theme.palette.purple.main }
+                                    height = { 24 }
+                                    width = { 24 }
+                                />
+                            </div>
                         </S.SearchBar>
                     )}
                 </S.Column>
