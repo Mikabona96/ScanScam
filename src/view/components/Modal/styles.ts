@@ -1,7 +1,14 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
 import { ButtonStyles } from '@/assets/styles/styles';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+export const appearanceAnimation = keyframes`
+    0% { opacity: 0 }
+    30% { opacity: 0.5 }
+    40% { opacity: 0.7; }
+    100% { opacity: 1; }
+`;
 
 export const Overlay = styled.div`
     position: fixed;
@@ -25,8 +32,7 @@ export const FormWrapper = styled.div`
     box-shadow: 0px 8px 16px 0px rgba(112, 115, 119, 0.12);
     max-width: 526px;
     width: 100%;
-    max-height: 564px;
-    height: 100%;
+    max-height: fit-content;
     padding: 24px;
     background: #fff;
     z-index: 99999999;
@@ -73,10 +79,13 @@ export const Text = styled.p`
     line-height: 24px;
 `;
 
-export const StepWrapper = styled.div`
-    display: flex;
+export const StepWrapper = styled.div<{$display: boolean}>`
+    display: ${({ $display }) => $display ? 'flex' : 'none'};
     flex-direction: column;
     width: 100%;
+    animation-name: ${appearanceAnimation};
+    animation-duration: 1s ease;
+    transition: all.3s ease;
 `;
 
 export const Divider = styled.div`
@@ -216,5 +225,11 @@ export const CheckBoxText = styled.p`
     line-height: 17px;
     max-width: 400px;
     width: 100%;
+`;
+
+export const SomeComp = styled.div`
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
 `;
 

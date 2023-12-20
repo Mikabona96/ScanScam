@@ -27,10 +27,11 @@ export const Modal: FC<PropTypes> = ({ onClose, title, children }) => {
     const [ isMounted, setMounted ] = useState(false);
     const [ step, setStep ] = useState(0);
 
-    const formTitles = [ 'Report a Scam', 'Report a Scam' ];
+    const formTitles = [ 'Report a Scam', 'Report a Scam', 'Report Submitted' ];
     const formTexts = [
         'Help keep the web safe by reporting scams. Share the details below, and let\'s work together for a secure online space!',
         'Would you like to receive updates on the resolution of this report?',
+        'Your report has been successfully submitted. Thank you for taking the initiative to make the web safer!',
     ];
 
     const rootRef = useRef<HTMLDivElement>(null);
@@ -69,6 +70,19 @@ export const Modal: FC<PropTypes> = ({ onClose, title, children }) => {
         onClose?.();
     }, [ onClose ]);
 
+    useEffect(() => {
+        if (step !== 2) {
+            return;
+        }
+        let timerId = setTimeout(() => {
+            onClose?.();
+        }, 5000);
+
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [ step ]);
+
     return (
         isMounted
             ? (
@@ -87,8 +101,9 @@ export const Modal: FC<PropTypes> = ({ onClose, title, children }) => {
                                 <S.Title>{formTitles[ step ]}</S.Title>
                                 <S.Text>{formTexts[ step ]}</S.Text>
                                 {step < 2 && <S.Divider />}
-                                {step === 0 && <Step1 setStep = { setStep } />}
-                                {step === 1 && <Step2 setStep = { setStep } />}
+                                <S.StepWrapper $display = { step === 0 }><Step1 setStep = { setStep } /></S.StepWrapper>
+                                <S.StepWrapper $display = { step === 1 }><Step2 setStep = { setStep } /></S.StepWrapper>
+                                {step === 2 && <S.Button onClick = { onClose }>Close</S.Button>}
                             </S.Form>
                         </S.FormWrapper>
                     </S.Overlay>

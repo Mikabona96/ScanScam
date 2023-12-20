@@ -8,7 +8,7 @@ type PropTypes = {
 
 export const Step1: FC<PropTypes> = ({ setStep }) => {
     return (
-        <S.StepWrapper>
+        <>
             <S.IputsContainer>
                 <S.InputWrapper>
                     <S.TextLabel>Scam URL or domain</S.TextLabel>
@@ -20,6 +20,6 @@ export const Step1: FC<PropTypes> = ({ setStep }) => {
                 </S.InputWrapper>
             </S.IputsContainer>
             <S.Button onClick = { () => setStep(1) }>Continue</S.Button>
-        </S.StepWrapper>
+        </>
     );
 };

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import * as S from './styles';
 
@@ -7,34 +7,64 @@ type PropTypes = {
 }
 
 export const Step2: FC<PropTypes> = ({ setStep }) => {
+    const [ data, setData ] = useState({
+        recieveUpdates: true,
+        checkbox:       true,
+    });
+
+    const radioButtonHandler = (mode: 'active' | 'disabled') => {
+        if (mode === 'active') {
+            setData((prev) => ({ ...prev, recieveUpdates: true }));
+        }
+        if (mode === 'disabled') {
+            setData((prev) => ({ ...prev, recieveUpdates: false }));
+        }
+    };
+
     return (
-        <S.StepWrapper>
+        <>
             <S.RadioButtonsContainer>
                 <S.RadioButtonWrapper>
                     <S.RadioButton
-                        checked
+                        checked = { data.recieveUpdates }
                         type = 'radio'
+                        onChange = { () => radioButtonHandler('active') }
                     />
                     <S.RadioButtonText>Yes, I'd like to receive updates</S.RadioButtonText>
                 </S.RadioButtonWrapper>
                 <S.RadioButtonWrapper>
-                    <S.RadioButton type = 'radio' />
+                    <S.RadioButton
+                        checked = { !data.recieveUpdates }
+                        type = 'radio'
+                        onChange = { () => radioButtonHandler('disabled') }
+                    />
                     <S.RadioButtonText>Stay anonymous</S.RadioButtonText>
                 </S.RadioButtonWrapper>
-                <S.Divider/>
-                <S.InputWrapper>
-                    <S.TextLabel>Share your email for updates</S.TextLabel>
-                    <S.Input placeholder = 'your.email@example.com' />
-                </S.InputWrapper>
+                {data.recieveUpdates
+                    && (
+                        <>
+                            <S.Divider/>
+                            <S.InputWrapper>
+                                <S.TextLabel>Share your email for updates</S.TextLabel>
+                                <S.Input placeholder = 'your.email@example.com' />
+                            </S.InputWrapper>
+                        </>)
+                }
             </S.RadioButtonsContainer>
-            <S.CheckboxWrapper>
-                <S.CheckBox type = 'checkbox' />
-                <S.CheckBoxText>
-                    I agree to be contacted if there are questions
-                    or additional information is needed regarding my report.
-                </S.CheckBoxText>
-            </S.CheckboxWrapper>
-            <S.Button onClick = { () => setStep(0) }>Submit a Report</S.Button>
-        </S.StepWrapper>
+            {data.recieveUpdates && (
+                <S.CheckboxWrapper>
+                    <S.CheckBox
+                        checked = { data.checkbox }
+                        type = 'checkbox'
+                        onChange = { () => setData((prev) => ({ ...prev, checkbox: !data.checkbox })) }
+                    />
+                    <S.CheckBoxText>
+                        I agree to be contacted if there are questions
+                        or additional information is needed regarding my report.
+                    </S.CheckBoxText>
+                </S.CheckboxWrapper>
+            )}
+            <S.Button onClick = { () => setStep(2) }>Submit a Report</S.Button>
+        </>
     );
 };
