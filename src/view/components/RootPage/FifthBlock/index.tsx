@@ -19,10 +19,7 @@ type PropTypes = {
     /* type props here */
 }
 
-export const FifthBlock: FC<PropTypes> = () => {
-    const { ref, width } = useComponentWidth();
-    const [ currentSlide, setCurrentSlide ] = useState(0);
-    const cards = [
+const cards = [
         {
             date:        '20 March 2023',
             title:       'Enhancing Security with FIDO Keys in 2FA Protocols',
@@ -67,12 +64,33 @@ export const FifthBlock: FC<PropTypes> = () => {
         },
     ];
 
+export const FifthBlock: FC<PropTypes> = () => {
+    const { ref, width } = useComponentWidth();
+    const [ currentSlide, setCurrentSlide ] = useState(0);
+
+    const arrowNavigationHandler = (direction: 'prev' | 'next') => {
+        if (direction === 'prev') {
+            if (currentSlide === 0) {
+                setCurrentSlide(cards.length);
+            }
+            setCurrentSlide((prev) => prev - 1);
+        }
+
+        if (direction === 'next') {
+            if (cards.length - 1 <= currentSlide) {
+                setCurrentSlide(-1);
+            }
+            setCurrentSlide((prev) => prev + 1);
+        }
+    };
+
     return (
         <S.Container>
             <S.Title>Insights and Updates</S.Title>
             <S.Subtitle>Stay informed with our latest articles and helpful tips</S.Subtitle>
             <S.Slider>
-                <div style = {{ display: 'flex', transform: `translateX(-${currentSlide * width}px)`, transition: '.3s ease' }}>
+                <div
+                    style = {{ display: 'flex', transform: `translateX(-${currentSlide * width}px)`, transition: '.3s ease' }}>
                     {
                         cards.map((card, idx) => {
                             return (
@@ -109,10 +127,7 @@ export const FifthBlock: FC<PropTypes> = () => {
                     <Arrow
                         style = {{ cursor: 'pointer' }}
                         onClick = { () => {
-                        if (currentSlide === 0) {
-                            setCurrentSlide(cards.length);
-                        }
-                        setCurrentSlide((prev) => prev - 1);
+                        arrowNavigationHandler('prev');
                     } }
                     />
                     <S.ProgressButtonContainer>
@@ -132,10 +147,7 @@ export const FifthBlock: FC<PropTypes> = () => {
                     <Arrow
                         style = {{ transform: 'rotate(180deg)', cursor: 'pointer' }}
                         onClick = { () => {
-                            if (cards.length - 1 <= currentSlide) {
-                               setCurrentSlide(-1);
-                            }
-                            setCurrentSlide((prev) => prev + 1);
+                            arrowNavigationHandler('next');
                         } }
                     />
                 </S.Navigation>

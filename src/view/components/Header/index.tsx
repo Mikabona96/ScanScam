@@ -12,17 +12,24 @@ import { SearchIcon } from '@/assets/images/icons';
 import { useTheme, css } from 'styled-components';
 import { CustomLink } from '@/view/elements';
 import { MyFonts } from '@/assets/fonts';
-import { useScroll } from '@/tools/hooks';
+import { useOverflowHidden, useScroll } from '@/tools/hooks';
 
 // Types
 type PropTypes = {
     /* type props here */
+    setModalActive: React.Dispatch<React.SetStateAction<boolean>>
+    isModalActive: boolean
 }
 
 
-export const Header: FC<PropTypes> = () => {
+export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
     const theme = useTheme();
     const scrolled = useScroll();
+    const overflowHandler = useOverflowHidden(isModalActive);
+
+    const handleModalOpen = () => {
+        setModalActive(true);
+    };
 
     const links = [
         {
@@ -105,7 +112,11 @@ export const Header: FC<PropTypes> = () => {
                                 );
                             })
                         }
-                        <S.ScamReportButton>Report a Scam</S.ScamReportButton>
+                        <S.ScamReportButton onClick = { () => {
+                            overflowHandler();
+                            handleModalOpen();
+                        } }>Report a Scam
+                        </S.ScamReportButton>
                         <S.LoginButton>Log in</S.LoginButton>
                     </S.LinksWrapper>
                 </S.Column>

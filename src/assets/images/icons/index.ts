@@ -8,3 +8,6 @@ export * from './arrow';
 export * from './telegram';
 export * from './linkedIn';
 export * from './x';
+export * from './closeIcon';
+export * from './warningIcon';
+export * from './successIcon';

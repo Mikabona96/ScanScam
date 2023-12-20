@@ -114,10 +114,9 @@ export const Navigation = styled.div`
     position: absolute;
     display: flex;
     bottom: 0;
-    margin: 0 8px;
     left: 50%;
     width: fit-content;
-    transform: translateX(calc(-50% - 10px));
+    transform: translateX(-50%);
     user-select: none;
 `;
 

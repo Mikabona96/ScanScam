@@ -6,7 +6,7 @@ type PropTypes = {
 }
 
 export const ButtonStyles = styled.button<PropTypes>`
-    max-width: 162px;
+    max-width: fit-content;
     width: 100%;
     max-height: 60px;
     height: 100%;
