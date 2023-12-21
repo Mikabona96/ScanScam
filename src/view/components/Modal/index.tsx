@@ -1,6 +1,8 @@
 // Core
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 import type { MouseEventHandler } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 // Bus
 // import {} from '../../../bus/'
 
@@ -12,20 +14,24 @@ import * as S from './styles';
 import { CloseIcon, SuccessIcon, WarningIcon } from '@/assets/images/icons';
 import { Step1 } from './step1';
 import { Step2 } from './step2';
+import { inithialState, schema } from './static';
 
 // Types
 type PropTypes = {
     /* type props here */
     onClose?: () => void;
-    title: string;
-    children: React.ReactNode;
 }
 
 const MODAL_CONTAINER_ID = 'modal-container-id';
 
-export const Modal: FC<PropTypes> = ({ onClose, title, children }) => {
+export const Modal: FC<PropTypes> = ({ onClose }) => {
     const [ isMounted, setMounted ] = useState(false);
     const [ step, setStep ] = useState(0);
+
+    const {  control, handleSubmit, formState: { errors }, trigger, setValue, resetField } = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
+    const onSubmit = (data: any) => {
+        console.log(data);
+    };
 
     const formTitles = [ 'Report a Scam', 'Report a Scam', 'Report Submitted' ];
     const formTexts = [
@@ -96,13 +102,33 @@ export const Modal: FC<PropTypes> = ({ onClose, title, children }) => {
                                 <CloseIcon />
                             </S.CloseBtn>
 
-                            <S.Form onSubmit = { (event) => event.preventDefault() }>
+                            <S.Form onSubmit = { (event) => {
+                                event.preventDefault();
+                                handleSubmit(onSubmit)();
+                            }
+                            }>
                                 {step < 2 ? <WarningIcon /> : <SuccessIcon />}
                                 <S.Title>{formTitles[ step ]}</S.Title>
                                 <S.Text>{formTexts[ step ]}</S.Text>
                                 {step < 2 && <S.Divider />}
-                                <S.StepWrapper $display = { step === 0 }><Step1 setStep = { setStep } /></S.StepWrapper>
-                                <S.StepWrapper $display = { step === 1 }><Step2 setStep = { setStep } /></S.StepWrapper>
+                                <S.StepWrapper $display = { step === 0 }>
+                                    <Step1
+                                        control = { control }
+                                        errors = { errors }
+                                        setStep = { setStep }
+                                        trigger = { trigger }
+                                    />
+                                </S.StepWrapper>
+                                <S.StepWrapper $display = { step === 1 }>
+                                    <Step2
+                                        control = { control }
+                                        errors = { errors }
+                                        resetField = { resetField }
+                                        setStep = { setStep }
+                                        setValue = { setValue }
+                                        trigger = { trigger }
+                                    />
+                                </S.StepWrapper>
                                 {step === 2 && <S.Button onClick = { onClose }>Close</S.Button>}
                             </S.Form>
                         </S.FormWrapper>

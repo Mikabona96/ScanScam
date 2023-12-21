@@ -143,17 +143,20 @@ const InputFields = css`
         border: 1px solid ${({ theme }) => theme.palette.purple.main};
         box-shadow: 0px 0px 0px 2px rgba(96, 35, 250, 0.20);
     }
+    transition: all .3s ease;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{$error?: boolean}>`
     ${InputFields}
     height: 48px;
+    border-color: ${({ $error, theme }) => $error ? theme.palette.error : theme.palette.gray.lightGrey};
 `;
 
-export const TextArea = styled.textarea`
+export const TextArea = styled.textarea<{$error?: boolean}>`
     ${InputFields}
     height: 123px;
     resize: none;
+    border-color: ${({ $error, theme }) => $error ? theme.palette.error : theme.palette.gray.lightGrey};
 `;
 
 export const Button = styled(ButtonStyles)`

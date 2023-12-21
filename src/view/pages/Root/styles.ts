@@ -45,7 +45,7 @@ export const Button = styled(ButtonStyles)`
     border-radius: 2px;
     margin: 0 auto;
 
-    &:hover {
+    &:active {
         background: ${({ theme }) => theme.button.dark};
         border: none;
     }

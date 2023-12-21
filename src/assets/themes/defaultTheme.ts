@@ -19,6 +19,7 @@ export interface ITheme {
         black: {
             dark: string
         }
+        error: string
     },
     text: {
         purple: {
@@ -54,7 +55,7 @@ export const defaultTheme: ITheme = {
         primary:   '#6023FA',
         secondary: '#fff',
         dark:      '#421BA3',
-        error:     '#FF0000',
+        error:     '#F04438',
     },
     palette: {
         purple: {
@@ -69,6 +70,7 @@ export const defaultTheme: ITheme = {
         black: {
             dark: '#070411',
         },
+        error: '#F04438',
     },
     text: {
         purple: {

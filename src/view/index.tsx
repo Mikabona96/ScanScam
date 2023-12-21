@@ -53,12 +53,10 @@ export const App: FC = () => {
             </AppContainer>
             {isModalActive && (
                 <Modal
-                    title = 'some modal title'
                     onClose = { () => {
                         overflowHandler();
                         setModalActive(false);
                     } }>
-                    Hello world
                 </Modal>
             )}
         </ThemeProvider>

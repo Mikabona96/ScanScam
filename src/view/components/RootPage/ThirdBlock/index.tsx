@@ -16,7 +16,7 @@ type PropTypes = {
 
 export const ThirdBlock: FC<PropTypes> = () => {
     return (
-        <S.Container>
+        <S.Container id = '#tools'>
             <S.Wrapper>
                 <S.Title>Empowering You with Tools</S.Title>
                 <S.Subtitle>Explore our suite of tools for a comprehensive online experience</S.Subtitle>
