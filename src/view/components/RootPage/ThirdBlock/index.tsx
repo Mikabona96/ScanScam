@@ -22,7 +22,9 @@ export const ThirdBlock: FC<PropTypes> = () => {
                 <S.Subtitle>Explore our suite of tools for a comprehensive online experience</S.Subtitle>
                 <S.CardsWrapper>
                     <S.Card>
-                        <SearchIcon />
+                        <S.IconWrapper>
+                            <SearchIcon />
+                        </S.IconWrapper>
                         <S.CardTitle>Domain Whois</S.CardTitle>
                         <S.CardDescription>
                             Uncover ownership and registration details seamlessly,
@@ -30,7 +32,9 @@ export const ThirdBlock: FC<PropTypes> = () => {
                         </S.CardDescription>
                     </S.Card>
                     <S.Card>
-                        <IpIcon />
+                        <S.IconWrapper>
+                            <IpIcon />
+                        </S.IconWrapper>
                         <S.CardTitle>IP Whois</S.CardTitle>
                         <S.CardDescription>
                             Discover ownership and location details for any IP address,
@@ -38,7 +42,9 @@ export const ThirdBlock: FC<PropTypes> = () => {
                         </S.CardDescription>
                     </S.Card>
                     <S.Card>
-                        <DownloadIcon />
+                        <S.IconWrapper>
+                            <DownloadIcon />
+                        </S.IconWrapper>
                         <S.CardTitle>Domain zone downloads</S.CardTitle>
                         <S.CardDescription>
                             Access and download essential domain zone data,
@@ -46,7 +52,9 @@ export const ThirdBlock: FC<PropTypes> = () => {
                         </S.CardDescription>
                     </S.Card>
                     <S.Card>
-                        <LocationIcon />
+                        <S.IconWrapper>
+                            <LocationIcon />
+                        </S.IconWrapper>
                         <S.CardTitle>Geolocation</S.CardTitle>
                         <S.CardDescription>
                             Explore precise location data, enriching your online encounters

@@ -4,10 +4,10 @@ export const SearchIcon = (props:  React.SVGProps<SVGSVGElement> & {color?: stri
     return (
         <svg
             fill = 'none'
-            height = { 40 }
+            height = { '100%' }
             style = {{ cursor: 'pointer' }}
             viewBox = '0 0 24 24'
-            width = { 40 }
+            width = { '100%' }
             xmlns = 'http://www.w3.org/2000/svg'
             { ...props }>
             <path

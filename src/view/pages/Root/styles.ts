@@ -27,6 +27,9 @@ export const BottomTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    ${({ theme }) => theme.media('max').md} {
+        text-align: center;
+    }
 `;
 
 export const Text = styled.h3`
@@ -36,6 +39,10 @@ export const Text = styled.h3`
     font-weight: 400;
     line-height: 32px;
     color: #fff;
+    ${({ theme }) => theme.media('max').md} {
+        font-size: 20px;
+        margin-bottom: 24px;
+    }
 `;
 
 export const Button = styled(ButtonStyles)`

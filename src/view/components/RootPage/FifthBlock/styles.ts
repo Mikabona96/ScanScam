@@ -11,6 +11,9 @@ export const Container = styled.section`
     width: 100%;
     padding: 200px 80px;
     text-align: center;
+     ${({ theme }) => theme.media('max').sm} {
+        padding: 24px;
+    };
 `;
 
 export const Title = styled.h3`
@@ -20,6 +23,10 @@ export const Title = styled.h3`
     font-style: normal;
     font-weight: 700;
     line-height: 56px;
+    ${({ theme }) => theme.media('max').sm} {
+        font-size: 24px;
+        line-height: 34px;
+    };
 `;
 
 export const Subtitle = styled.p`
@@ -30,14 +37,40 @@ export const Subtitle = styled.p`
     font-style: normal;
     font-weight: 400;
     line-height: 28px;
+    ${({ theme }) => theme.media('max').sm} {
+        font-size: 16px;
+    };
 `;
 
 export const Slider = styled.div`
     position: relative;
     margin-top: 48px;
     overflow: hidden;
+    max-width: 1280px;
     width: 100%;
     height: 640px;
+    ${({ theme }) => theme.media('max').md} {
+        width: 644px;
+        height: 600px;
+        margin-top: 24px;
+        margin-left: auto;
+        margin-right: auto;
+    };
+    ${({ theme }) => theme.media('max').sm} {
+        width: 320px;
+        height: 550px;
+        margin-top: 24px;
+        margin-left: auto;
+        margin-right: auto;
+    };
+    ${({ theme }) => theme.media('min').xl} {
+        width: fit-content;
+        height: 640px;
+        margin-top: 48px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+    };
 `;
 
 export const Track = styled.div<{$translate: number}>`
@@ -62,8 +95,17 @@ export const Card = styled.div`
         scale: 1.2;
         transition: all .3s ease;
     }
-    ${({ theme }) => theme.media('max').md} {
-        width: 200px;
+    ${({ theme }) => theme.media('max').sm} {
+        width: 320px;
+        flex-shrink: 0;
+        margin-right: auto;
+        padding-left: 20px;
+        align-items: center;
+        & img {
+            width: 100%;
+            width: 270px;
+            height: 270px;
+        }
     }
 `;
 
@@ -85,6 +127,9 @@ export const CardTitle = styled.h5`
     font-style: normal;
     font-weight: 600;
     line-height: 24px;
+     ${({ theme }) => theme.media('max').sm} {
+        font-size: 14px;
+    };
 `;
 
 export const CardDescription = styled.p`
@@ -95,6 +140,9 @@ export const CardDescription = styled.p`
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
+    ${({ theme }) => theme.media('max').sm} {
+        font-size: 14px;
+    };
 `;
 
 export const LinkWrapper = styled.div`
@@ -108,6 +156,9 @@ export const LinkWrapper = styled.div`
     font-weight: 500;
     line-height: 24px;
     cursor: pointer;
+    ${({ theme }) => theme.media('max').sm} {
+        font-size: 16px;
+    };
 `;
 
 export const Navigation = styled.div`

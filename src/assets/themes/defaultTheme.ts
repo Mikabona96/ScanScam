@@ -38,11 +38,12 @@ export interface ITheme {
         lg: string;
         md: string;
         sm: string;
+        xs: string;
     }
 }
 
 export const breakpoints = {
-    xl: '1140',
+    xl: '1440',
     lg: '960',
     md: '720',
     sm: '540',

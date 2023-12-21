@@ -16,6 +16,12 @@ export const Wrapper = styled.div`
     align-items: center;
     border-radius: 8px;
     background: ${({ theme }) => `linear-gradient(89deg, ${theme.palette.purple.dark} 0.16%, ${theme.palette.black.dark} 15.46%, ${theme.palette.black.dark} 77.6%, ${theme.palette.purple.dark2} 99.28%)`};
+    ${({ theme }) => theme.media('min').xs} {
+        padding: 24px;
+    }
+    ${({ theme }) => theme.media('min').lg} {
+        padding: 48px;
+    }
 `;
 
 export const Title = styled.h3`
@@ -25,6 +31,20 @@ export const Title = styled.h3`
     font-style: normal;
     font-weight: 700;
     line-height: 56px;
+    ${({ theme }) => theme.media('min').xs} {
+        font-size: 28px;
+        line-height: 38px;
+        text-align: center;
+    }
+    ${({ theme }) => theme.media('min').md} {
+        font-size: 38px;
+        line-height: 48px;
+        text-align: center;
+    }
+    ${({ theme }) => theme.media('min').lg} {
+        font-size: 48px;
+        line-height: 56px;
+    }
 `;
 
 export const Subtitle = styled.p`
@@ -35,6 +55,18 @@ export const Subtitle = styled.p`
     font-style: normal;
     font-weight: 400;
     line-height: 28px;
+    ${({ theme }) => theme.media('min').xs} {
+        font-size: 16px;
+        text-align: center;
+    }
+    ${({ theme }) => theme.media('min').md} {
+        font-size: 18px;
+        text-align: center;
+    }
+    ${({ theme }) => theme.media('min').lg} {
+        font-size: 20px;
+        text-align: center;
+    }
 `;
 
 export const CardsWrapper = styled.div`
@@ -42,6 +74,14 @@ export const CardsWrapper = styled.div`
     display: grid;
     grid-template: 1fr 1fr / 1fr 1fr;
     grid-gap: 48px;
+    ${({ theme }) => theme.media('min').xs} {
+        grid-template: 1fr 1fr 1fr 1fr / 1fr;
+        grid-gap: 24px;
+    }
+    ${({ theme }) => theme.media('min').lg} {
+        grid-template: 1fr 1fr / 1fr 1fr;
+        grid-gap: 48px;
+    }
 `;
 
 export const Card = styled.div`
@@ -62,6 +102,26 @@ export const Card = styled.div`
     &:hover {
         background: rgba(255, 255, 255, 0.2);
     }
+    ${({ theme }) => theme.media('min').xs} {
+       padding: 12px 24px;
+    }
+    ${({ theme }) => theme.media('min').lg} {
+        padding: 24px 48px;
+    }
+`;
+
+
+export const IconWrapper = styled.div`
+    width: 40px;
+    height: 40px;
+    ${({ theme }) => theme.media('min').xs} {
+        width: 24px;
+        height: 24px;
+    }
+    ${({ theme }) => theme.media('min').lg} {
+        width: 40px;
+        height: 40px;
+    }
 `;
 
 export const CardTitle = styled.h5`
@@ -71,6 +131,9 @@ export const CardTitle = styled.h5`
     font-style: normal;
     font-weight: 500;
     line-height: 28px;
+    ${({ theme }) => theme.media('min').xs} {
+        font-size: 20px;
+    }
 `;
 
 export const CardDescription = styled.p`
@@ -80,4 +143,7 @@ export const CardDescription = styled.p`
     font-style: normal;
     font-weight: 400;
     line-height: 24px
+    ${({ theme }) => theme.media('min').xs} {
+        font-size: 14px;
+    }
 `;
