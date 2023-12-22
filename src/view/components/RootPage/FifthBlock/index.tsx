@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/indent */
 // Core
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
+import Slider, { Settings } from 'react-slick';
 
 // Bus
 // import {} from '../../../bus/'
@@ -12,7 +13,9 @@ import CardImage from '@/assets/images/RootPage/Card.png';
 // Styles
 import * as S from './styles';
 import { CustomLink } from '@/view/elements';
-import { useComponentWidth } from '@/tools/hooks';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { breakpoints } from '@/assets';
 
 // Types
 type PropTypes = {
@@ -65,23 +68,43 @@ const cards = [
     ];
 
 export const FifthBlock: FC<PropTypes> = () => {
-    const { ref, width } = useComponentWidth();
     const [ currentSlide, setCurrentSlide ] = useState(0);
-
-    const arrowNavigationHandler = (direction: 'prev' | 'next') => {
-        if (direction === 'prev') {
-            if (currentSlide === 0) {
-                setCurrentSlide(cards.length);
-            }
-            setCurrentSlide((prev) => prev - 1);
-        }
-
-        if (direction === 'next') {
-            if (cards.length - 1 <= currentSlide) {
-                setCurrentSlide(-1);
-            }
-            setCurrentSlide((prev) => prev + 1);
-        }
+    const ref = useRef<Slider>(null);
+    const settings: Settings = {
+        dots:           false,
+        infinite:       true,
+        speed:          500,
+        arrows:         false,
+        slidesToShow:   4,
+        slidesToScroll: 1,
+        initialSlide:   0,
+        beforeChange:   (_, next) => setCurrentSlide(next),
+        responsive:     [
+            {
+                breakpoint: breakpoints.sm,
+                settings:   {
+                    slidesToShow: 1,
+                },
+            },
+            {
+                breakpoint: breakpoints.md,
+                settings:   {
+                    slidesToShow: 1,
+                },
+            },
+            {
+                breakpoint: 1020,
+                settings:   {
+                    slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 1440,
+                settings:   {
+                    slidesToShow: 3,
+                },
+            },
+        ],
     };
 
     return (
@@ -89,14 +112,13 @@ export const FifthBlock: FC<PropTypes> = () => {
             <S.Title>Insights and Updates</S.Title>
             <S.Subtitle>Stay informed with our latest articles and helpful tips</S.Subtitle>
             <S.Slider>
-                <div
-                    style = {{ display: 'flex', transform: `translateX(-${currentSlide * width}px)`, transition: '.3s ease' }}>
+                <Slider
+                    ref = { ref }
+                    { ...settings }>
                     {
                         cards.map((card, idx) => {
                             return (
-                                <S.Card
-                                    key = { card.title +  idx }
-                                    ref = { ref }>
+                                <S.Card key = { card.title +  idx }>
                                     <S.ImageContainer>
                                         <img
                                             alt = ''
@@ -122,36 +144,29 @@ export const FifthBlock: FC<PropTypes> = () => {
                             );
                         })
                     }
-                </div>
-                <S.Navigation>
-                    <Arrow
-                        style = {{ cursor: 'pointer' }}
-                        onClick = { () => {
-                        arrowNavigationHandler('prev');
-                    } }
-                    />
-                    <S.ProgressButtonContainer>
-                        {
-                            cards.map((card, idx) => idx === 0
-                                ? <S.ProgressButton
-                                        $isActive = { currentSlide === idx }
-                                        key = { idx }
-                                        onClick = { () => setCurrentSlide(idx) }
-                                  /> : <S.ProgressButton
-                                      $isActive = { currentSlide === idx }
-                                      key = { idx }
-                                      onClick = { () => setCurrentSlide(idx) }
-                                       />)
-                        }
-                    </S.ProgressButtonContainer>
-                    <Arrow
-                        style = {{ transform: 'rotate(180deg)', cursor: 'pointer' }}
-                        onClick = { () => {
-                            arrowNavigationHandler('next');
-                        } }
-                    />
-                </S.Navigation>
+                </Slider>
             </S.Slider>
+            <S.Navigation>
+                <Arrow
+                    style = {{ cursor: 'pointer' }}
+                    onClick = { () => ref.current?.slickPrev() }
+                />
+                <S.ProgressButtonContainer>
+                    {
+                        cards.map((card, idx) => (
+                            <S.ProgressButton
+                                $isActive = { currentSlide === idx }
+                                key = { idx }
+                                onClick = { () => ref.current?.slickGoTo(idx) }
+                            />
+                        ))
+                    }
+                </S.ProgressButtonContainer>
+                <Arrow
+                    style = {{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+                    onClick = { () => ref.current?.slickNext() }
+                />
+            </S.Navigation>
             <S.Button>Read More on Our Blog</S.Button>
         </S.Container>
     );

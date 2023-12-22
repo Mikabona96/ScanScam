@@ -43,11 +43,11 @@ export interface ITheme {
 }
 
 export const breakpoints = {
-    xl: '1440',
-    lg: '960',
-    md: '720',
-    sm: '540',
-    xs: '0',
+    xl: 1440,
+    lg: 960,
+    md: 720,
+    sm: 540,
+    xs: 0,
 };
 
 export const defaultTheme: ITheme = {

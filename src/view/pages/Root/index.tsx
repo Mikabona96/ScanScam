@@ -20,7 +20,7 @@ const Root: FC = () => {
             <SecondBlock />
             <ThirdBlock />
             <FourthBlock />
-            {/* <FifthBlock /> */}
+            <FifthBlock />
         </Container>
     );
 };
