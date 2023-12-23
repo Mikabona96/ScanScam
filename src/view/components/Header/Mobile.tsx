@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 // Styles
 import * as S from './styles';
@@ -23,14 +23,28 @@ type PropTypes = {
 export const Mobile: FC<PropTypes> = ({ links, handleModalOpen, isModalActive }) => {
     const [ isOpen, setIsOpen ] = useState(false);
     const theme = useTheme();
-    const overflowHandler = useOverflowHidden(isOpen);
-    const overflowModalHandler = useOverflowHidden(isModalActive);
+    const overflowHandler = useOverflowHidden();
+    const overflowModalHandler = useOverflowHidden();
+
+
+    useEffect(() => {
+        const resizeHandler = () => {
+            setIsOpen(false);
+            overflowHandler(true);
+        };
+        window.addEventListener('resize', resizeHandler);
+
+        return () => {
+            window.removeEventListener('resize', resizeHandler);
+        };
+    }, [ isOpen ]);
+
 
     return (
         <S.Mobile $open = { isOpen }>
             <S.MenuIcon onClick = { () => {
                 setIsOpen(true);
-                overflowHandler();
+                overflowHandler(isOpen);
             } }>
                 <MenuIcon
                     height = { 24 }
@@ -85,7 +99,7 @@ export const Mobile: FC<PropTypes> = ({ links, handleModalOpen, isModalActive })
                                 $styles = { S.ScamReportButton }
                                 $variant = 'outlined'
                                 onClick = { () => {
-                                    overflowModalHandler();
+                                    overflowModalHandler(isModalActive);
                                     handleModalOpen();
                                     setIsOpen(false);
                                 } }>Report a Scam
@@ -98,7 +112,7 @@ export const Mobile: FC<PropTypes> = ({ links, handleModalOpen, isModalActive })
             )}
             {isOpen && (
                 <S.Overlay onClick = { () => {
-                    overflowHandler();
+                    overflowHandler(isOpen);
                     setIsOpen(false);
                 } }>
                 </S.Overlay>

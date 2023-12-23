@@ -123,8 +123,9 @@ export const FifthBlock: FC<PropTypes> = () => {
                                 <S.Card key = { card.title +  idx }>
                                     <S.ImageContainer>
                                         <img
-                                            alt = ''
+                                            alt = 'card_image'
                                             draggable = { false }
+                                            loading = 'lazy'
                                             src = { CardImage }
                                             style = {{ transition: '.3s ease' }}
                                         />

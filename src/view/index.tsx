@@ -25,7 +25,7 @@ export const App: FC = () => {
     const { setToggleAction: setTogglerAction } = useTogglesRedux();
 
     const [ isModalActive, setModalActive ] = useState(false);
-    const overflowHandler = useOverflowHidden(isModalActive);
+    const overflowHandler = useOverflowHidden();
 
 
     const setOnlineStatusHandler = useCallback(() => void setTogglerAction({
@@ -54,7 +54,7 @@ export const App: FC = () => {
             {isModalActive && (
                 <Modal
                     onClose = { () => {
-                        overflowHandler();
+                        overflowHandler(isModalActive);
                         setModalActive(false);
                     } }>
                 </Modal>

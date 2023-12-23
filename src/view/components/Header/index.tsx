@@ -26,7 +26,7 @@ import { Mobile } from './Mobile';
 export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
     const theme = useTheme();
     const scrolled = useScroll();
-    const overflowHandler = useOverflowHidden(isModalActive);
+    const overflowHandler = useOverflowHidden();
 
     const handleModalOpen = () => {
         setModalActive(true);
@@ -104,7 +104,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                                 $styles = { S.ScamReportButton }
                                 $variant = 'outlined'
                                 onClick = { () => {
-                                    overflowHandler();
+                                    overflowHandler(isModalActive);
                                     handleModalOpen();
                                 } }>Report a Scam
                             </Button>
