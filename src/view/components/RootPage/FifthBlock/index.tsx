@@ -12,7 +12,7 @@ import CardImage from '@/assets/images/RootPage/Card.png';
 
 // Styles
 import * as S from './styles';
-import { Button, CustomLink } from '@/view/elements';
+import { Button, CustomLink, SectionTitle } from '@/view/elements';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { breakpoints } from '@/assets';
@@ -109,7 +109,7 @@ export const FifthBlock: FC<PropTypes> = () => {
 
     return (
         <S.Container>
-            <S.Title>Insights and Updates</S.Title>
+            <SectionTitle>Insights and Updates</SectionTitle>
             <S.Subtitle>Stay informed with our latest articles and helpful tips</S.Subtitle>
             <S.Slider>
                 <Slider

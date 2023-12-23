@@ -7,6 +7,7 @@ import React, { FC } from 'react';
 // Styles
 import * as S from './styles';
 import { CardImage } from '@/assets/images/icons';
+import { SectionTitle } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -26,7 +27,7 @@ export const FourthBlock: FC<PropTypes> = () => {
                     <CardImage />
                 </S.CardWrapper>
                 <S.TextWrapper>
-                    <S.Title>Proudly Trusted by Leading Partners</S.Title>
+                    <SectionTitle $styles = { S.Title }>Proudly Trusted by Leading Partners</SectionTitle>
                     <S.Subtitle>
                         Explore our rich tapestry of partnerships with industry leaders,
                         each logo representing a chapter of collaboration,
