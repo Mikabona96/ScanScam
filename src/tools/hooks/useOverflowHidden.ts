@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
 
-export const setOverflow = (isModalActive: boolean) => {
+export const setOverflow = (isActive: boolean) => {
     const body = document.querySelector('body') as HTMLElement;
-    body.style.overflow = !isModalActive ? 'hidden' : '';
+    body.style.overflow = !isActive ? 'hidden' : '';
+    console.log('overflow setted to');
 };
 
 
-export const useOverflowHidden = (isModalActive: boolean) => useCallback(() => setOverflow(isModalActive), [ isModalActive ]);
+export const useOverflowHidden = (isActive: boolean) => useCallback(() => setOverflow(isActive), [ isActive ]);

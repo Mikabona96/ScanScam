@@ -44,10 +44,10 @@ export const App: FC = () => {
             <GlobalStyles />
             <FontStyles />
             <AppContainer>
-                {/* <Header
+                <Header
                     isModalActive = { isModalActive }
                     setModalActive = { setModalActive }
-                /> */}
+                />
                 <Routes />
                 {/* <Footer /> */}
             </AppContainer>

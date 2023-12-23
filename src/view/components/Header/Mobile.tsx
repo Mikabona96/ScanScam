@@ -1,65 +1,44 @@
-// Core
-import React, { FC } from 'react';
-
-// Bus
-// import {} from '../../../bus/'
-
-import Logo from '@/assets/images/icons/logo.png';
+import React, { FC, useState } from 'react';
 
 // Styles
 import * as S from './styles';
+
+// Images
+import Logo from '@/assets/images/icons/logo.png';
+import { Button, CustomLink } from '@/view/elements';
 import { SearchIcon } from '@/assets/images/icons';
 import { useTheme } from 'styled-components';
-import { Button, CustomLink } from '@/view/elements';
-import { useOverflowHidden, useScroll } from '@/tools/hooks';
-import { Mobile } from './Mobile';
+import { useOverflowHidden } from '@/tools/hooks';
+import { MenuIcon } from '@/assets/images/icons/menuIcon';
 
+type PropTypes = {
+    links: {
+        label: string;
+        link: string;
+    }[]
+    isModalActive: boolean
+    handleModalOpen: () => void
+}
 
-    // Types
-    type PropTypes = {
-        /* type props here */
-        setModalActive: React.Dispatch<React.SetStateAction<boolean>>
-        isModalActive: boolean
-    }
-
-
-export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
+export const Mobile: FC<PropTypes> = ({ links, handleModalOpen, isModalActive }) => {
+    const [ isOpen, setIsOpen ] = useState(false);
     const theme = useTheme();
-    const scrolled = useScroll();
-    const overflowHandler = useOverflowHidden(isModalActive);
-
-    const handleModalOpen = () => {
-        setModalActive(true);
-    };
-
-    const links = [
-        {
-            label: 'About Us',
-            link:  '#',
-        },
-        {
-            label: 'Tools',
-            link:  '#',
-        },
-        {
-            label: 'Blog',
-            link:  '#',
-        },
-        {
-            label: 'Contacts',
-            link:  '#',
-        },
-    ];
+    const overflowHandler = useOverflowHidden(isOpen);
+    const overflowModalHandler = useOverflowHidden(isModalActive);
 
     return (
-        <>
-            <Mobile
-                handleModalOpen = { handleModalOpen }
-                isModalActive = { isModalActive }
-                links = { links }
-            />
-            <S.Header $scrolled = { scrolled } >
-                <S.Wrapper>
+        <S.Mobile $open = { isOpen }>
+            <S.MenuIcon onClick = { () => {
+                setIsOpen(true);
+                overflowHandler();
+            } }>
+                <MenuIcon
+                    height = { 24 }
+                    width = { 24 }
+                />
+            </S.MenuIcon>
+            {isOpen && (
+                <S.SideBar>
                     <S.Column>
                         <CustomLink to = '#'>
                             <img
@@ -69,7 +48,6 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                         </CustomLink>
                     </S.Column>
                     <S.Column
-                        $show = { scrolled }
                         $styles = { S.SearchBarColumnStyles }>
                         <S.SearchBar>
                             <S.Input
@@ -84,9 +62,12 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                             </div>
                         </S.SearchBar>
                     </S.Column>
-                    <S.Column>
-                        <S.LinksWrapper $show>
-                            <S.LinksWrapper $show = { scrolled }>
+
+                    <S.Column $styles = { S.ColumnLinkStyles }>
+                        <S.LinksWrapper
+                            $show
+                            $styles = { S.linkWrapperStyles }>
+                            <S.LinksWrapper $show >
                                 {
                                     links.map((link, idx) => {
                                         return (
@@ -104,15 +85,24 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                                 $styles = { S.ScamReportButton }
                                 $variant = 'outlined'
                                 onClick = { () => {
-                                    overflowHandler();
+                                    overflowModalHandler();
                                     handleModalOpen();
+                                    setIsOpen(false);
                                 } }>Report a Scam
                             </Button>
                             <Button>Log in</Button>
                         </S.LinksWrapper>
                     </S.Column>
-                </S.Wrapper>
-            </S.Header>
-        </>
+
+                </S.SideBar>
+            )}
+            {isOpen && (
+                <S.Overlay onClick = { () => {
+                    overflowHandler();
+                    setIsOpen(false);
+                } }>
+                </S.Overlay>
+            )}
+        </S.Mobile>
     );
 };
