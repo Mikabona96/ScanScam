@@ -49,7 +49,7 @@ export const App: FC = () => {
                     setModalActive = { setModalActive }
                 />
                 <Routes />
-                {/* <Footer /> */}
+                <Footer />
             </AppContainer>
             {isModalActive && (
                 <Modal

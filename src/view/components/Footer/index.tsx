@@ -59,6 +59,8 @@ export const Footer: FC<PropTypes> = () => {
                     </S.SocialLinks>
                 </S.Links>
             </S.Wrapper>
+            <S.Divider />
+            <S.CopyRight>© 2023 ScamScan</S.CopyRight>
         </S.Container>
     );
 };
