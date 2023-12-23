@@ -29,7 +29,7 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
     const [ isMounted, setMounted ] = useState(false);
     const [ step, setStep ] = useState(0);
 
-    const {  control, handleSubmit, formState: { errors }, trigger, setValue, resetField } = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
+    const {  control, handleSubmit, formState: { errors }, trigger, setValue } = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
     const onSubmit = (data: any) => {
         console.log(data);
     };
@@ -124,7 +124,6 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
                                     <Step2
                                         control = { control }
                                         errors = { errors }
-                                        resetField = { resetField }
                                         setStep = { setStep }
                                         setValue = { setValue }
                                         trigger = { trigger }
@@ -135,6 +134,7 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
                                     && (
                                         <Button
                                             $styles = { S.Button }
+                                            type = 'button'
                                             onClick = { onClose }>Close
                                         </Button>
                                     )

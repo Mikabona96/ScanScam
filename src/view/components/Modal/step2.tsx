@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 
 import * as S from './styles';
-import { Control, Controller, FieldErrors, UseFormResetField, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
+import { Control, Controller, FieldErrors, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
 import { IFormState } from './static';
 import { Button } from '@/view/elements';
 
@@ -11,16 +11,14 @@ type PropTypes = {
     errors: FieldErrors<IFormState>
     trigger: UseFormTrigger<IFormState>
     setValue: UseFormSetValue<IFormState>
-    resetField: UseFormResetField<IFormState>
 }
 
-export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setValue, resetField }) => {
+export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setValue }) => {
     const [ recieveUpds, setRecieveUpds ] = useState(true);
 
     const radioButtonHandler = (mode: 'active' | 'disabled') => {
         if (mode === 'active') {
             setRecieveUpds(true);
-            resetField('email');
         }
         if (mode === 'disabled') {
             setRecieveUpds(false);
@@ -28,9 +26,6 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
     };
 
     useEffect(() => {
-        if (!recieveUpds) {
-            setValue('email', 'null');
-        }
         setValue('checkbox', false);
         setValue('recieveUpdates', false);
     }, [ recieveUpds ]);
@@ -42,55 +37,58 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                     control = { control }
                     name = 'recieveUpdates'
                     render = { ({ field: { onChange, onBlur }}) => (
-                        <>
-                            <S.RadioButtonWrapper>
-                                <S.RadioButton
-                                    defaultChecked = { recieveUpds }
-                                    name = 'radio'
-                                    type = 'radio'
-                                    onChange = { () => {
-                                        radioButtonHandler('active');
-                                        onChange();
-                                        onBlur();
-                                    } }
-                                />
-                                <S.RadioButtonText>Yes, I'd like to receive updates</S.RadioButtonText>
-                            </S.RadioButtonWrapper>
-                            <S.RadioButtonWrapper>
-                                <S.RadioButton
-                                    defaultChecked = { !recieveUpds }
-                                    name = 'radio'
-                                    type = 'radio'
-                                    onChange = { () => {
-                                        radioButtonHandler('disabled');
-                                        onChange();
-                                        onBlur();
-                                    } }
-                                />
-                                <S.RadioButtonText>Stay anonymous</S.RadioButtonText>
-                            </S.RadioButtonWrapper>
-                        </>
+                        <S.RadioButtonWrapper>
+                            <S.RadioButton
+                                defaultChecked = { recieveUpds }
+                                name = 'radio'
+                                type = 'radio'
+                                onChange = { () => {
+                                    radioButtonHandler('active');
+                                    onChange();
+                                    onBlur();
+                                } }
+                            />
+                            <S.RadioButtonText>Yes, I'd like to receive updates</S.RadioButtonText>
+                        </S.RadioButtonWrapper>
+                    ) }
+                />
+                <Controller
+                    control = { control }
+                    name = 'recieveUpdates'
+                    render = { ({ field: { onChange, onBlur }}) => (
+                        <S.RadioButtonWrapper>
+                            <S.RadioButton
+                                defaultChecked = { !recieveUpds }
+                                name = 'radio'
+                                type = 'radio'
+                                onChange = { () => {
+                                    radioButtonHandler('disabled');
+                                    onChange();
+                                    onBlur();
+                                } }
+                            />
+                            <S.RadioButtonText>Stay anonymous</S.RadioButtonText>
+                        </S.RadioButtonWrapper>
                     ) }
                 />
 
-                <>
-                    {recieveUpds && <S.Divider/>}
-                    <S.InputWrapper style = {{ display: recieveUpds ? 'block' : 'none' }}>
-                        <S.TextLabel>Share your email for updates</S.TextLabel>
-                        <Controller
-                            control = { control }
-                            name = 'email'
-                            render = { ({ field: { onChange, onBlur }}) => (
-                                <S.Input
-                                    $error = { !!errors.email?.message }
-                                    placeholder = 'your.email@example.com'
-                                    onBlur = { onBlur }
-                                    onChange = { onChange }
-                                />
-                            ) }
-                        />
-                    </S.InputWrapper>
-                </>
+                {recieveUpds && <S.Divider/>}
+                <S.InputWrapper style = {{ display: recieveUpds ? 'block' : 'none' }}>
+                    <S.TextLabel>Share your email for updates</S.TextLabel>
+                    <Controller
+                        control = { control }
+                        name = 'email'
+                        render = { ({ field: { onChange, onBlur, ref }}) => (
+                            <S.Input
+                                $error = { !!errors.email?.message }
+                                placeholder = 'your.email@example.com'
+                                ref = { ref }
+                                onBlur = { onBlur }
+                                onChange = { onChange }
+                            />
+                        ) }
+                    />
+                </S.InputWrapper>
             </S.RadioButtonsContainer>
             {recieveUpds && (
                 <S.CheckboxWrapper>
@@ -127,6 +125,9 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                         return;
                     }
                     setStep(2);
+                    if (!recieveUpds) {
+                        setValue('email', null);
+                    }
                 } }>Submit a Report
             </Button>
         </>

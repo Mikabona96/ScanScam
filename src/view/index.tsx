@@ -24,7 +24,7 @@ export const AppContainer = styled.div`
 export const App: FC = () => {
     const { setToggleAction: setTogglerAction } = useTogglesRedux();
 
-    const [ isModalActive, setModalActive ] = useState(false);
+    const [ isModalActive, setModalActive ] = useState(true);
     const overflowHandler = useOverflowHidden(isModalActive);
 
 
