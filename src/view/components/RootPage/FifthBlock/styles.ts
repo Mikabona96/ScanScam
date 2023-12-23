@@ -15,27 +15,16 @@ export const Container = styled.section`
     };
 `;
 
-export const Title = styled.h3`
-    color: ${({ theme }) => theme.text.black.main};
-    font-family: ${MyFonts.THICCCBOI.bold};
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 56px;
+export const Title = css`
     ${({ theme }) => theme.media('max').sm} {
         font-size: 24px;
         line-height: 34px;
     };
 `;
 
-export const Subtitle = styled.p`
+export const Subtitle = css`
+    margin: 0 auto;
     margin-top: 16px;
-    color: ${({ theme }) => theme.text.gray.main};
-    font-family: ${MyFonts.THICCCBOI.regular};
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
     ${({ theme }) => theme.media('max').sm} {
         font-size: 16px;
     };

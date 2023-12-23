@@ -28,14 +28,9 @@ export const Title = css`
     color: #fff;
 `;
 
-export const Subtitle = styled.p`
-    font-family: ${MyFonts.THICCCBOI.regular};
+export const Subtitle = css`
     margin-top: 16px;
     color: #fff;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
     ${({ theme }) => theme.media('min').xs} {
         font-size: 16px;
         text-align: center;

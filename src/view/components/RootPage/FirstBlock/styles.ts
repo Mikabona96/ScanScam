@@ -89,28 +89,6 @@ export const TitleGradient = styled.span`
     -webkit-text-fill-color: transparent;
 `;
 
-export const Subtitle = styled.p`
-    color: ${({ theme }) => theme.text.gray.main};
-    font-family: ${MyFonts.THICCCBOI.regular};
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    ${({ theme }) => theme.media('min').xs} {
-        font-size: 16px;
-        line-height: 24px;
-        max-width: 400px;
-    }
-    ${({ theme }) => theme.media('min').md} {
-        font-size: 18px;
-    }
-    ${({ theme }) => theme.media('min').lg} {
-        font-size: 20px;
-        line-height: 28px;
-        max-width: fit-content;
-    }
-`;
-
 export const Form = styled.form`
     /* styles here */
     display: flex;

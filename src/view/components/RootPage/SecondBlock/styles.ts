@@ -1,6 +1,6 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
     max-height: 624px;
@@ -66,16 +66,9 @@ export const Title = styled.h3`
     }
 `;
 
-export const Subtitle = styled.p`
-    margin-top: 16px;
-    color: ${({ theme }) => theme.text.gray.main};
-    font-family: ${MyFonts.THICCCBOI.regular};
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
+export const Subtitle = css`
      ${({ theme }) => theme.media('min').xs} {
-        text-align: start;
+        text-align: center;
     }
     ${({ theme }) => theme.media('min').md} {
         font-size: 18px;

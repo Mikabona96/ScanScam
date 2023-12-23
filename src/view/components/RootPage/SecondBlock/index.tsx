@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 
 // Styles
 import * as S from './styles';
-import { SectionTitle } from '@/view/elements';
+import { SectionSubtitle, SectionTitle } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -19,7 +19,9 @@ export const SecondBlock: FC<PropTypes> = () => {
             <S.Wrapper>
                 <S.TextWrapper>
                     <SectionTitle>Our Impact in Numbers</SectionTitle>
-                    <S.Subtitle>See the results of our relentless efforts to protect users online</S.Subtitle>
+                    <SectionSubtitle $styles = { S.Subtitle }>
+                        See the results of our relentless efforts to protect users online
+                    </SectionSubtitle>
                 </S.TextWrapper>
                 <S.MetricWrapper>
                     <S.MetricCard>

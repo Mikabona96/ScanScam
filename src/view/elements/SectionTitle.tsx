@@ -11,7 +11,7 @@ type PropTypes = {
 }
 
 // Styles
-const Container = styled.div<PropTypes>`
+const Container = styled.h3<PropTypes>`
     font-family: ${MyFonts.THICCCBOI.bold};
     color: ${({ theme }) => theme.text.black};
     font-size: 48px;

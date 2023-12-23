@@ -8,7 +8,7 @@ import React, { FC } from 'react';
 // Styles
 import * as S from './styles';
 import { DownloadIcon, IpIcon, LocationIcon, SearchIcon } from '@/assets/images/icons';
-import { SectionTitle } from '@/view/elements';
+import { SectionSubtitle, SectionTitle } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -20,7 +20,9 @@ export const ThirdBlock: FC<PropTypes> = () => {
         <S.Container id = '#tools'>
             <S.Wrapper>
                 <SectionTitle $styles = { S.Title }>Empowering You with Tools</SectionTitle>
-                <S.Subtitle>Explore our suite of tools for a comprehensive online experience</S.Subtitle>
+                <SectionSubtitle $styles = { S.Subtitle }>
+                    Explore our suite of tools for a comprehensive online experience
+                </SectionSubtitle>
                 <S.CardsWrapper>
                     <S.Card>
                         <S.IconWrapper>

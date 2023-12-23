@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // Styles
 import * as S from './styles';
 import { inithialState, schema } from './static';
-import { Button } from '@/view/elements';
+import { Button, SectionSubtitle } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -28,7 +28,7 @@ export const FirstBlock: FC<PropTypes> = () => {
                     Secure Your Browsing:
                     Instant <S.TitleGradient>Scam Check</S.TitleGradient>
                 </S.Title>
-                <S.Subtitle>Enter the domain or URL below to ensure a scam-free experience</S.Subtitle>
+                <SectionSubtitle>Enter the domain or URL below to ensure a scam-free experience</SectionSubtitle>
                 <S.Form onSubmit = { (event) => {
                     event.preventDefault();
                     handleSubmit(onSubmit)();

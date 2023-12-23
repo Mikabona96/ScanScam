@@ -56,17 +56,11 @@ export const Title = css`
     }
 `;
 
-export const Subtitle = styled.p`
+export const Subtitle = css`
     margin-top: 16px;
-    color: ${({ theme }) => theme.text.gray.main};
-    font-family: ${MyFonts.THICCCBOI.regular};
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
     ${({ theme }) => theme.media('min').xs} {
         font-size: 16px;
-        text-align: center;
+        text-align: start;
     }
     ${({ theme }) => theme.media('min').lg} {
         font-size: 20px;
