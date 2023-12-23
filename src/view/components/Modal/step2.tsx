@@ -15,6 +15,7 @@ type PropTypes = {
 
 export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setValue }) => {
     const [ recieveUpds, setRecieveUpds ] = useState(true);
+    const [ email, setEmail ] = useState('');
 
     const radioButtonHandler = (mode: 'active' | 'disabled') => {
         if (mode === 'active') {
@@ -46,6 +47,7 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                                     radioButtonHandler('active');
                                     onChange();
                                     onBlur();
+                                    setValue('email', email);
                                 } }
                             />
                             <S.RadioButtonText>Yes, I'd like to receive updates</S.RadioButtonText>
@@ -66,6 +68,9 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                                     onChange();
                                     onBlur();
                                 } }
+                                onClick = { () => {
+                                    setValue('email', null);
+                                } }
                             />
                             <S.RadioButtonText>Stay anonymous</S.RadioButtonText>
                         </S.RadioButtonWrapper>
@@ -84,7 +89,10 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                                 placeholder = 'your.email@example.com'
                                 ref = { ref }
                                 onBlur = { onBlur }
-                                onChange = { onChange }
+                                onChange = { (event) => {
+                                    setEmail(event.target.value);
+                                    onChange(event);
+                                } }
                             />
                         ) }
                     />
@@ -125,9 +133,6 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                         return;
                     }
                     setStep(2);
-                    if (!recieveUpds) {
-                        setValue('email', null);
-                    }
                 } }>Submit a Report
             </Button>
         </>
