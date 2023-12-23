@@ -1,7 +1,6 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
-import { ButtonStyles } from '@/assets/styles/styles';
-import { RuleSet } from 'styled-components';
+import { RuleSet, css } from 'styled-components';
 import styled, { keyframes } from 'styled-components';
 
 export const appearanceAnimation = keyframes`
@@ -91,34 +90,10 @@ export const LinksWrapper = styled.div`
     align-items: center;
 `;
 
-export const LoginButton = styled(ButtonStyles)`
-    font-family: ${MyFonts.THICCCBOI.medium};
-    max-width: 93px;
-    width: 100%;
-    max-height: 48px;
-    height: 100%;
-    &:active {
-        background: ${({ theme }) => theme.button.dark};
-    }
-`;
-
-export const ScamReportButton = styled(ButtonStyles)`
-    background: ${({ theme }) => theme.button.secondary};
-    border: ${({ theme }) => `1px solid ${theme.palette.purple.main}`};
-    color: ${({ theme }) => theme.text.purple.main};
-    font-family: ${MyFonts.THICCCBOI.medium};
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    max-height: 48px;
+export const ScamReportButton = css`
     margin-right: 16px;
     margin-left: 8px;
     white-space: nowrap;
-    &:active {
-        border: 1px solid ${({ theme }) => theme.button.dark};
-        color: ${({ theme }) => theme.button.dark};
-    }
 `;
 
 export const AnchorLink = styled.span<{$styles: RuleSet<object> | undefined}>`

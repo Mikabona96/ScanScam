@@ -12,7 +12,7 @@ import CardImage from '@/assets/images/RootPage/Card.png';
 
 // Styles
 import * as S from './styles';
-import { CustomLink } from '@/view/elements';
+import { Button, CustomLink } from '@/view/elements';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { breakpoints } from '@/assets';
@@ -167,7 +167,7 @@ export const FifthBlock: FC<PropTypes> = () => {
                     onClick = { () => ref.current?.slickNext() }
                 />
             </S.Navigation>
-            <S.Button>Read More on Our Blog</S.Button>
+            <Button $styles = { S.Button } >Read More on Our Blog</Button>
         </S.Container>
     );
 };

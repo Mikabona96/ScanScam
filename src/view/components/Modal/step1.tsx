@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import * as S from './styles';
 import { Control, Controller, FieldErrors, UseFormTrigger } from 'react-hook-form';
 import { IFormState } from './static';
+import { Button } from '@/view/elements';
 
 type PropTypes = {
     setStep: React.Dispatch<React.SetStateAction<number>>
@@ -46,7 +47,8 @@ export const Step1: FC<PropTypes> = ({ setStep, control, errors, trigger }) => {
                     />
                 </S.InputWrapper>
             </S.IputsContainer>
-            <S.Button
+            <Button
+                $styles = { S.Button }
                 type = 'button'
                 onClick = { async () => {
                     const areFieldsValid = await trigger([ 'url', 'description' ]);
@@ -55,7 +57,7 @@ export const Step1: FC<PropTypes> = ({ setStep, control, errors, trigger }) => {
                     }
                     setStep(1);
                 } }>Continue
-            </S.Button>
+            </Button>
         </>
     );
 };

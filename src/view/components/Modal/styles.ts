@@ -159,14 +159,9 @@ export const TextArea = styled.textarea<{$error?: boolean}>`
     border-color: ${({ $error, theme }) => $error ? theme.palette.error : theme.palette.gray.lightGrey};
 `;
 
-export const Button = styled(ButtonStyles)`
+export const Button = css`
     margin: auto;
     margin-top: 24px;
-    transition: all.3s ease;
-
-    &:active {
-        background: ${({ theme }) => theme.button.dark};
-    }
 `;
 
 export const RadioButtonsContainer = styled.div`

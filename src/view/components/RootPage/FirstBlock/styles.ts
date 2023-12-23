@@ -1,10 +1,10 @@
 // Core
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // Images
 import Background from '../../../../assets/images/RootPage/Background.png';
 import { MyFonts } from '@/assets/fonts';
-import { ButtonStyles } from '@/assets/styles/styles';
+// import { ButtonStyles } from '@/assets/styles/styles';
 
 export const Container = styled.section`
     display: flex;
@@ -171,18 +171,17 @@ export const Input = styled.input<{$error?: boolean}>`
     }
 `;
 
-export const Button = styled(ButtonStyles)`
-    max-width: 130px;
-    &:active {
-        background: ${({ theme }) => theme.button.dark};
-    }
+export const ButtonStyles = css`
+    max-height: 60px;
+    height: 100%;
     ${({ theme }) => theme.media('min').xs} {
         max-width: 110px;
+        width: 100%;
         padding: 6px 12px;
     }
-    ${({ theme }) => theme.media('min').xs} {
+    ${({ theme }) => theme.media('min').sm} {
         max-width: 130px;
+        width: 100%;
         padding: 12px 24px;
     }
 `;
-

@@ -1,7 +1,6 @@
 // Core
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { MyFonts } from '@/assets/fonts';
-import { ButtonStyles } from '@/assets/styles/styles';
 
 export const Container = styled.main`
     width: 100%;
@@ -45,22 +44,6 @@ export const Text = styled.h3`
     }
 `;
 
-export const Button = styled(ButtonStyles)`
-    max-height: 48px;
-    background: transparent;
-    border: 1px solid #fff;
-    border-radius: 2px;
+export const Button = css`
     margin: 0 auto;
-
-    &:active {
-        background: ${({ theme }) => theme.button.dark};
-        border: none;
-    }
-
-    /* Font */
-    font-family: ${MyFonts.THICCCBOI.regular};
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
 `;

@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // Styles
 import * as S from './styles';
 import { inithialState, schema } from './static';
+import { Button } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -44,9 +45,7 @@ export const FirstBlock: FC<PropTypes> = () => {
                             />
                         ) }
                     />
-                    {/* <S.Input placeholder = 'Enter a domain or URL (e.g., www.example.com)' /> */}
-                    <S.Button>Check now
-                    </S.Button>
+                    <Button $styles = { S.ButtonStyles }>Check now</Button>
                 </S.Form>
             </S.Block>
         </S.Container>

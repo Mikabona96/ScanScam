@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import * as S from './styles';
 import { Control, Controller, FieldErrors, UseFormResetField, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
 import { IFormState } from './static';
+import { Button } from '@/view/elements';
 
 type PropTypes = {
     setStep: React.Dispatch<React.SetStateAction<number>>
@@ -111,7 +112,8 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                     </S.CheckBoxText>
                 </S.CheckboxWrapper>
             )}
-            <S.Button
+            <Button
+                $styles = { S.Button }
                 type = 'submit'
                 onClick = { async () => {
                     const areFieldsValid = await trigger([ 'email' ]);
@@ -126,7 +128,7 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                     }
                     setStep(2);
                 } }>Submit a Report
-            </S.Button>
+            </Button>
         </>
     );
 };

@@ -1,6 +1,5 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
-import { ButtonStyles } from '@/assets/styles/styles';
 import styled, { css } from 'styled-components';
 
 export const LinkStyles = css`
@@ -157,8 +156,7 @@ export const ProgressButton = styled.div<{$isActive?: boolean}>`
     }
 `;
 
-export const Button = styled(ButtonStyles)`
-    max-width: 219px;
+export const Button = css`
     max-height: 48px;
     margin: 0 auto;
     margin-top: 48px;

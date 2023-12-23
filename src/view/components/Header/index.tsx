@@ -10,7 +10,7 @@ import Logo from '@/assets/images/icons/logo.png';
 import * as S from './styles';
 import { SearchIcon } from '@/assets/images/icons';
 import { useTheme, css } from 'styled-components';
-import { CustomLink } from '@/view/elements';
+import { Button, CustomLink } from '@/view/elements';
 import { MyFonts } from '@/assets/fonts';
 import { useOverflowHidden, useScroll } from '@/tools/hooks';
 
@@ -114,12 +114,15 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                                 })
                             }
                         </div>
-                        <S.ScamReportButton onClick = { () => {
-                            overflowHandler();
-                            handleModalOpen();
-                        } }>Report a Scam
-                        </S.ScamReportButton>
-                        <S.LoginButton>Log in</S.LoginButton>
+                        <Button
+                            $styles = { S.ScamReportButton }
+                            $variant = 'outlined'
+                            onClick = { () => {
+                                overflowHandler();
+                                handleModalOpen();
+                            } }>Report a Scam
+                        </Button>
+                        <Button>Log in</Button>
                     </S.LinksWrapper>
                 </S.Column>
             </S.Wrapper>

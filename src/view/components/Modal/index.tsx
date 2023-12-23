@@ -15,6 +15,7 @@ import { CloseIcon, SuccessIcon, WarningIcon } from '@/assets/images/icons';
 import { Step1 } from './step1';
 import { Step2 } from './step2';
 import { inithialState, schema } from './static';
+import { Button } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -129,7 +130,15 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
                                         trigger = { trigger }
                                     />
                                 </S.StepWrapper>
-                                {step === 2 && <S.Button onClick = { onClose }>Close</S.Button>}
+                                {
+                                    step === 2
+                                    && (
+                                        <Button
+                                            $styles = { S.Button }
+                                            onClick = { onClose }>Close
+                                        </Button>
+                                    )
+                                }
                             </S.Form>
                         </S.FormWrapper>
                     </S.Overlay>

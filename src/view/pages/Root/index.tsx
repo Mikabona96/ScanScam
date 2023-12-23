@@ -5,23 +5,27 @@ import React, { FC } from 'react';
 import { ErrorBoundary, FifthBlock, FirstBlock, FourthBlock, SecondBlock, ThirdBlock } from '@/view/components';
 
 // Styles
-import { Container, Bottom, BottomTextWrapper, Text, Button } from './styles';
+import * as S from './styles';
+import { Button } from '@/view/elements';
 
 const Root: FC = () => {
     return (
-        <Container>
+        <S.Container>
             <FirstBlock />
-            <Bottom>
-                <BottomTextWrapper>
-                    <Text>Keep the web safe – report suspicious activity</Text>
-                    <Button>Report a Scam</Button>
-                </BottomTextWrapper>
-            </Bottom>
+            <S.Bottom>
+                <S.BottomTextWrapper>
+                    <S.Text>Keep the web safe – report suspicious activity</S.Text>
+                    <Button
+                        $styles = { S.Button }
+                        $variant = 'white_outlined'>Report a Scam
+                    </Button>
+                </S.BottomTextWrapper>
+            </S.Bottom>
             <SecondBlock />
             <ThirdBlock />
             <FourthBlock />
             <FifthBlock />
-        </Container>
+        </S.Container>
     );
 };
 
