@@ -10,6 +10,7 @@ import { SearchIcon } from '@/assets/images/icons';
 import { useTheme } from 'styled-components';
 import { useOverflowHidden } from '@/tools/hooks';
 import { MenuIcon } from '@/assets/images/icons/menuIcon';
+import { useLocation } from 'react-router-dom';
 
 type PropTypes = {
     links: {
@@ -25,7 +26,7 @@ export const Mobile: FC<PropTypes> = ({ links, handleModalOpen, isModalActive })
     const theme = useTheme();
     const overflowHandler = useOverflowHidden();
     const overflowModalHandler = useOverflowHidden();
-
+    const location = useLocation();
 
     useEffect(() => {
         const resizeHandler = () => {
@@ -86,7 +87,7 @@ export const Mobile: FC<PropTypes> = ({ links, handleModalOpen, isModalActive })
                                     links.map((link, idx) => {
                                         return (
                                             <CustomLink
-                                                $styles = { S.LinkStyles }
+                                                $styles = { S.LinkStyles(link.link === location.pathname) }
                                                 key = { link.label + idx }
                                                 label = { link.label }
                                                 to = { link.link }

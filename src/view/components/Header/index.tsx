@@ -4,6 +4,10 @@ import React, { FC } from 'react';
 // Bus
 // import {} from '../../../bus/'
 
+// Routes
+import * as ROUTES from '../../routes/book';
+
+// Images
 import Logo from '@/assets/images/icons/logo.png';
 
 // Styles
@@ -13,6 +17,7 @@ import { useTheme } from 'styled-components';
 import { Button, CustomLink } from '@/view/elements';
 import { useOverflowHidden, useScroll } from '@/tools/hooks';
 import { Mobile } from './Mobile';
+import { useLocation } from 'react-router-dom';
 
 
     // Types
@@ -27,6 +32,8 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
     const theme = useTheme();
     const scrolled = useScroll();
     const overflowHandler = useOverflowHidden();
+
+    const location = useLocation();
 
     const handleModalOpen = () => {
         setModalActive(true);
@@ -43,7 +50,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
         },
         {
             label: 'Blog',
-            link:  '#',
+            link:  ROUTES.BLOG,
         },
         {
             label: 'Contacts',
@@ -89,9 +96,11 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                             <S.LinksWrapper $show = { scrolled }>
                                 {
                                     links.map((link, idx) => {
+                                        const styles = S.LinkStyles(link.link === location.pathname);
+
                                         return (
                                             <CustomLink
-                                                $styles = { S.LinkStyles }
+                                                $styles = { styles }
                                                 key = { link.label + idx }
                                                 label = { link.label }
                                                 to = { link.link }

@@ -105,9 +105,10 @@ export const Input = styled.input`
     }
 `;
 
-export const LinksWrapper = styled.div<{$show?: boolean, $styles?:RuleSet<object> | undefined}>`
+export const LinksWrapper = styled.ul<{$show?: boolean, $styles?:RuleSet<object> | undefined}>`
     display: ${({ $show }) => $show ? 'flex' : 'none'};
     align-items: center;
+    list-style: none;
     ${({ theme }) => theme.media('max').lg} {
         display: flex;
         flex-direction: column;
@@ -180,8 +181,8 @@ export const SearchBarColumnStyles = css`
         width: 100%;
     `;
 
-export const LinkStyles = css`
-        color: ${({ theme }) => theme.text.black.main};
+export const LinkStyles = ($active?: boolean) => css`
+        color: ${({ theme }) => $active ? theme.palette.purple.main : theme.text.black.main};
         margin-right: 8px;
         white-space: nowrap;
         font-family: ${MyFonts.THICCCBOI.medium};

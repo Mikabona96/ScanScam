@@ -13,7 +13,7 @@ type PropTypes = {
 // Styles
 const Container = styled.h3<PropTypes>`
     font-family: ${MyFonts.THICCCBOI.bold};
-    color: ${({ theme }) => theme.text.black};
+    color: ${({ theme }) => theme.text.black.main};
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
