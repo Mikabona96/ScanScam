@@ -10,6 +10,7 @@ import { ErrorBoundary } from '../../components';
 
 // Styles
 import * as S from './styles';
+import { Article } from '@/view/components/BlogPage/Article';
 
 // Types
 type PropTypes = {
@@ -19,7 +20,8 @@ type PropTypes = {
 const Blog: FC<PropTypes> = () => {
     return (
         <S.Container>
-            <FirstBlock />
+            {/* <FirstBlock /> */}
+            <Article />
             <SecondBlock />
         </S.Container>
     );
