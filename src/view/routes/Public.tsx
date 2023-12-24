@@ -7,14 +7,17 @@ import * as Pages from '../pages';
 
 // Tools
 import * as book from './book';
+import { LandingPageLayout } from '@/layouts';
 
 export const Public: FC = () => {
     return (
         <Routes>
-            <Route
-                element = { <Pages.Root /> }
-                path = { book.ROOT }
-            />
+            <Route element = { <LandingPageLayout /> }>
+                <Route
+                    element = { <Pages.Root /> }
+                    path = { book.ROOT }
+                />
+            </Route>
             {/* MarkerGen route */}
             <Route
                 element = {

@@ -1,5 +1,5 @@
 // Core
-import React, { FC, useEffect, useCallback, useState } from 'react';
+import React, { FC, useEffect, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 // Routes
@@ -10,8 +10,6 @@ import { useTogglesRedux } from '../bus/client/toggles';
 
 // Assets
 import { GlobalStyles, defaultTheme, FontStyles } from '../assets';
-import { Footer, Header, Modal } from './components';
-import { useOverflowHidden } from '@/tools/hooks';
 
 // Styles
 export const AppContainer = styled.div`
@@ -23,10 +21,6 @@ export const AppContainer = styled.div`
 
 export const App: FC = () => {
     const { setToggleAction: setTogglerAction } = useTogglesRedux();
-
-    const [ isModalActive, setModalActive ] = useState(false);
-    const overflowHandler = useOverflowHidden();
-
 
     const setOnlineStatusHandler = useCallback(() => void setTogglerAction({
         type:  'isOnline',
@@ -44,21 +38,8 @@ export const App: FC = () => {
             <GlobalStyles />
             <FontStyles />
             <AppContainer>
-                <Header
-                    isModalActive = { isModalActive }
-                    setModalActive = { setModalActive }
-                />
                 <Routes />
-                <Footer />
             </AppContainer>
-            {isModalActive && (
-                <Modal
-                    onClose = { () => {
-                        overflowHandler(isModalActive);
-                        setModalActive(false);
-                    } }>
-                </Modal>
-            )}
         </ThemeProvider>
     );
 };

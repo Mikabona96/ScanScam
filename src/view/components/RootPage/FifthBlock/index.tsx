@@ -6,16 +6,15 @@ import Slider, { Settings } from 'react-slick';
 // Bus
 // import {} from '../../../bus/'
 
-import { Arrow, CircleRightIcon } from '@/assets/images/icons';
-
-import CardImage from '@/assets/images/RootPage/Card.png';
+import { Arrow } from '@/assets/images/icons';
 
 // Styles
 import * as S from './styles';
-import { Button, CustomLink, SectionSubtitle, SectionTitle } from '@/view/elements';
+import { Button, SectionSubtitle, SectionTitle } from '@/view/elements';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { breakpoints } from '@/assets';
+import { Card } from '../../Card';
 
 // Types
 type PropTypes = {
@@ -118,32 +117,9 @@ export const FifthBlock: FC<PropTypes> = () => {
                     ref = { ref }
                     { ...settings }>
                     {
-                        cards.map((card, idx) => {
+                        cards.map((card) => {
                             return (
-                                <S.Card key = { card.title +  idx }>
-                                    <S.ImageContainer>
-                                        <img
-                                            alt = 'card_image'
-                                            draggable = { false }
-                                            loading = 'lazy'
-                                            src = { CardImage }
-                                            style = {{ transition: '.3s ease' }}
-                                        />
-                                    </S.ImageContainer>
-                                    <S.CardDate>{card.date}</S.CardDate>
-                                    <S.CardTitle>{card.title}</S.CardTitle>
-                                    <S.CardDescription>
-                                        {card.description}
-                                    </S.CardDescription>
-                                    <CustomLink
-                                        $styles = { S.LinkStyles }
-                                        to = { card.link }>
-                                        <S.LinkWrapper>
-                                            <CircleRightIcon />
-                                            <span style = {{ marginLeft: '4px' }}>Find Out More</span>
-                                        </S.LinkWrapper>
-                                    </CustomLink>
-                                </S.Card>
+                                <Card card = { card } />
                             );
                         })
                     }
