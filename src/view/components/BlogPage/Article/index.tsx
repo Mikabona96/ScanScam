@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 // Elements
-import { SectionSubtitle, SectionTitle } from '@/view/elements';
+import { CustomLink, SectionSubtitle, SectionTitle } from '@/view/elements';
 
 // Styles
 import * as S from './styles';
@@ -25,11 +25,19 @@ export const Article = () => {
             <S.Container>
                 <S.Navigation>
                     <S.NavigationItem>
-                        ScamScan
+                        <CustomLink
+                            $styles = { S.NavigationLink }
+                            to = '/'>
+                            ScamScan
+                        </CustomLink>
                     </S.NavigationItem>
                     <S.Circle />
                     <S.NavigationItem>
-                        Blog
+                        <CustomLink
+                            $styles = { S.NavigationLink }
+                            to = '/blog'>
+                            Blog
+                        </CustomLink>
                     </S.NavigationItem>
                     <S.Circle />
                     <S.NavigationItem>
@@ -46,11 +54,14 @@ export const Article = () => {
                                 src = { data.img_url }
                             />
                         </S.ImageWrapper>
-                        <SectionSubtitle>{data.subtitle}</SectionSubtitle>
+                        <SectionSubtitle $styles = { S.Subtitle } >{data.subtitle}</SectionSubtitle>
                         {
                             data.paragraph.map((paragraph) => {
                                 return (
-                                    <div key = { paragraph.id }>
+                                    <div
+                                        id = { '#' + paragraph.title.toLowerCase().split(' ')
+                                            .join('') }
+                                        key = { paragraph.id }>
                                         <SectionTitle $styles = { S.Title }>
                                             {paragraph.title}
                                         </SectionTitle>
@@ -59,7 +70,7 @@ export const Article = () => {
                                                 paragraph.text.map((text) => {
                                                     return (
                                                         <S.ParagraphListItem  key = { text.heading }>
-                                                            <SectionSubtitle>
+                                                            <SectionSubtitle $styles = { S.Subtitle }>
                                                                 <span style = {{ fontWeight: 'bold' }}>{text.heading}</span>{text.text}
                                                             </SectionSubtitle>
                                                         </S.ParagraphListItem>
@@ -72,9 +83,44 @@ export const Article = () => {
                             })
                         }
                         <SectionTitle $styles = { S.Title }>Conclusion</SectionTitle>
-                        <SectionSubtitle>{data.conclusion}</SectionSubtitle>
+                        <SectionSubtitle $styles = { S.Subtitle }>{data.conclusion}</SectionSubtitle>
                     </S.LeftSide>
-                    2222
+                    <S.RightSide>
+                        <S.DateHashtagsWrapper>
+                            <SectionSubtitle $styles = { S.Subtitle }>
+                                {data.date}
+                            </SectionSubtitle>
+                            <S.HashtagsWrapper>
+                                {
+                                    data.hashtags.map((hashtag, idx) => {
+                                        return (
+                                            <SectionSubtitle
+                                                $styles = { S.Subtitle }
+                                                key = { idx }>
+                                                {hashtag}
+                                            </SectionSubtitle>
+                                        );
+                                    })
+                                }
+                            </S.HashtagsWrapper>
+                        </S.DateHashtagsWrapper>
+                        <S.TablesOfContent>Table of Contents</S.TablesOfContent>
+                        <S.AnchorsWrapper>
+                            {
+                                data.anchors.map((a, i) => {
+                                    return (
+                                        <CustomLink
+                                            $styles = { S.Ancor }
+                                            key = { a + i }
+                                            to = { `#${a.toLowerCase().split(' ')
+                                                .join('')}` }>
+                                            {a}
+                                        </CustomLink>
+                                    );
+                                })
+                            }
+                        </S.AnchorsWrapper>
+                    </S.RightSide>
                 </S.Wrapper>
             </S.Container>
         ) : <div>loading data.....</div>

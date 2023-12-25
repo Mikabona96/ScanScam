@@ -117,9 +117,12 @@ export const FifthBlock: FC<PropTypes> = () => {
                     ref = { ref }
                     { ...settings }>
                     {
-                        cards.map((card) => {
+                        cards.map((card, idx) => {
                             return (
-                                <Card card = { card } />
+                                <Card
+                                    card = { card }
+                                    key = { card.title + idx }
+                                />
                             );
                         })
                     }

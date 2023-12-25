@@ -17,19 +17,19 @@ const cards = [
         id:      1,
         label:   'Enhancing Security with FIDO Keys in 2FA Protocols',
         img_url: BlogCardImg1,
-        link:    '#',
+        link:    '/blog/1',
     },
     {
         id:      2,
         label:   'Enhancing Security with FIDO Keys in 2FA Protocols',
         img_url: BlogCardImg2,
-        link:    '#',
+        link:    '/blog/2',
     },
     {
         id:      3,
         label:   'Enhancing Security with FIDO Keys in 2FA Protocols',
         img_url: BlogCardImg3,
-        link:    '#',
+        link:    '/blog/3',
     },
 ];
 

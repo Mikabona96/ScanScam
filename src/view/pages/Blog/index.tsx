@@ -11,6 +11,7 @@ import { ErrorBoundary } from '../../components';
 // Styles
 import * as S from './styles';
 import { Article } from '@/view/components/BlogPage/Article';
+import { useParams } from 'react-router-dom';
 
 // Types
 type PropTypes = {
@@ -18,10 +19,12 @@ type PropTypes = {
 }
 
 const Blog: FC<PropTypes> = () => {
+    const { id } = useParams();
+
     return (
         <S.Container>
-            {/* <FirstBlock /> */}
-            <Article />
+            {!id && <FirstBlock />}
+            {id && <Article />}
             <SecondBlock />
         </S.Container>
     );

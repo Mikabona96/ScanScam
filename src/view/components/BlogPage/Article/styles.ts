@@ -1,3 +1,4 @@
+import { MyFonts } from '@/assets/fonts';
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
@@ -16,6 +17,11 @@ export const Navigation = styled.ul`
 
 export const NavigationItem = styled.li`
 
+`;
+
+export const NavigationLink = css`
+    color: ${({ theme }) => theme.palette.purple.main};
+    font-weight: 500;
 `;
 
 export const Circle = styled.span`
@@ -79,4 +85,58 @@ export const ParagraphListItem = styled.li`
         top: 10px;
         transform: translateY(-50%);
     }
+`;
+
+export const RightSide = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 424px;
+    width: 100%;
+    padding-top: 8px;
+    gap: 32px;
+`;
+
+export const DateHashtagsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const HashtagsWrapper = styled.div`
+    display: flex;
+    gap: 8px;    
+`;
+
+export const Subtitle = css`
+    color: ${({ theme }) => theme.text.gray.main};
+    ${({ theme }) => theme.media('min').lg} {
+        font-size: 16px;
+    }
+    ${({ theme }) => theme.media('min').xs} {
+        font-size: 16px;
+    }
+    ${({ theme }) => theme.media('min').md} {
+        font-size: 16px;
+    }
+`;
+
+export const TablesOfContent = styled.h3`
+    color: ${({ theme }) => theme.text.gray.main};
+    font-family: ${MyFonts.THICCCBOI.regular};
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px; 
+`;
+
+export const AnchorsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-left: 8px;
+    padding-left: 24px;
+    border-left: 1px solid ${({ theme }) => theme.text.gray.secondary};
+`;
+
+export const Ancor = css`
+    color: ${({ theme }) => theme.text.gray.secondary};
 `;

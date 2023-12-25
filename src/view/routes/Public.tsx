@@ -19,7 +19,7 @@ export const Public: FC = () => {
                 />
                 <Route
                     element = { <Pages.Blog /> }
-                    path = { book.BLOG }
+                    path = { `${book.BLOG}/:id?` }
                 />
             </Route>
             {/* MarkerGen route */}

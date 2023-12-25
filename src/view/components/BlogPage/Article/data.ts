@@ -37,5 +37,13 @@ export const mockedData = [
             },
         ],
         conclusion: 'Phishing scams are pervasive, but with knowledge and vigilance, you can protect yourself from falling victim to these deceptive tactics. Stay alert, scrutinize communications, and implement best practices to fortify your defenses against phishing threats.Remember, your online safety is in your hands. By recognizing the red flags and adopting proactive measures, you can navigate the digital landscape securely and confidently.',
+        date:       '20 March 2023',
+        hashtags:   [ '#phishing', '#cybersecurity', '#anti-scam' ],
+        anchors:    [
+            'Unmasking Phishing Techniques',
+            'Recognizing the Red Flags',
+            'Strategies to Avoid Phishing Scams',
+            'Conclusion',
+        ],
     },
 ];
