@@ -8,17 +8,35 @@ import * as S from './styles';
 
 // Data
 import { mockedData } from './data';
+import { useLocation, useParams } from 'react-router-dom';
 
 export const Article = () => {
     const [ data, setData ] = useState<typeof mockedData[0] | null>(null);
+    const { hash } = useLocation();
+    const { id } = useParams();
 
     useEffect(() => {
         new Promise<typeof mockedData>((res) => {
             setTimeout(() => {
                 res(mockedData);
             }, 1000);
-        }).then((res) => setData(res[ 0 ]));
+        }).then((res) => setData(res[ `${Number(id) - 1}` ]));
     }, []);
+
+
+    const scrollToSection = (sectionId: string | number) => {
+        const section = document.getElementById(`${sectionId}`);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    useEffect(() => {
+        if (!hash) {
+            return;
+        }
+        scrollToSection(hash);
+    }, [ data ]);
 
     return (
         data ? (
@@ -82,7 +100,9 @@ export const Article = () => {
                                 );
                             })
                         }
-                        <SectionTitle $styles = { S.Title }>Conclusion</SectionTitle>
+                        <div id = '#conclusion'>
+                            <SectionTitle $styles = { S.Title }>Conclusion</SectionTitle>
+                        </div>
                         <SectionSubtitle $styles = { S.Subtitle }>{data.conclusion}</SectionSubtitle>
                     </S.LeftSide>
                     <S.RightSide>
@@ -108,12 +128,18 @@ export const Article = () => {
                         <S.AnchorsWrapper>
                             {
                                 data.anchors.map((a, i) => {
+                                    const linkTo = `#${a.toLowerCase().split(' ')
+                                        .join('')}`;
+
                                     return (
                                         <CustomLink
-                                            $styles = { S.Ancor }
+                                            $styles = { S.Ancor(linkTo === hash) }
                                             key = { a + i }
-                                            to = { `#${a.toLowerCase().split(' ')
-                                                .join('')}` }>
+                                            to = { linkTo }
+                                            onClick = { () => {
+                                                scrollToSection(`#${a.toLowerCase().split(' ')
+                                                    .join('')}`);
+                                            } }>
                                             {a}
                                         </CustomLink>
                                     );

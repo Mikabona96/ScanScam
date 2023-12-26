@@ -11,6 +11,7 @@ type PropTypes = {
     label?: string
     children?: React.ReactNode
     $styles?: RuleSet<object>
+    onClick?: () => void
 }
 
 // Styles
@@ -28,11 +29,12 @@ const Container = styled(Link)<PropTypes>`
     ${({ $styles }) => $styles}
 `;
 
-export const CustomLink: FC<PropTypes> = ({ to, label, children, $styles }) => {
+export const CustomLink: FC<PropTypes> = ({ to, label, children, $styles, onClick }) => {
     return (
         <Container
             $styles = { $styles }
-            to = { to }>
+            to = { to }
+            onClick = { onClick }>
             {children ? children : label}
         </Container>
     );

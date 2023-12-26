@@ -92,6 +92,7 @@ export const RightSide = styled.div`
     flex-direction: column;
     max-width: 424px;
     width: 100%;
+    height: fit-content;
     padding-top: 8px;
     gap: 32px;
 `;
@@ -137,6 +138,6 @@ export const AnchorsWrapper = styled.div`
     border-left: 1px solid ${({ theme }) => theme.text.gray.secondary};
 `;
 
-export const Ancor = css`
-    color: ${({ theme }) => theme.text.gray.secondary};
+export const Ancor = (active?: boolean) => css`
+    color: ${({ theme }) => active ? theme.palette.purple.main : theme.text.gray.secondary};
 `;
