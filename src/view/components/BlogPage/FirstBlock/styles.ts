@@ -115,7 +115,7 @@ export const Card = styled.div<{$active?: boolean}>`
         width: 197px;
         height: 480px;
         align-items: flex-start;
-        ${({ $active }) => $active && 'width: 380px;'}
+        ${({ $active }) => $active && 'width: 416px;'}
          & img {
             left: -200px;
             height: 480px;

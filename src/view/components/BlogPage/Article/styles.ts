@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.section`
     padding: 0 80px;
     margin-top: 48px;
+    width: 100%;
     gap: 48px;
     display: flex;
     flex-direction: column;
@@ -87,7 +88,7 @@ export const ParagraphListItem = styled.li`
     }
 `;
 
-export const RightSide = styled.div`
+export const RightSide = styled.aside<{$mt?: number}>`
     display: flex;
     flex-direction: column;
     max-width: 424px;
@@ -95,6 +96,9 @@ export const RightSide = styled.div`
     height: fit-content;
     padding-top: 8px;
     gap: 32px;
+    position: sticky;
+    top: 0;
+    ${({ $mt }) => $mt && `top: ${$mt}px`}
 `;
 
 export const DateHashtagsWrapper = styled.div`

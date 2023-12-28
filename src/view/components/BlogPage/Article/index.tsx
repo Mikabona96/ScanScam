@@ -9,11 +9,15 @@ import * as S from './styles';
 // Data
 import { mockedData } from './data';
 import { useLocation, useParams } from 'react-router-dom';
+import { useComponentWidth, useScroll } from '@/tools/hooks';
+import { breakpoints } from '@/assets';
 
 export const Article = () => {
     const [ data, setData ] = useState<typeof mockedData[0] | null>(null);
     const { hash } = useLocation();
     const { id } = useParams();
+    const isScrolled = useScroll();
+    const { ref, width } = useComponentWidth();
 
     useEffect(() => {
         new Promise<typeof mockedData>((res) => {
@@ -38,9 +42,13 @@ export const Article = () => {
         scrollToSection(hash);
     }, [ data ]);
 
+    console.log('width', width);
+
+    const marginTop = width > breakpoints.lg ? 120 : 48;
+
     return (
         data ? (
-            <S.Container>
+            <S.Container ref = { ref }>
                 <S.Navigation>
                     <S.NavigationItem>
                         <CustomLink
@@ -105,7 +113,7 @@ export const Article = () => {
                         </div>
                         <SectionSubtitle $styles = { S.Subtitle }>{data.conclusion}</SectionSubtitle>
                     </S.LeftSide>
-                    <S.RightSide>
+                    <S.RightSide $mt = { isScrolled ? marginTop : 0 }>
                         <S.DateHashtagsWrapper>
                             <SectionSubtitle $styles = { S.Subtitle }>
                                 {data.date}

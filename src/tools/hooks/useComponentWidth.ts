@@ -29,7 +29,7 @@ export const useComponentWidth = () => {
         timerId = window.setTimeout(delayedFunc, 500);
     };
 
-
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return {
