@@ -10,6 +10,18 @@ export const appearanceAnimation = keyframes`
  100% { opacity: 1; }
 `;
 
+export const appearanceMobileHeader = keyframes`
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: -50%;
+    }
+    100% {
+        left: 0;
+    }
+`;
+
 export const Header = styled.header<{$scrolled: boolean}>`
     position: fixed;
     max-width: 1440px;
@@ -20,11 +32,13 @@ export const Header = styled.header<{$scrolled: boolean}>`
     z-index: 9999;
     background: ${({ $scrolled }) => $scrolled ? '#fff' : 'transparent'};
     ${({ theme }) => theme.media('max').lg} {
-        display: none;
+        padding: 0 12px;
+        height: 48px;
+        transition: all.3s ease;
     };
 `;
 
-export const Wrapper = styled.ul`
+export const Wrapper = styled.ul<{$isOpen: boolean}>`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,18 +46,24 @@ export const Wrapper = styled.ul`
     padding: 0;
     margin: 0;
     list-style: none;
-    /* ${({ theme }) => theme.media('min').xs} {
-        background-color: yellow;
+     ${({ theme }) => theme.media('max').lg} {
+        flex-direction: column;
         position: absolute;
         top: 0;
         left: 0;
-        padding: 24px;
-        height: 100%;
-        width: 100%;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }; */
+        background: #fff;
+        width: 250px;
+        height: 100vh;
+        overflow-y: scroll;
+        z-index: 9998;
+        padding: 0 12px;
+        gap: 24px;
+        justify-content: unset;
+        display: ${({ $isOpen }) => $isOpen ? 'flex' : 'none'};
+        animation-name: ${appearanceMobileHeader};
+        animation-duration: .3s;
+        transition: all.3s ease;
+    };
 `;
 
 export const Column = styled.li<{$styles?: RuleSet<object>, $show?: boolean, $hidelogo?: boolean}>`
@@ -52,10 +72,9 @@ export const Column = styled.li<{$styles?: RuleSet<object>, $show?: boolean, $hi
     margin: 0;
     ${({ $show = true }) => $show ? 'display: flex' : 'display: none'};
     ${({ $styles }) => $styles ? $styles : ''}
-    /* ${({ theme }) => theme.media('min').xs} {
+    ${({ theme }) => theme.media('max').lg} {
         display: flex;
-        ${({ $hidelogo }) => $hidelogo ? 'display: none' : 'display: flex'};
-    }; */
+    };
 `;
 
 export const SearchBar = styled.div`
@@ -113,6 +132,7 @@ export const LinksWrapper = styled.ul<{$show?: boolean, $styles?:RuleSet<object>
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        gap: 24px;
         ${({ $styles }) => $styles}
     };
 `;
@@ -130,51 +150,21 @@ export const AnchorLink = styled.span<{$styles: RuleSet<object> | undefined}>`
     ${({ $styles }) => $styles}
 `;
 
-export const Mobile = styled.header<{$open?:boolean}>`
-    display: none;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: ${({ $open }) => $open ? '100%' : '48px'};
-    background-color: ${({ $open }) => $open ? 'unset' : 'rgba(255, 255, 255, .9)'};
-    backdrop-filter: blur(4px);
-    z-index: 9999;
-    ${({ theme }) => theme.media('max').lg} {
-        display: flex;
-    }
-`;
 
-
-export const Overlay = styled.div`
+export const Overlay = styled.div<{$isOpen?: boolean}>`
     width: 100%;
+    height: 100vh;
     top: 0;
     left: 0;
     position: absolute;
-    height: -webkit-fill-available;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
-    z-index: 99999;
+    z-index: 9997;
+    display: none;
+    ${({ theme }) => theme.media('max').lg} {
+        display: ${({ $isOpen }) => $isOpen ? 'block' : 'none'}
+    }
 `;
-
-
-export const SideBar = styled.div`
-    padding: 12px 24px;
-    min-width: 250px;
-    max-width: 360px;
-    width: 60%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: -webkit-fill-available;
-    background-color: white;
-    z-index: 999999999;
-    overflow: scroll;
-`;
-
 
 export const SearchBarColumnStyles = css`
         max-width: 432px;
@@ -197,11 +187,15 @@ export const LinkStyles = ($active?: boolean) => css`
         }
     `;
 export const MenuIcon = styled.div`
-    position: relative;
-    background-color: yelow;
-    height: 48px;
-    width: 48px;
-    padding: 12px;
+    display: none;
+    ${({ theme }) => theme.media('max').lg} {
+        position: relative;
+        background-color: yelow;
+        height: 48px;
+        width: 48px;
+        padding: 12px;
+        display: block;
+    }
 `;
 
 export const linkWrapperStyles = css`

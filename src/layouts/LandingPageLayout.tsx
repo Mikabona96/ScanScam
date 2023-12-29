@@ -8,7 +8,7 @@ export const LandingPageLayout = () => {
     const overflowHandler = useOverflowHidden();
 
     return (
-        <>
+        <div style = {{ position: 'relative' }}>
             <Header
                 isModalActive = { isModalActive }
                 setModalActive = { setModalActive }
@@ -23,6 +23,6 @@ export const LandingPageLayout = () => {
                     } }>
                 </Modal>
             )}
-        </>
+        </div>
     );
 };
