@@ -36,10 +36,9 @@ export const Article = () => {
     };
 
     useEffect(() => {
-        if (!hash) {
-            return;
+        if (hash && width >= breakpoints.lg) {
+            scrollToSection(hash);
         }
-        scrollToSection(hash);
     }, [ data ]);
 
     console.log('width', width);

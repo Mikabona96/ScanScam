@@ -43,6 +43,11 @@ export const Wrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 344px;
     gap: 32px;
+     ${({ theme }) => theme.media('max').lg} {
+        display: grid;
+        gap: 0;
+        grid-template-columns: 1fr;
+    }
 `;
 
 export const LeftSide = styled.div`
@@ -98,6 +103,9 @@ export const RightSide = styled.aside<{$mt?: number}>`
     gap: 32px;
     position: sticky;
     top: 0;
+    ${({ theme }) => theme.media('max').lg} {
+        display: none
+    }
     ${({ $mt }) => $mt && `top: ${$mt}px`}
 `;
 
@@ -112,6 +120,7 @@ export const HashtagsWrapper = styled.div`
 `;
 
 export const Subtitle = css`
+    max-width: 100% !important;
     color: ${({ theme }) => theme.text.gray.main};
     ${({ theme }) => theme.media('min').lg} {
         font-size: 16px;
