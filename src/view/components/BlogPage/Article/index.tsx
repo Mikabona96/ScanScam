@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Elements
 import { CustomLink, SectionSubtitle, SectionTitle } from '@/view/elements';
@@ -9,15 +9,16 @@ import * as S from './styles';
 // Data
 import { mockedData } from './data';
 import { useLocation, useParams } from 'react-router-dom';
-import { useComponentWidth, useScroll } from '@/tools/hooks';
+import { useScroll } from '@/tools/hooks';
 import { breakpoints } from '@/assets';
 
 export const Article = () => {
     const [ data, setData ] = useState<typeof mockedData[0] | null>(null);
+    const [ width, setWidth ] = useState(0);
     const { hash } = useLocation();
     const { id } = useParams();
+    const ref = useRef<HTMLDivElement | null>(null);
     const isScrolled = useScroll();
-    const { ref, width } = useComponentWidth();
 
     useEffect(() => {
         new Promise<typeof mockedData>((res) => {
@@ -31,17 +32,36 @@ export const Article = () => {
     const scrollToSection = (sectionId: string | number) => {
         const section = document.getElementById(`${sectionId}`);
         if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
+            window.scrollTo({ behavior: 'smooth', top: section.getBoundingClientRect().top - document.body.getBoundingClientRect().top });
         }
     };
 
+    const createSlug = (text:string) => {
+        let slug = text.toLowerCase();
+
+        slug = slug.replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+
+        return slug;
+    };
+
+
     useEffect(() => {
+        const width = ref.current?.clientWidth;
+        if (!width) {
+            return;
+        }
+        setWidth(width);
         if (hash && width >= breakpoints.lg) {
             scrollToSection(hash);
         }
     }, [ data ]);
 
-    console.log('width', width);
+    useEffect(() => {
+        // const anchors = document.querySelectorAll('[data-anchor=anchor]');
+        // console.log(anchors);
+    }, [ data ]);
+
+    // console.log('width', width);
 
     const marginTop = width > breakpoints.lg ? 120 : 48;
 
@@ -84,8 +104,7 @@ export const Article = () => {
                             data.paragraph.map((paragraph) => {
                                 return (
                                     <div
-                                        id = { '#' + paragraph.title.toLowerCase().split(' ')
-                                            .join('') }
+                                        id = { '#' + createSlug(paragraph.title) }
                                         key = { paragraph.id }>
                                         <SectionTitle $styles = { S.Title }>
                                             {paragraph.title}
@@ -135,17 +154,16 @@ export const Article = () => {
                         <S.AnchorsWrapper>
                             {
                                 data.anchors.map((a, i) => {
-                                    const linkTo = `#${a.toLowerCase().split(' ')
-                                        .join('')}`;
+                                    const linkTo = '#' + createSlug(a);
 
                                     return (
                                         <CustomLink
                                             $styles = { S.Ancor(linkTo === hash) }
+                                            dataAnchor = 'anchor'
                                             key = { a + i }
                                             to = { linkTo }
                                             onClick = { () => {
-                                                scrollToSection(`#${a.toLowerCase().split(' ')
-                                                    .join('')}`);
+                                                scrollToSection('#' + createSlug(a));
                                             } }>
                                             {a}
                                         </CustomLink>
