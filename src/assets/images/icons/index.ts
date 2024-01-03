@@ -11,3 +11,7 @@ export * from './x';
 export * from './closeIcon';
 export * from './warningIcon';
 export * from './successIcon';
+export * from './scamCheck';
+export * from './whoisQuery';
+export * from './domainZone';
+export * from './logout';

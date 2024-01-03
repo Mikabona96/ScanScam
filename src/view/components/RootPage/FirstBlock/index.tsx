@@ -1,14 +1,16 @@
 // Core
 import React, { FC } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 // Bus
 // import {} from '../../../bus/'
 
+// Elements
+import { SectionSubtitle } from '@/view/elements';
+
 // Styles
 import * as S from './styles';
-import { inithialState, schema } from './static';
-import { Button, SectionSubtitle } from '@/view/elements';
+
+// Schema
+import { SearchBar } from '../../SearchBar';
 
 // Types
 type PropTypes = {
@@ -16,11 +18,6 @@ type PropTypes = {
 }
 
 export const FirstBlock: FC<PropTypes> = () => {
-    const {  control, handleSubmit, formState: { errors }} = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
-    const onSubmit = (data: any) => {
-        console.log(data, 'data');
-    };
-
     return (
         <S.Container>
             <S.Block>
@@ -29,24 +26,7 @@ export const FirstBlock: FC<PropTypes> = () => {
                     Instant <S.TitleGradient>Scam Check</S.TitleGradient>
                 </S.Title>
                 <SectionSubtitle>Enter the domain or URL below to ensure a scam-free experience</SectionSubtitle>
-                <S.Form onSubmit = { (event) => {
-                    event.preventDefault();
-                    handleSubmit(onSubmit)();
-                } }>
-                    <Controller
-                        control = { control }
-                        name = 'url'
-                        render = { ({ field: { onChange, onBlur }}) => (
-                            <S.Input
-                                $error = { !!errors.url?.message }
-                                placeholder = 'www.example-scam.com'
-                                onBlur = { onBlur }
-                                onChange = { onChange }
-                            />
-                        ) }
-                    />
-                    <Button $styles = { S.ButtonStyles }>Check now</Button>
-                </S.Form>
+                <SearchBar />
             </S.Block>
         </S.Container>
     );

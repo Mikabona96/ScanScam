@@ -1,4 +1,5 @@
 // MarkerGen re-export
+export * from './SearchBar';
 export * from './Card';
 export * from './Modal';
 export * from './Portal';

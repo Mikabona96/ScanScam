@@ -22,6 +22,10 @@ export const Private: FC = () => {
                     path = { `${book.BLOG}/:id?` }
                 />
             </Route>
+            <Route
+                element = { <Pages.ScamCheck /> }
+                path = { book.SCAM_CHECK }
+            />
             {/* MarkerGen route */}
             <Route
                 element = {

@@ -7,7 +7,7 @@ import * as Pages from '../pages';
 
 // Tools
 import * as book from './book';
-import { LandingPageLayout } from '@/layouts';
+import { LandingPageLayout, WebAppLayout } from '@/layouts';
 
 export const Public: FC = () => {
     return (
@@ -20,6 +20,12 @@ export const Public: FC = () => {
                 <Route
                     element = { <Pages.Blog /> }
                     path = { `${book.BLOG}/:id?` }
+                />
+            </Route>
+            <Route element = { <WebAppLayout /> }>
+                <Route
+                    element = { <Pages.ScamCheck /> }
+                    path = { book.SCAM_CHECK }
                 />
             </Route>
             {/* MarkerGen route */}
