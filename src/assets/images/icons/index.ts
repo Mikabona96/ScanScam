@@ -18,3 +18,4 @@ export * from './logout';
 export * from './scamStatusSafe';
 export * from './scamStatusScam';
 export * from './scamStatusUnclassified';
+export * from './info';

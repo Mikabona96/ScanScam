@@ -16,6 +16,7 @@ export interface ITheme {
         gray: {
             lightGrey: string
             background: string
+            info: string
         },
         black: {
             dark: string
@@ -69,6 +70,7 @@ export const defaultTheme: ITheme = {
         gray: {
             lightGrey:  '#D9D9D9',
             background: '#F6F6F8',
+            info:       '#818181',
         },
         black: {
             dark: '#070411',

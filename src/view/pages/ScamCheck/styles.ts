@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 // Core
 import { MyFonts } from '@/assets/fonts';
 import styled, { css } from 'styled-components';
@@ -8,7 +9,14 @@ export const Container = styled.section`
     background-color: #fff;
     border-radius: 4px;
     padding: 32px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const DataContainer = styled.div`
     gap: 32px;
+    height: 100%;
     display: flex;
     flex-direction: column;
 `;
@@ -103,4 +111,67 @@ export const ScamInfoText = styled.p`
     font-family: ${MyFonts.THICCCBOI.regular};
     margin-top: 16px;
     font-weight: 400;
+`;
+
+export const DoughnutChartsBlock = styled.div`
+    display: flex;
+    padding: 36px 24px 0px;
+    gap: 48px;
+    align-items: center;
+`;
+
+export const DoughnutChartsContainer = styled.div`
+    display: flex;
+`;
+
+export const DoughnutChartWrapper = styled.div`
+    width: 126px;
+    height: 126px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const Statuses = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+`;
+
+export const StatusText = styled.p<{$status: 'low' | 'high' | 'moderate'}>`
+    display: flex;
+    font-family: ${MyFonts.THICCCBOI.regular};
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17px;
+    position: relative;
+    padding-left: 22px;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 14px;
+        height: 14px;
+        transform: translateY(-50%);
+        background-color: ${({ $status }) => $status === 'low' ? '#067647' : $status === 'moderate' ? '#DF9300' : '#B42318'};
+        border-radius: 50%;
+    }
+`;
+
+export const Info = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    margin-top: 16px;
+    gap: 4px;
+    color: ${({ theme }) => theme.palette.gray.info};
+
+    font-family: ${MyFonts.THICCCBOI.regular};
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
 `;
