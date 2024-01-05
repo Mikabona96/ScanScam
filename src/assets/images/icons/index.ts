@@ -15,3 +15,6 @@ export * from './scamCheck';
 export * from './whoisQuery';
 export * from './domainZone';
 export * from './logout';
+export * from './scamStatusSafe';
+export * from './scamStatusScam';
+export * from './scamStatusUnclassified';

@@ -208,3 +208,7 @@ export const ColumnLinkStyles = css`
     width: 100%;
     margin-top: 20px;
 `;
+
+export const OpenAppBtn = css`
+    padding: 0;
+`;

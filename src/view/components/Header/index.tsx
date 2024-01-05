@@ -131,7 +131,11 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                                 handleModalOpen();
                             } }>Report a Scam
                         </Button>
-                        <Button>Log in</Button>
+                        <CustomLink
+                            $styles = { S.OpenAppBtn }
+                            to = '/scam-check'>
+                            <Button>Open App</Button>
+                        </CustomLink>
                     </S.LinksWrapper>
                 </S.Column>
             </S.Wrapper>
