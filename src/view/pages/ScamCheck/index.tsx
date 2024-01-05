@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 // import {} from '../../../bus/'
 
 // Components
-import { ErrorBoundary, SearchBar } from '../../components';
+import { ErrorBoundary, Screenshot, SearchBar, Table } from '../../components';
 
 // Styles
 import * as S from './styles';
@@ -18,6 +18,16 @@ type PropTypes = {
 
 const ScamCheck: FC<PropTypes> = () => {
     const data = true;
+    const domainData = [
+        { Registrar: 'Google LTd.' },
+        { 'Registration date': '2023-03-25' },
+        { 'Owner name': 'John Doe' },
+    ];
+    const ipData = [
+        { IP: '213.227.162.125' },
+        { Country: 'Fance' },
+        { Registrant: 'Google LTd.' },
+    ];
 
     return (
         <S.Container>
@@ -78,6 +88,20 @@ const ScamCheck: FC<PropTypes> = () => {
                                     <S.Info><InfoIcon /> Indicates the likelihood of scams based on AI analysis</S.Info>
                                 </S.ScamInfo>
                             </S.ScamInfoWrapper>
+                            <Screenshot />
+                            <S.Whois>
+                                <S.WhoisTitle>Whois information</S.WhoisTitle>
+                                <S.TablesContainer>
+                                    <Table
+                                        data = { domainData }
+                                        title = 'Domain'
+                                    />
+                                    <Table
+                                        data = { ipData }
+                                        title = 'IP'
+                                    />
+                                </S.TablesContainer>
+                            </S.Whois>
                         </S.DataContainer>
                     )
             }

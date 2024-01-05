@@ -12,6 +12,7 @@ export const Container = styled.section`
     gap: 24px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 8px 16px 0px rgba(112, 115, 119, 0.12);
 `;
 
 export const DataContainer = styled.div`
@@ -175,3 +176,25 @@ export const Info = styled.div`
     font-weight: 400;
     line-height: 14px;
 `;
+
+
+export const Whois = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+`;
+
+export const WhoisTitle = styled.h3`
+    font-family: ${MyFonts.THICCCBOI.semiBold};
+    color: ${({ theme }) => theme.text.black.main};
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+`;
+
+export const TablesContainer = styled.div`
+    display: flex;
+    gap: 48px;
+`;
+

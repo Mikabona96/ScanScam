@@ -1,4 +1,6 @@
 // MarkerGen re-export
+export * from './Table';
+export * from './ScamCheck/Screenshot';
 export * from './SearchBar';
 export * from './Card';
 export * from './Modal';

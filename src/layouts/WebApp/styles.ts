@@ -10,7 +10,6 @@ export const Container = styled.main`
 export const SideBar = styled.aside`
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 216px;
     background: ${({ theme }) => theme.palette.black.dark};
 `;
@@ -81,6 +80,7 @@ export const ContentWrapper = styled.div`
     flex-direction: column;
     max-width: 1224px;
     width: 100%;
+    height: fit-content;
     background: ${({ theme }) => theme.palette.gray.background};
 `;
 

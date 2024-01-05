@@ -19,3 +19,4 @@ export * from './scamStatusSafe';
 export * from './scamStatusScam';
 export * from './scamStatusUnclassified';
 export * from './info';
+export * from './link';
