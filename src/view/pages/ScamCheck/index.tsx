@@ -8,7 +8,7 @@ import { ErrorBoundary, Screenshot, SearchBar, Table } from '../../components';
 
 // Styles
 import * as S from './styles';
-import { ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle } from '@/view/elements';
+import { Button, ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle } from '@/view/elements';
 import { InfoIcon } from '@/assets/images/icons';
 
 // Types
@@ -102,6 +102,14 @@ const ScamCheck: FC<PropTypes> = () => {
                                     />
                                 </S.TablesContainer>
                             </S.Whois>
+                            <S.ReportScamWrapper>
+                                <S.ReportTitle>Report scam</S.ReportTitle>
+                                <S.ReportSubtitle>
+                                    Report any issues or concerns about this website.
+                                    Your feedback helps improve our scam-checking service.
+                                </S.ReportSubtitle>
+                                <Button>Submit Report</Button>
+                            </S.ReportScamWrapper>
                         </S.DataContainer>
                     )
             }

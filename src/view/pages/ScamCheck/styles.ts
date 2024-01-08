@@ -198,3 +198,21 @@ export const TablesContainer = styled.div`
     gap: 48px;
 `;
 
+export const ReportScamWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 410px;
+    width: 100%;
+`;
+
+export const ReportTitle = styled.h5`
+    ${Text};
+`;
+
+export const ReportSubtitle = styled.h5`
+    ${Text};
+    margin-top: 12px;
+    margin-bottom: 24px;
+    font-family: ${MyFonts.THICCCBOI.regular};
+    font-weight: 400;
+`;
