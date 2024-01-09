@@ -20,3 +20,6 @@ export * from './scamStatusScam';
 export * from './scamStatusUnclassified';
 export * from './info';
 export * from './link';
+export * from './table';
+export * from './anglebrackets';
+export * from './chevron';

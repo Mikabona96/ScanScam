@@ -1,43 +1,108 @@
 // Core
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import { LatLngExpression } from 'leaflet';
 
 // Bus
 // import {} from '../../../bus/'
 
 // Styles
+import 'leaflet/dist/leaflet.css';
 import * as S from './styles';
-import { LinkIcon } from '@/assets/images/icons';
+
+// Icons
+import { ChevronIcon, LinkIcon } from '@/assets/images/icons';
 
 // Types
 type PropTypes = {
     /* type props here */
     title: string
     data: object[]
+    variant?: '1' | '2'
+    alignValues?: 'close' | 'far'
+    isOpen?: boolean
+    footerLink?: string
+    withMap?: boolean
+    location?: number[]
 }
 
-export const Table: FC<PropTypes> = ({ title, data }) => {
-    return (
-        <S.Table>
-            <S.Thead><tr><th>{title}</th></tr></S.Thead>
-            <S.Tbody>
-                {
-                    data.map((item: any, idx: number) => {
-                        const entries = Object.entries(item);
-                        const key = entries[ 0 ][ 0 ];
-                        const value = entries[ 0 ][ 1 ] as string;
+export const Table: FC<PropTypes> = ({ title, data, variant = '1', alignValues, isOpen = true, footerLink, withMap, location }) => {
+    const [ open, setOpen ] = useState(isOpen);
 
-                        return (
-                            <S.Tr key = { idx }>
-                                <S.Td>{key}</S.Td>
-                                <S.Td>{value}</S.Td>
-                            </S.Tr>
-                        );
-                    })
+    return (
+        <S.TableContainer>
+            <S.Thead
+                style = {{ cursor: 'pointer' }}
+                onClick = { () => setOpen(!open) }>
+                <div
+                    style = {{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                    <div>
+                        {title}
+                    </div>
+                    <div
+                        style = {{ transform: open ? '' : 'rotate(180deg)', transition: 'all .3s ease' }}>
+                        {variant === '2' && <ChevronIcon />}
+                    </div>
+                </div>
+            </S.Thead>
+            <S.TableWrapper>
+                <S.Table $withMap = { withMap }>
+                    {
+                        ((variant === '2' && open) || variant === '1') && (
+                            <S.Tbody>
+                                {
+                                    data.map((item: any) => {
+                                        const entries = Object.entries(item);
+
+                                        return entries.map((item) => {
+                                            return (
+                                                <S.Tr key = { item[ 0 ] }>
+                                                    <S.Tdkey $alignValues = { variant === '2' ? alignValues : void 0 }>{item[ 0 ]}</S.Tdkey>
+                                                    <S.TdValue $alignValues = { variant === '2' ? alignValues : void 0 }>{item[ 1 ] as string}</S.TdValue>
+                                                </S.Tr>
+                                            );
+                                        });
+                                    })
+                                }
+                            </S.Tbody>
+                        )
+                    }
+                    {
+                        variant !== '2' && (
+                            <S.Tfoot>
+                                <tr>
+                                    <th>
+                                        <Link
+                                            style = {{ textDecoration: 'none' }}
+                                            to = { `${footerLink}` }>
+                                            <S.Link><LinkIcon /> {title} details</S.Link>
+                                        </Link>
+                                    </th>
+                                </tr>
+                            </S.Tfoot>
+                        )
+                    }
+                </S.Table>
+                {
+                    withMap && open && (
+                        <S.MapWrapper>
+                            <MapContainer
+                                center = { location as LatLngExpression }
+                                dragging = { false }
+                                scrollWheelZoom = { false }
+                                style = {{ width: '100%', height: '100%' }}
+                                zoom = { 10 }
+                                zoomControl = { false }>
+                                <TileLayer
+                                    attribution = { `<a target="_blank" style="${S.OpenstreetMapLink}" href='https://www.openstreetmap.org/?mlat=${location && location[ 0 ]}&mlon=${location && location[ 1 ]}#map=12/${location && location[ 0 ]}/${location && location[ 1 ]}'>Open in Maps</a>` }
+                                    url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                                />
+                            </MapContainer>
+                        </S.MapWrapper>
+                    )
                 }
-            </S.Tbody>
-            <S.Tfoot>
-                <tr><th><S.Link><LinkIcon /> {title} details</S.Link></th></tr>
-            </S.Tfoot>
-        </S.Table>
+            </S.TableWrapper>
+        </S.TableContainer>
     );
 };

@@ -8,20 +8,22 @@ import * as S from './styles';
 import Logo from '@/assets/images/icons/logoTransparency.png';
 import { CustomLink } from '@/view/elements';
 import { DomainZone, Logout, ScamCheck, WhoisQuery } from '@/assets/images/icons';
+import { useBasePath } from '@/tools/hooks';
 
 export const Sidebar = () => {
+    const pathname = useBasePath();
     const links = [
         {
             id:    1,
             label: 'Scam Check',
             Icon:  ScamCheck,
-            link:  '#',
+            link:  '/scam-check',
         },
         {
             id:    2,
             label: 'Whois Query',
             Icon:  WhoisQuery,
-            link:  '#',
+            link:  '/whois-query',
         },
         {
             id:    3,
@@ -30,6 +32,7 @@ export const Sidebar = () => {
             link:  '#',
         },
     ];
+
 
     return (
         <S.SideBar>
@@ -48,9 +51,9 @@ export const Sidebar = () => {
                         links.map(({ Icon, id, label, link }) => {
                             return (
                                 <S.MenuItem
-                                    $active = { id === 1 }
+                                    $active = { pathname === link }
                                     key = { id }>
-                                    <S.MenuItemSelected $active = { id === 1 } />
+                                    <S.MenuItemSelected $active = { pathname === link } />
                                     <Icon />
                                     <CustomLink
                                         $styles = { S.LinkStyles }

@@ -11,6 +11,7 @@ export const SideBar = styled.aside`
     display: flex;
     flex-direction: column;
     width: 216px;
+    min-height: 100vh;
     background: ${({ theme }) => theme.palette.black.dark};
 `;
 
@@ -80,7 +81,8 @@ export const ContentWrapper = styled.div`
     flex-direction: column;
     max-width: 1224px;
     width: 100%;
-    height: fit-content;
+    /* height: fit-content; */
+    min-height: 100vh;
     background: ${({ theme }) => theme.palette.gray.background};
 `;
 
@@ -100,6 +102,7 @@ export const OutletWrapper = styled.div`
 `;
 
 export const Footer = styled.footer`
+    margin-top: auto;
     padding: 48px 48px 16px;
     display: flex;
     justify-content: space-between;

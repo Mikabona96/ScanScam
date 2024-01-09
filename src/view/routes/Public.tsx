@@ -27,6 +27,10 @@ export const Public: FC = () => {
                     element = { <Pages.ScamCheck /> }
                     path = { book.SCAM_CHECK }
                 />
+                <Route
+                    element = { <Pages.WhoisQuery /> }
+                    path = { `${book.WHOIS_QUERY}/:id?` }
+                />
             </Route>
             {/* MarkerGen route */}
             <Route
