@@ -18,7 +18,7 @@ import { ChevronIcon, LinkIcon } from '@/assets/images/icons';
 type PropTypes = {
     /* type props here */
     title: string
-    data: object[]
+    data: {key: string, value: string | string[]}[]
     variant?: '1' | '2'
     alignValues?: 'close' | 'far'
     isOpen?: boolean
@@ -52,17 +52,20 @@ export const Table: FC<PropTypes> = ({ title, data, variant = '1', alignValues, 
                         ((variant === '2' && open) || variant === '1') && (
                             <S.Tbody>
                                 {
-                                    data.map((item: any) => {
-                                        const entries = Object.entries(item);
+                                    data.map(({ key, value }) => {
+                                        let val = value ? value : '';
+                                        if (Array.isArray(value)) {
+                                            value.forEach((string) => {
+                                                val += `\n${string}`;
+                                            });
+                                        }
 
-                                        return entries.map((item) => {
-                                            return (
-                                                <S.Tr key = { item[ 0 ] }>
-                                                    <S.Tdkey $alignValues = { variant === '2' ? alignValues : void 0 }>{item[ 0 ]}</S.Tdkey>
-                                                    <S.TdValue $alignValues = { variant === '2' ? alignValues : void 0 }>{item[ 1 ] as string}</S.TdValue>
-                                                </S.Tr>
-                                            );
-                                        });
+                                        return (
+                                            <S.Tr key = { key }>
+                                                <S.Tdkey $alignValues = { variant === '2' ? alignValues : void 0 }>{key}</S.Tdkey>
+                                                <S.TdValue $alignValues = { variant === '2' ? alignValues : void 0 }>{val}</S.TdValue>
+                                            </S.Tr>
+                                        );
                                     })
                                 }
                             </S.Tbody>

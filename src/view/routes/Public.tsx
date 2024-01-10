@@ -29,7 +29,7 @@ export const Public: FC = () => {
                 />
                 <Route
                     element = { <Pages.WhoisQuery /> }
-                    path = { `${book.WHOIS_QUERY}/:id?` }
+                    path = { book.WHOIS_QUERY }
                 />
             </Route>
             {/* MarkerGen route */}

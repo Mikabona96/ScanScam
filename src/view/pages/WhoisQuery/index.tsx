@@ -10,7 +10,7 @@ import { ErrorBoundary, ResultDomain, ResultIP, SearchBar } from '../../componen
 // Styles
 import * as S from './styles';
 import { SectionSubtitle, SectionTitle } from '@/view/elements';
-import { useParams } from 'react-router-dom';
+import { useWhoisquery } from '@/bus/whoisquery';
 
 // Types
 type PropTypes = {
@@ -19,13 +19,12 @@ type PropTypes = {
 
 const WhoisQuery: FC<PropTypes> = () => {
     const [ isRaw, setIsRaw ] = useState(false);
-    const { id } = useParams();
-    const data = true;
+    const { whoisquery: { whoisQuery }} = useWhoisquery();
 
     return (
         <S.Container>
             {
-                !data ? (
+                !whoisQuery ? (
                     <>
                         <S.TextWrapper>
                             <SectionTitle $styles = { S.TitleStyles }>
@@ -35,12 +34,14 @@ const WhoisQuery: FC<PropTypes> = () => {
                                 Enter a website URL to check if it's safe
                             </SectionSubtitle>
                         </S.TextWrapper>
-                        <SearchBar />
+                        <SearchBar
+                            placeholder = 'Enter a domain or IP address'
+                        />
                     </>
                 ) : (
                     <>
                         {
-                            data && id === 'domain_details' && (
+                            whoisQuery && !whoisQuery?.parsed?.ip && (
                                 <ResultDomain
                                     isRaw = { isRaw }
                                     setIsRaw = { setIsRaw }
@@ -48,7 +49,7 @@ const WhoisQuery: FC<PropTypes> = () => {
                             )
                         }
                         {
-                            data && id === 'ip_details' && (
+                            whoisQuery && whoisQuery?.parsed?.ip && (
                                 <ResultIP
                                     isRaw = { isRaw }
                                     setIsRaw = { setIsRaw }

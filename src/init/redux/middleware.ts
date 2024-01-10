@@ -6,6 +6,7 @@ import { Middleware } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 
 // MarkerGen import Saga or Thunk
+import thunkMiddleware from 'redux-thunk';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -13,6 +14,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const middleware: Middleware[] = [
     // MarkerGen use middleware Saga or Thunk
+    thunkMiddleware,
 ];
 
 isDev && middleware.push(

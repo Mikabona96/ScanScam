@@ -19,19 +19,15 @@ type PropTypes = {
 const ScamCheck: FC<PropTypes> = () => {
     const data = true;
     const domainData = [
-        {
-            Registrar:           'Google LTd.',
-            'Registration date': '2023-03-25',
-            'Owner name':        'John Doe',
-        },
+        { key: 'Registrar', value: 'Google LTd.' },
+        { key: 'Registration date', value: '2023-03-25' },
+        { key: 'Owner name', value: 'John Doe' },
 
     ];
     const ipData = [
-        {
-            IP:         '213.227.162.125',
-            Country:    'France',
-            Registrant: 'Google LTd.',
-        },
+        { key: 'IP', value: '213.227.162.125' },
+        { key: 'Country', value: 'France' },
+        { key: 'Registrant', value: 'Google LTd.' },
     ];
 
     return (
@@ -99,12 +95,12 @@ const ScamCheck: FC<PropTypes> = () => {
                                 <S.TablesContainer>
                                     <Table
                                         data = { domainData }
-                                        footerLink = '/whois-query/domain_details'
+                                        footerLink = '/whois-query'
                                         title = 'Domain'
                                     />
                                     <Table
                                         data = { ipData }
-                                        footerLink = '/whois-query/ip_details'
+                                        footerLink = '/whois-query'
                                         title = 'IP'
                                     />
                                 </S.TablesContainer>

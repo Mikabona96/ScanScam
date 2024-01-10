@@ -8,6 +8,7 @@ import React, { FC } from 'react';
 import * as S from './styles';
 import { TopRow } from '../TopRow';
 import { Table } from '../../Table';
+import { useWhoisquery } from '@/bus/whoisquery';
 
 // Types
 type PropTypes = {
@@ -17,13 +18,26 @@ type PropTypes = {
 }
 
 export const ResultIP: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
+    const { whoisquery: { whoisQuery }} = useWhoisquery();
+
     const geoData = [
-        {
-            Country:   'AUT',
-            Address:   'Feldkirchner Str. 140, 9020 Klagenfurt Austria',
-            Longitude: '14.28907',
-            Latitude:  '46.64121',
-        },
+        { key: 'Country', value: whoisQuery?.parsed?.addresses[ 0 ]?.country || '-' },
+        { key: 'Address', value: whoisQuery?.parsed?.addresses[ 0 ]?.address || '-' },
+        { key: 'Longitude', value: whoisQuery?.parsed?.addresses[ 0 ]?.longitude || '-' },
+        { key: 'Latitude', value: whoisQuery?.parsed?.addresses[ 0 ]?.latitude || '-' },
+    ];
+    const summary = [
+        { key: 'Whois Server', value: whoisQuery?.parsed?.whois || '-' },
+        { key: 'ASN', value: whoisQuery?.json_format?.OriginAS || whoisQuery?.json_format?.origin || '-' },
+        { key: 'Company', value: whoisQuery?.json_format?.OrgName || whoisQuery?.json_format?.descr || '-' },
+        { key: 'Route', value: whoisQuery?.json_format?.CIDR || whoisQuery?.json_format?.route || '-' },
+        { key: 'Abuse Contact', value: whoisQuery?.json_format?.OrgAbuseEmail || whoisQuery?.json_format[ 'abuse-mailbox' ] || '-' },
+    ];
+    const ipNet = [
+        { key: 'Net Name', value: whoisQuery?.json_format?.NetName || whoisQuery?.json_format?.netname || '-' },
+        { key: 'First IP', value: whoisQuery?.parsed?.ipnet?.first_ip || '-' },
+        { key: 'Last Ip', value: whoisQuery?.parsed?.ipnet?.last_ip || '-' },
+        { key: 'All IPs', value: whoisQuery?.parsed?.ipnet?.all_ips || '-' },
     ];
 
     return (
@@ -36,9 +50,22 @@ export const ResultIP: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
             />
             <Table
                 withMap
+                alignValues = 'close'
                 data = { geoData }
-                location = { [ Number(geoData[ 0 ].Latitude), Number(geoData[ 0 ].Longitude) ] }
+                location = { [ Number(geoData[ 3 ].value), Number(geoData[ 2 ].value) ] }
                 title = 'Geolocation'
+                variant = '2'
+            />
+            <Table
+                alignValues = 'close'
+                data = { summary }
+                title = 'Summary'
+                variant = '2'
+            />
+            <Table
+                alignValues = 'close'
+                data = { ipNet }
+                title = 'IP Net'
                 variant = '2'
             />
         </S.Container>

@@ -12,12 +12,11 @@ import Logo from '@/assets/images/icons/logo.png';
 
 // Styles
 import * as S from './styles';
-import { SearchIcon } from '@/assets/images/icons';
-import { useTheme } from 'styled-components';
 import { Button, CustomLink } from '@/view/elements';
 import { useOverflowHidden, useScroll } from '@/tools/hooks';
 import { useLocation } from 'react-router-dom';
 import { MenuIcon } from '@/assets/images/icons/menuIcon';
+import { HeaderSearchBar } from '../HeaderSearchBar';
 
 
     // Types
@@ -30,7 +29,6 @@ import { MenuIcon } from '@/assets/images/icons/menuIcon';
 
 export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
     const [ isOpen, setIsOpen ] = useState(false);
-    const theme = useTheme();
     const scrolled = useScroll();
     const overflowHandler = useOverflowHidden();
 
@@ -91,18 +89,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                 <S.Column
                     $show = { scrolled }
                     $styles = { S.SearchBarColumnStyles }>
-                    <S.SearchBar>
-                        <S.Input
-                            placeholder = 'Enter a domain or URL (e.g., www.example.com)'
-                        />
-                        <div style = {{ width: '24px', height: '24px' }}>
-                            <SearchIcon
-                                color = { theme.palette.purple.main }
-                                height = { 24 }
-                                width = { 24 }
-                            />
-                        </div>
-                    </S.SearchBar>
+                    <HeaderSearchBar />
                 </S.Column>
                 <S.Column>
                     <S.LinksWrapper $show>

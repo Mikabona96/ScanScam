@@ -140,3 +140,7 @@ export const FooterLinkStyles = css`
         color: ${({ theme }) => theme.palette.purple.main};
     }
 `;
+
+export const CustomLink = css`
+    margin-left: auto;
+`;

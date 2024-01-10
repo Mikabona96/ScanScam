@@ -6,8 +6,11 @@ import { Outlet } from 'react-router-dom';
 import * as S from './styles';
 import { Sidebar } from './Sidebar';
 import { Button, CustomLink } from '@/view/elements';
+import { HeaderSearchBar } from '@/view/components';
+import { useWhoisquery } from '@/bus/whoisquery';
 
 export const WebAppLayout = () => {
+    const { whoisquery: { whoisQuery }} = useWhoisquery();
     const links = [
         {
             id:    1,
@@ -41,8 +44,10 @@ export const WebAppLayout = () => {
             <Sidebar />
             <S.ContentWrapper>
                 <S.Header>
-                    <div style = {{ width: '20px', height: '20px' }}></div>
-                    <CustomLink to = '/' >
+                    {whoisQuery && <HeaderSearchBar placeholder = 'Type a new website to check' />}
+                    <CustomLink
+                        $styles = { S.CustomLink }
+                        to = '/' >
                         <Button>
                             Return to site
                         </Button>

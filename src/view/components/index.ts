@@ -1,4 +1,5 @@
 // MarkerGen re-export
+export * from './HeaderSearchBar';
 export * from './WhoisQuerry/ResultIP';
 export * from './WhoisQuerry/ResultDomain';
 export * from './WhoisQuerry/TopRow';
