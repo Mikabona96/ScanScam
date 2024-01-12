@@ -18,7 +18,7 @@ export const SearchBar = styled.form<{$error?: boolean}>`
     padding: 12px;
     animation-name: ${appearanceAnimation};
     border: 1px solid transparent;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray.lightGrey};
+    border-bottom: 1px solid ${({ $error, theme }) => $error ? theme.palette.error : theme.palette.gray.lightGrey};
     animation-duration: 1s;
     transition: all.3s ease;
     &:focus-within {
@@ -30,7 +30,6 @@ export const SearchBar = styled.form<{$error?: boolean}>`
     &:hover {
         border-bottom: ${({ theme, $error }) => $error ? '' : `1px solid ${theme.palette.purple.main}`};
     }
-    border-color: ${({ $error, theme }) => $error ? theme.palette.error : theme.palette.gray.lightGrey};
 `;
 
 export const Input = styled.input`

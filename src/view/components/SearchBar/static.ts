@@ -5,10 +5,10 @@ export const ipv4Regex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.((25[0-5]|2[
 
 const customValidator = (value: any) => {
     if (!urlRegex.test(value) && !ipv4Regex.test(value)) {
-        return false; // Если не соответствует ни одному из регулярных выражений
+        return false;
     }
 
-    return true; // Соответствует хотя бы одному из регулярных выражений
+    return true;
 };
 
 export const schema = object(
