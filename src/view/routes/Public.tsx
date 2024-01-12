@@ -31,6 +31,10 @@ export const Public: FC = () => {
                     element = { <Pages.WhoisQuery /> }
                     path = { book.WHOIS_QUERY }
                 />
+                <Route
+                    element = { <Pages.DomainZone /> }
+                    path = { book.DOMAIN_ZONE }
+                />
             </Route>
             {/* MarkerGen route */}
             <Route

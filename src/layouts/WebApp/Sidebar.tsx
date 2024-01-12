@@ -29,7 +29,7 @@ export const Sidebar = () => {
             id:    3,
             label: 'Domain Zone',
             Icon:  DomainZone,
-            link:  '#',
+            link:  '/domain-zone',
         },
     ];
 
