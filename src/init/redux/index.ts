@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // MarkerGen reducers
 import whoisquery from '../../bus/whoisquery/slice';
+import scamcheck from '../../bus/scamcheck/slice';
 import toggles from '../../bus/client/toggles';
 
 // Middleware
@@ -16,6 +17,7 @@ import {
 export const store = configureStore({
     reducer: {
         // MarkerGen add reducer
+        scamcheck,
         whoisquery,
         toggles,
     },

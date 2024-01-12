@@ -7,32 +7,26 @@ import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 
 // Bus
 // import {} from '../../../bus/'
-import { useWhoisquery } from '@/bus/whoisquery';
 
 // Styles
 import * as S from './styles';
 
 //
-import { inithialState, schema, urlRegex, ipv4Regex } from './static';
+import { inithialState, schema } from './static';
 
 // Types
 type PropTypes = {
     /* type props here */
     placeholder?: string
+    submitFunction?: (ipOrUrl: string) => void
 }
 
-export const SearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL (e.g., www.example.com)' }) => {
-    const { fetchWhoisqueryIp, fetchWhoisqueryDomain } = useWhoisquery();
+export const SearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL (e.g., www.example.com)', submitFunction }) => {
     const {  control, handleSubmit, formState: { errors }} = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
     const onSubmit: SubmitHandler<{urlOrIp?: string | undefined}> = ({ urlOrIp }) => {
         const ipOrUrl = urlOrIp?.trim();
-        if (ipOrUrl) {
-            if (ipOrUrl.match(urlRegex)) {
-                fetchWhoisqueryDomain(ipOrUrl);
-            }
-            if (ipOrUrl.match(ipv4Regex)) {
-                fetchWhoisqueryIp(ipOrUrl);
-            }
+        if (submitFunction) {
+            submitFunction(`${ipOrUrl}`);
         }
     };
 

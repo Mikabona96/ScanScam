@@ -11,6 +11,7 @@ import { ErrorBoundary, ResultDomain, ResultIP, SearchBar } from '../../componen
 import * as S from './styles';
 import { SectionSubtitle, SectionTitle } from '@/view/elements';
 import { useWhoisquery } from '@/bus/whoisquery';
+import { ipv4Regex, urlRegex } from '@/view/components/SearchBar/static';
 
 // Types
 type PropTypes = {
@@ -19,7 +20,18 @@ type PropTypes = {
 
 const WhoisQuery: FC<PropTypes> = () => {
     const [ isRaw, setIsRaw ] = useState(false);
-    const { whoisquery: { whoisQuery }} = useWhoisquery();
+    const { whoisquery: { whoisQuery }, fetchWhoisqueryDomain, fetchWhoisqueryIp } = useWhoisquery();
+
+    const submitFunction = (ipOrUrl: string) => {
+        if (ipOrUrl) {
+            if (ipOrUrl.match(urlRegex)) {
+                fetchWhoisqueryDomain(ipOrUrl);
+            }
+            if (ipOrUrl.match(ipv4Regex)) {
+                fetchWhoisqueryIp(ipOrUrl);
+            }
+        }
+    };
 
     return (
         <S.Container>
@@ -36,6 +48,7 @@ const WhoisQuery: FC<PropTypes> = () => {
                         </S.TextWrapper>
                         <SearchBar
                             placeholder = 'Enter a domain or IP address'
+                            submitFunction = { submitFunction }
                         />
                     </>
                 ) : (

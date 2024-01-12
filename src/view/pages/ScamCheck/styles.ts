@@ -216,3 +216,12 @@ export const ReportSubtitle = styled.h5`
     font-family: ${MyFonts.THICCCBOI.regular};
     font-weight: 400;
 `;
+
+export const ErrorMesage = css`
+    color: ${({ theme }) => theme.palette.error};
+    ${({ theme }) => theme.media('min').xs} {
+        font-size: 14px;
+        line-height: 24px;
+        text-align: left;
+    }
+`;
