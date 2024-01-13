@@ -6,6 +6,9 @@ export const Container = styled.div`
     flex-direction: column;
     gap: 24px;
     height: 100%;
+    ${({ theme }) => theme.media('max').md} {
+        width: 100%;
+    }
 `;
 
 export const Pre = styled.pre`

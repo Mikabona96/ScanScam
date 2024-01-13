@@ -12,10 +12,11 @@ import { useBasePath } from '@/tools/hooks';
 
 // Types
 type PropTypes = {
-    isMobileOpen?: boolean
+    isMobileOpen: boolean
+    handleMobileMenu: () => void
 }
 
-export const Sidebar: FC<PropTypes> = ({ isMobileOpen }) => {
+export const Sidebar: FC<PropTypes> = ({ isMobileOpen, handleMobileMenu }) => {
     const pathname = useBasePath();
     const links = [
         {
@@ -66,6 +67,7 @@ export const Sidebar: FC<PropTypes> = ({ isMobileOpen }) => {
                                             $styles = { S.LinkStyles }
                                             label = { label }
                                             to = { link }
+                                            onClick = { handleMobileMenu }
                                         />
                                     </S.MenuItem>
                                 );

@@ -40,10 +40,11 @@ const WhoisQuery: FC<PropTypes> = () => {
                     <>
                         <S.TextWrapper>
                             <SectionTitle $styles = { S.TitleStyles }>
-                                Welcome to ScamScan!
+                                Whois Query
                             </SectionTitle>
                             <SectionSubtitle $styles = { S.SubtitleStyles }>
-                                Enter a website URL to check if it's safe
+                                Search for detailed information about IP addresses and domains,
+                                including registration information, ownership, and more
                             </SectionSubtitle>
                         </S.TextWrapper>
                         <SearchBar

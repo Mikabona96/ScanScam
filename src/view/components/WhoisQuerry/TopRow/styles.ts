@@ -5,12 +5,20 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: flex;
     justify-content: space-between;
+    ${({ theme }) => theme.media('max').sm} {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
 `;
 
 export const TextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
+    ${({ theme }) => theme.media('max').sm} {
+        align-items: center;
+    }
 `;
 
 export const Title = styled.h3`

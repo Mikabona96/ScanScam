@@ -34,7 +34,7 @@ export const SideBar = styled.aside<{$open?: boolean}>`
         left: 0;
         animation-name: ${appearanceMobileHeader};
         animation-duration: .3s;
-        z-index: 100;
+        z-index: 99999;
     }
 `;
 
@@ -56,6 +56,7 @@ export const Overlay = styled.div<{$isOpen?: boolean}>`
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
     display: none;
+    z-index: 9999;
     ${({ theme }) => theme.media('max').lg} {
         display: ${({ $isOpen }) => $isOpen ? 'block' : 'none'}
     }

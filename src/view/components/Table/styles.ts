@@ -17,11 +17,17 @@ export const TableWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 24px;
+    ${({ theme }) => theme.media('max').lg} {
+        flex-direction: column;
+    }
 `;
 
 export const Table = styled.table<{$withMap?:boolean}>`
     max-width: ${({ $withMap }) => $withMap ? '698px' : '100%'};
     width: ${({ $withMap }) => $withMap ? 'calc(100% - 342px)' : '100%'};
+    ${({ theme }) => theme.media('max').lg} {
+        width: 100%;
+    }
 `;
 
 const TbodyAnimation = keyframes`
@@ -87,6 +93,10 @@ export const TdValue = styled(Tdkey)`
     width: 100%;
     display: flex;
     align-items: center;
+    ${({ theme }) => theme.media('max').lg} {
+        max-width: unset;
+        overflow-wrap: anywhere;
+    }
 `;
 
 export const Tfoot = styled.tfoot`

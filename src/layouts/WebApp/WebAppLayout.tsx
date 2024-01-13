@@ -67,7 +67,10 @@ export const WebAppLayout = () => {
 
     return (
         <S.Container ref = { ref }>
-            <Sidebar isMobileOpen = { isMobileOpen } />
+            <Sidebar
+                handleMobileMenu = { handleMobileMenu }
+                isMobileOpen = { isMobileOpen }
+            />
             <S.Overlay
                 $isOpen = { isMobileOpen }
                 onClick = { handleMobileMenu }
