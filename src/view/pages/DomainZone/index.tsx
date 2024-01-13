@@ -75,17 +75,17 @@ const DomainZone: FC<PropTypes> = () => {
                     Request a CSV download for each zone with comprehensive information.
                 </SectionSubtitle>
             </S.TextWrapper>
+            <S.SearchBar $active = { isActive }>
+                <S.SvgWrapper>
+                    <SearchIcon color = { isActive ? theme.palette.purple.main : theme.palette.gray.lightGrey } />
+                </S.SvgWrapper>
+                <S.Input
+                    placeholder = 'Search for domain zone...'
+                    onBlur = { () => setIsActive(false) }
+                    onFocus = { () => setIsActive(true) }
+                />
+            </S.SearchBar>
             <S.TableContainer>
-                <S.SearchBar $active = { isActive }>
-                    <S.SvgWrapper>
-                        <SearchIcon color = { isActive ? theme.palette.purple.main : theme.palette.gray.lightGrey } />
-                    </S.SvgWrapper>
-                    <S.Input
-                        placeholder = 'Search for domain zone...'
-                        onBlur = { () => setIsActive(false) }
-                        onFocus = { () => setIsActive(true) }
-                    />
-                </S.SearchBar>
                 <S.TableWrapper>
                     <S.Table>
                         <S.Thead>

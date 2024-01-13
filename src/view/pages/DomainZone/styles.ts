@@ -36,6 +36,9 @@ export const TableContainer = styled.div`
     width: 100%;
     flex-direction: column;
     gap: 16px;
+    ${({ theme }) => theme.media('max').lg} {
+        overflow-x: scroll;
+    }
 `;
 
 export const SearchBar = styled.div<{$active: boolean}>`
@@ -78,6 +81,9 @@ export const TableWrapper = styled.div`
     border-radius: 4px;
     border: 1px solid #F5F5F5;
     box-shadow: 0px 2px 12px 0px rgba(101, 101, 101, 0.03);
+    ${({ theme }) => theme.media('max').lg} {
+        width: 636px;
+    }
 `;
 
 export const Table = styled.table`
@@ -148,6 +154,9 @@ export const Pagination = styled.div`
     align-items: center;
     justify-content: flex-end;
     gap: 16px;
+    ${({ theme }) => theme.media('max').lg} {
+        max-width: 636px;
+    }
 `;
 
 export const RowsPerPageWrapper = styled.div`
