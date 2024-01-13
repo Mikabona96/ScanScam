@@ -1,34 +1,20 @@
-import styled from 'styled-components';
-import { MyFonts } from '../fonts';
+import { css } from 'styled-components';
+// import { MyFonts } from '../fonts';
 
-type PropTypes = {
+// WebApp Common Styles
 
-}
-
-export const ButtonStyles = styled.button<PropTypes>`
-    max-width: fit-content;
+export const SectionContainer = css`
     width: 100%;
-    max-height: 60px;
     height: 100%;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 32px;
+    gap: 24px;
     display: flex;
-    padding: 12px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 0px 2px 2px 0px;
-    background: ${({ theme }) => theme.button.primary};
-    border: 0;
-    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.04);
-
-    /* Button text */
-    font-family: ${MyFonts.THICCCBOI.regular};
-    color: #fff;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    transition: all .3s ease;
-    cursor: pointer;
-    user-select: none;
+    flex-direction: column;
+    box-shadow: 0px 8px 16px 0px rgba(112, 115, 119, 0.12);
+    ${({ theme }) => theme.media('max').lg} {
+        display: flex;
+        align-items: center;
+    }
 `;

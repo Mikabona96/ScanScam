@@ -33,6 +33,10 @@ export const Description = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 17px;
+    ${({ theme }) => theme.media('max').sm} {
+        flex-direction: column;
+        gap: 24px;
+    }
 `;
 
 export const Link = styled.div`
@@ -45,6 +49,7 @@ export const Link = styled.div`
     font-weight: 500;
     line-height: 24px;
     cursor: pointer;
+    text-wrap: nowrap;
 `;
 
 export const ImageWrapper = styled.div`

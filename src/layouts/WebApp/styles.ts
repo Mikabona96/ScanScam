@@ -1,18 +1,64 @@
 import { MyFonts } from '@/assets/fonts';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+export const appearanceMobileHeader = keyframes`
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: -50%;
+    }
+    100% {
+        left: 0;
+    }
+`;
+
 
 export const Container = styled.main`
     display: flex;
     width: 100%;
     height: 100%;
+    position: relative;
 `;
 
-export const SideBar = styled.aside`
+export const SideBar = styled.aside<{$open?: boolean}>`
     display: flex;
     flex-direction: column;
     width: 216px;
-    min-height: 100vh;
     background: ${({ theme }) => theme.palette.black.dark};
+    ${({ theme }) => theme.media('max').lg} {
+        min-height: 100vh;
+        display: ${({ $open }) => $open ? 'flex' : 'none'};
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation-name: ${appearanceMobileHeader};
+        animation-duration: .3s;
+        z-index: 100;
+    }
+`;
+
+export const SidebarContentWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    ${({ theme }) => theme.media('max').lg} {
+        overflow-y: scroll;
+        height: 100svh;
+    }
+`;
+
+export const Overlay = styled.div<{$isOpen?: boolean}>`
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    display: none;
+    ${({ theme }) => theme.media('max').lg} {
+        display: ${({ $isOpen }) => $isOpen ? 'block' : 'none'}
+    }
 `;
 
 export const LogoContainer = styled.div`
@@ -28,6 +74,7 @@ export const Menu = styled.nav`
     padding: 24px 16px;
     justify-content: space-between;
     height: 100%;
+    height: calc(100% - 95px);
 `;
 
 export const MenuItemsContainer = styled.ul`
@@ -93,12 +140,31 @@ export const Header = styled.header`
     justify-content: space-between;
     align-items: center;
     background: #fff;
+    ${({ theme }) => theme.media('max').lg} {
+        display: flex;
+        align-items: center;
+        padding: 4px 12px;
+        height: 68px;
+        justify-content: unset;
+        gap: 24px;
+    }
+`;
+
+export const SvgWrapper = styled.div`
+    width: 24px;
+    height: 24px;
+    ${({ theme }) => theme.media('min').lg} {
+        display: none;
+    }
 `;
 
 export const OutletWrapper = styled.div`
     padding: 24px 48px 0px;
     min-height: 667px;
     height: 100%;
+    ${({ theme }) => theme.media('max').sm} {
+        padding: 0;
+    }
 `;
 
 export const Footer = styled.footer`
@@ -106,6 +172,14 @@ export const Footer = styled.footer`
     padding: 48px 48px 16px;
     display: flex;
     justify-content: space-between;
+    /* ${({ theme }) => theme.media('max').lg} {
+        padding: 32px;
+        align-items: center;
+    } */
+    ${({ theme }) => theme.media('max').sm} {
+        padding: 12px;
+        align-items: center;
+    }
 `;
 
 export const FooterText = styled.p`
@@ -122,9 +196,19 @@ export const LinksWrapper = styled.ul`
     display: flex;
     align-items: center;
     gap: 4px;
+    ${({ theme }) => theme.media('max').sm} {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+    }
 `;
 
 export const Link = styled.li`
+    ${({ theme }) => theme.media('max').md} {
+        width: fit-content;
+        text-wrap: nowrap;
+    }
 `;
 
 export const FooterLinkStyles = css`
@@ -143,4 +227,15 @@ export const FooterLinkStyles = css`
 
 export const CustomLink = css`
     margin-left: auto;
+    ${({ theme }) => theme.media('max').lg} {
+        display: none;
+    }
+`;
+
+export const SearchBarWrapper = styled.div`
+    width: 100%;
+    ${({ theme }) => theme.media('max').md} {
+        max-width: 288px;
+        width: 100%;
+    }
 `;

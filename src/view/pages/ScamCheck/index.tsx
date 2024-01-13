@@ -21,15 +21,15 @@ const ScamCheck: FC<PropTypes> = () => {
     // const data = false;
     const { fetchScamCheck, scamchek: { scamCheck, isLoading, error }} = useScamCheck();
     const domainData = [
-        { key: 'Registrar', value: `${scamCheck.Domain.registrar}` },
-        { key: 'Registration date', value: `${scamCheck.Domain.registrationDate}` },
-        { key: 'Owner name', value: `${scamCheck.Domain.ownerName}` },
+        { key: 'Registrar', value: `${scamCheck.Domain.registrar || '-'}` },
+        { key: 'Registration date', value: `${scamCheck.Domain.registrationDate || '-'}` },
+        { key: 'Owner name', value: `${scamCheck.Domain.ownerName || '-'}` },
 
     ];
     const ipData = [
-        { key: 'IP', value: `${scamCheck.Ip.ip}` },
-        { key: 'Country', value: `${scamCheck.Ip.country}` },
-        { key: 'Registrant', value: `${scamCheck.Ip.registrant}` },
+        { key: 'IP', value: `${scamCheck.Ip.ip || '-'}` },
+        { key: 'Country', value: `${scamCheck.Ip.country || '-'}` },
+        { key: 'Registrant', value: `${scamCheck.Ip.registrant || '-'}` },
     ];
 
     if (isLoading) {
@@ -66,8 +66,8 @@ const ScamCheck: FC<PropTypes> = () => {
                     : (
                         <S.DataContainer>
                             <S.SiteInfo>
-                                <S.Domain>{`${scamCheck.domain}`}</S.Domain>
-                                <S.SiteName>{`${scamCheck.name}`}</S.SiteName>
+                                <S.Domain>{`${scamCheck.domain || '-'}`}</S.Domain>
+                                <S.SiteName>{`${scamCheck.name || '-'}`}</S.SiteName>
                                 <S.SiteDescription>
                                     Search the world's information, including webpages, images, videos, and more
                                 </S.SiteDescription>

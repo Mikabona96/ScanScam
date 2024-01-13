@@ -1,5 +1,5 @@
 // Core
-import React from 'react';
+import React, { FC } from 'react';
 
 // Styles
 import * as S from './styles';
@@ -10,7 +10,12 @@ import { CustomLink } from '@/view/elements';
 import { DomainZone, Logout, ScamCheck, WhoisQuery } from '@/assets/images/icons';
 import { useBasePath } from '@/tools/hooks';
 
-export const Sidebar = () => {
+// Types
+type PropTypes = {
+    isMobileOpen?: boolean
+}
+
+export const Sidebar: FC<PropTypes> = ({ isMobileOpen }) => {
     const pathname = useBasePath();
     const links = [
         {
@@ -35,46 +40,49 @@ export const Sidebar = () => {
 
 
     return (
-        <S.SideBar>
-            <S.LogoContainer>
-                <CustomLink
-                    to = '/'>
-                    <img
-                        src = { Logo }
-                        style = {{ width: '72px', height: '48px' }}
-                    />
-                </CustomLink>
-            </S.LogoContainer>
-            <S.Menu>
-                <S.MenuItemsContainer>
-                    {
-                        links.map(({ Icon, id, label, link }) => {
-                            return (
-                                <S.MenuItem
-                                    $active = { pathname === link }
-                                    key = { id }>
-                                    <S.MenuItemSelected $active = { pathname === link } />
-                                    <Icon />
-                                    <CustomLink
-                                        $styles = { S.LinkStyles }
-                                        label = { label }
-                                        to = { link }
-                                    />
-                                </S.MenuItem>
-                            );
-                        })
-                    }
-                </S.MenuItemsContainer>
-                <S.MenuItem>
-                    <S.MenuItemSelected />
-                    <Logout />
+        <S.SideBar $open = { isMobileOpen }>
+            <S.SidebarContentWrapper>
+
+                <S.LogoContainer>
                     <CustomLink
-                        $styles = { S.LinkStyles }
-                        label = { 'Log out' }
-                        to = { '#' }
-                    />
-                </S.MenuItem>
-            </S.Menu>
+                        to = '/'>
+                        <img
+                            src = { Logo }
+                            style = {{ width: '72px', height: '48px' }}
+                        />
+                    </CustomLink>
+                </S.LogoContainer>
+                <S.Menu>
+                    <S.MenuItemsContainer>
+                        {
+                            links.map(({ Icon, id, label, link }) => {
+                                return (
+                                    <S.MenuItem
+                                        $active = { pathname === link }
+                                        key = { id }>
+                                        <S.MenuItemSelected $active = { pathname === link } />
+                                        <Icon />
+                                        <CustomLink
+                                            $styles = { S.LinkStyles }
+                                            label = { label }
+                                            to = { link }
+                                        />
+                                    </S.MenuItem>
+                                );
+                            })
+                        }
+                    </S.MenuItemsContainer>
+                    <S.MenuItem>
+                        <S.MenuItemSelected />
+                        <Logout />
+                        <CustomLink
+                            $styles = { S.LinkStyles }
+                            label = { 'Log out' }
+                            to = { '#' }
+                        />
+                    </S.MenuItem>
+                </S.Menu>
+            </S.SidebarContentWrapper>
         </S.SideBar>
     );
 };

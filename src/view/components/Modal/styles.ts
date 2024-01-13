@@ -1,6 +1,5 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
-import { ButtonStyles } from '@/assets/styles/styles';
 import styled, { css, keyframes } from 'styled-components';
 
 export const appearanceAnimation = keyframes`

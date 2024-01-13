@@ -41,6 +41,7 @@ export const SearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL 
                 render = { ({ field: { onChange, onBlur }}) => (
                     <S.Input
                         $error = { !!errors.urlOrIp?.message }
+                        autoCapitalize = 'none'
                         placeholder = { placeholder }
                         onBlur = { onBlur }
                         onChange = { (event) => {

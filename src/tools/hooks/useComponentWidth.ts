@@ -13,7 +13,6 @@ export const useComponentWidth = () => {
         }
         const { width: styleWidth, marginRight } = window.getComputedStyle(ref.current);
         setWidth(parseInt(styleWidth, 10) + parseInt(marginRight, 10));
-        console.log(width);
     }, [ width ]);
 
     const delayedFunc = () => {

@@ -1,18 +1,11 @@
 /* eslint-disable no-nested-ternary */
 // Core
 import { MyFonts } from '@/assets/fonts';
+import { SectionContainer } from '@/assets/styles/styles';
 import styled, { css } from 'styled-components';
 
 export const Container = styled.section`
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 32px;
-    gap: 24px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0px 8px 16px 0px rgba(112, 115, 119, 0.12);
+    ${SectionContainer}
 `;
 
 export const DataContainer = styled.div`
@@ -20,6 +13,9 @@ export const DataContainer = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    ${({ theme }) => theme.media('max').lg} {
+        align-items: center;
+    }
 `;
 
 export const TextWrapper = styled.div`
@@ -74,6 +70,9 @@ export const SiteDescription = styled.p`
 export const ScamInfoWrapper = styled.div`
     display: flex;
     gap: 48px;
+    ${({ theme }) => theme.media('max').lg} {
+        flex-direction: column;
+    }
 `;
 
 export const ScamInfo = styled.div`
@@ -81,6 +80,7 @@ export const ScamInfo = styled.div`
     border-radius: 4px;
     box-shadow: 0px 2px 12px 0px rgba(101, 101, 101, 0.03);
     max-width: 486px;
+    padding-bottom: 10px;
     width: 100%;
     min-height: 254px;
 `;
@@ -119,6 +119,9 @@ export const DoughnutChartsBlock = styled.div`
     padding: 36px 24px 0px;
     gap: 48px;
     align-items: center;
+    ${({ theme }) => theme.media('max').sm} {
+        flex-direction: column;
+    }
 `;
 
 export const DoughnutChartsContainer = styled.div`
@@ -181,6 +184,7 @@ export const Info = styled.div`
 export const Whois = styled.div`
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 24px;
 `;
 
@@ -196,6 +200,9 @@ export const WhoisTitle = styled.h3`
 export const TablesContainer = styled.div`
     display: flex;
     gap: 48px;
+    ${({ theme }) => theme.media('max').lg} {
+        flex-direction: column;
+    }
 `;
 
 export const ReportScamWrapper = styled.div`

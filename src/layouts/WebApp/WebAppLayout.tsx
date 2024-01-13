@@ -1,5 +1,5 @@
 // Core
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 // Styles
@@ -9,11 +9,18 @@ import { Button, CustomLink } from '@/view/elements';
 import { HeaderSearchBar } from '@/view/components';
 import { useWhoisquery } from '@/bus/whoisquery';
 import { useScamCheck } from '@/bus/scamcheck';
+import { MenuIcon } from '@/assets/images/icons/menuIcon';
+import { useComponentWidth, useOverflowHidden } from '@/tools/hooks';
+import { breakpoints } from '@/assets';
 
 export const WebAppLayout = () => {
     const { whoisquery: { whoisQuery }} = useWhoisquery();
     const { scamchek: { scamCheck }} = useScamCheck();
     const { pathname } = useLocation();
+    const { ref, width } = useComponentWidth();
+    const [ isMobileOpen, setIsMobileOpen ] = useState(false);
+    const overflowHandler = useOverflowHidden();
+
     const links = [
         {
             id:    1,
@@ -42,18 +49,41 @@ export const WebAppLayout = () => {
         },
     ];
 
-    console.log(pathname);
+    // useEffect(() => {
+    //     if (isMobileOpen && width > breakpoints.lg) {
+    //         overflowHandler(true);
+    //         setIsMobileOpen(false);
+    //     }
+    // }, [ width ]);
+
+    const handleMobileMenu = () => {
+        setIsMobileOpen(!isMobileOpen);
+        if (isMobileOpen) {
+            overflowHandler(true);
+        } else {
+            overflowHandler(false);
+        }
+    };
 
     return (
-        <S.Container>
-            <Sidebar />
+        <S.Container ref = { ref }>
+            <Sidebar isMobileOpen = { isMobileOpen } />
+            <S.Overlay
+                $isOpen = { isMobileOpen }
+                onClick = { handleMobileMenu }
+            />
             <S.ContentWrapper>
                 <S.Header>
+                    <S.SvgWrapper onClick = { handleMobileMenu }>
+                        <MenuIcon />
+                    </S.SvgWrapper>
                     {((whoisQuery && pathname === '/whois-query') || (scamCheck.domain && pathname === '/scam-check')) && (
-                        <HeaderSearchBar
-                            placeholder = 'Type a new website to check'
-                            scamCheck = { pathname === '/scam-check' }
-                        />
+                        <S.SearchBarWrapper>
+                            <HeaderSearchBar
+                                placeholder = 'Type a new website to check'
+                                scamCheck = { pathname === '/scam-check' }
+                            />
+                        </S.SearchBarWrapper>
                     )}
                     <CustomLink
                         $styles = { S.CustomLink }

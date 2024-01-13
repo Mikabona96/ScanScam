@@ -66,6 +66,7 @@ export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain o
                 name = 'urlOrIp'
                 render = { ({ field: { onChange, onBlur }}) => (
                     <S.Input
+                        autoCapitalize = 'none'
                         placeholder = { placeholder }
                         onBlur = { onBlur }
                         onChange = { (event) => {
