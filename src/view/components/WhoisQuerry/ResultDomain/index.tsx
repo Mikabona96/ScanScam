@@ -9,6 +9,7 @@ import { useWhoisquery } from '@/bus/whoisquery';
 
 // Styles
 import * as S from './styles';
+import { Parser } from './parse-text';
 
 // Types
 type PropTypes = {
@@ -34,6 +35,19 @@ export const ResultDomain: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
         { key: 'Registred on', value: whoisQuery?.parsed?.date?.registration_date || '-' },
         { key: 'Updated on', value: whoisQuery?.parsed?.date?.updated_date || '-' },
     ];
+    const NameServers = (val: string[] | any) => {
+        if (typeof val[ 0 ] === 'string') {
+            return val.map((value: string) => {
+                return { key: value, value };
+            });
+        }
+
+        return [
+            { key: '-', value: '-' },
+            { key: '-', value: '-' },
+            { key: '-', value: '-' },
+        ];
+    };
 
     const getContactData = (value: 'registrant' | 'admin' | 'billing' | 'tech') => {
         return [
@@ -75,13 +89,12 @@ export const ResultDomain: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
                             title = 'Important dates'
                             variant = '2'
                         />
-                        {/* //Todo NameServers
-                            <Table
+                        <Table
                             alignValues = 'close'
-                            data = { importantDates }
+                            data = { NameServers(whoisQuery?.json_format[ 'Name Server' ]) }
                             title = 'Name servers'
                             variant = '2'
-                        /> */}
+                        />
                         <Table
                             alignValues = 'close'
                             data = { getContactData('registrant') }
@@ -111,7 +124,7 @@ export const ResultDomain: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
                         />
                     </>
                 ) : (
-                    <S.Pre>{ whoisQuery?.raw }</S.Pre>
+                    <Parser rawData = { whoisQuery?.raw } />
                 )
             }
         </S.Container>
