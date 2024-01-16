@@ -8,7 +8,7 @@ import { ErrorBoundary, Screenshot, SearchBar, Table } from '../../components';
 
 // Styles
 import * as S from './styles';
-import { Button, ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle } from '@/view/elements';
+import { Button, ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
 import { InfoIcon } from '@/assets/images/icons';
 import { useScamCheck } from '@/bus/scamcheck';
 
@@ -34,9 +34,7 @@ const ScamCheck: FC<PropTypes> = () => {
 
     if (isLoading) {
         return (
-            <S.Container>
-                <div>Loading data...</div>
-            </S.Container>
+            <Spinner loading = { isLoading } />
         );
     }
 

@@ -7,12 +7,13 @@ import { Private } from './Private';
 
 // Bus
 import { useTogglesRedux } from '../../bus/client/toggles';
+import { Spinner } from '../elements';
 
 export const Routes: FC = () => {
     const { togglesRedux: { isLoggedIn }} = useTogglesRedux();
 
     return (
-        <Suspense fallback = { <div>Spinner</div> }>
+        <Suspense fallback = { <Spinner loading /> }>
             {
                 isLoggedIn
                     ? <Private />

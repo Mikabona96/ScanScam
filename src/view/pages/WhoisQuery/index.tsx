@@ -9,7 +9,7 @@ import { ErrorBoundary, ResultDomain, ResultIP, SearchBar } from '../../componen
 
 // Styles
 import * as S from './styles';
-import { SectionSubtitle, SectionTitle } from '@/view/elements';
+import { SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
 import { useWhoisquery } from '@/bus/whoisquery';
 import { ipv4Regex, urlRegex } from '@/view/components/SearchBar/static';
 
@@ -20,7 +20,7 @@ type PropTypes = {
 
 const WhoisQuery: FC<PropTypes> = () => {
     const [ isRaw, setIsRaw ] = useState(false);
-    const { whoisquery: { whoisQuery }, fetchWhoisqueryDomain, fetchWhoisqueryIp } = useWhoisquery();
+    const { whoisquery: { whoisQuery, isLoading }, fetchWhoisqueryDomain, fetchWhoisqueryIp } = useWhoisquery();
 
     const submitFunction = (ipOrUrl: string) => {
         if (ipOrUrl) {
@@ -32,6 +32,10 @@ const WhoisQuery: FC<PropTypes> = () => {
             }
         }
     };
+
+    if (isLoading) {
+        return <Spinner loading = { isLoading } />;
+    }
 
     return (
         <S.Container>

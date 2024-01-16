@@ -1,4 +1,5 @@
 // MarkerGen re-export
+export * from './Spinner';
 export * from './CustomSelect';
 export * from './DoughnutChart';
 export * from './ChipScamStatus';
