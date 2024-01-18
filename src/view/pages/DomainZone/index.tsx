@@ -1,68 +1,68 @@
 // Core
 import React, { FC, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { useTheme } from 'styled-components';
 
 // Bus
 // import {} from '../../../bus/'
+import { useTld } from '@/bus/tld';
 
 // Components
 import { ErrorBoundary } from '../../components';
+import { CustomSelect, SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
+import { ChevronIcon, DownloadIcon, SearchIcon } from '@/assets/images/icons';
 
 // Styles
 import * as S from './styles';
-import { CustomSelect, SectionSubtitle, SectionTitle } from '@/view/elements';
-import { ChevronIcon, DownloadIcon, SearchIcon } from '@/assets/images/icons';
-import { useTheme } from 'styled-components';
-import Data from './data.json';
 
 // Types
 type PropTypes = {
     /* type props here */
 }
 
-type DataType = {
-    'id': number,
-    'Domain zone name': string
-    'Number of domains': string
-    'Registrar': string
-    'Last update': string
-}[]
-
-const recievedData = JSON.parse(JSON.stringify(Data));
-
 const DomainZone: FC<PropTypes> = () => {
     const theme = useTheme();
     const [ isActive, setIsActive ] = useState(false);
     const [ rowsPerPage, setRowsPerPage ] = useState(6);
     const [ currentPage, setCurrentPage ] = useState(1);
-    const [ data, setData ] = useState<DataType>(recievedData.data);
+
+    const { fetchTld, tld: { data: tldData, isLoading }} = useTld();
 
     useEffect(() => {
-        setData(recievedData.data.slice(0, rowsPerPage));
-    }, [ rowsPerPage ]);
+        fetchTld({ page: currentPage, per_page: rowsPerPage });
+    }, []);
 
-    const createCsvContent = () => {
-        // Example CSV data
-        const csvData = 'Name,Age,Location\nJohn,25,New York\nJane,30,San Francisco\n';
+    useEffect(() => {
+        fetchTld({ page: currentPage, per_page: rowsPerPage });
+    }, [ currentPage, rowsPerPage ]);
 
-        // Create a Blob containing the CSV data
-        const blob = new Blob([ csvData ], { type: 'text/csv' });
+    const formatDate = (date: string | Date) => {
+        const dateObject = new Date(date);
 
-        // Create a data URL for the Blob
-        const url = URL.createObjectURL(blob);
+        const year = dateObject.getFullYear();
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObject.getDate().toString()
+            .padStart(2, '0');
 
-        return url;
+        return  year + '-' + month + '-' + day;
     };
 
-    const csvUrl = createCsvContent();
-
     const setCurrentPageHandler = (direction: 'forward' | 'backward') => {
-        if (direction === 'forward' && currentPage < 3) {
+        if (direction === 'forward' && tldData?.pagination.last_page && currentPage < tldData?.pagination.last_page) {
             setCurrentPage((prevState) => prevState + 1);
         }
         if (direction === 'backward' && currentPage > 1) {
             setCurrentPage((prevState) => prevState - 1);
         }
     };
+
+    if (isLoading) {
+        return (
+            <S.Container>
+                <Spinner loading = { isLoading } />
+            </S.Container>
+        );
+    }
 
     return (
         <S.Container>
@@ -99,17 +99,17 @@ const DomainZone: FC<PropTypes> = () => {
                         </S.Thead>
                         <S.Tbody>
                             {
-                                data.map((item) => {
+                                tldData && tldData.tlds.map((item) => {
                                     return (
-                                        <S.Tr key = { item.id }>
-                                            <S.Td>{item[ 'Domain zone name' ]}</S.Td>
-                                            <S.Td>{item[ 'Number of domains' ]}</S.Td>
-                                            <S.Td>{item.Registrar}</S.Td>
-                                            <S.Td>{item[ 'Last update' ]}</S.Td>
+                                        <S.Tr key = { uuidv4() }>
+                                            <S.Td>{item.tld}</S.Td>
+                                            <S.Td>{item.count}</S.Td>
+                                            <S.Td>{item.registrar}</S.Td>
+                                            <S.Td>{`${formatDate(item.last_update)}`}</S.Td>
                                             <S.Td>
                                                 <S.Link
                                                     download = 'example.csv'
-                                                    href = { csvUrl }>
+                                                    href = { '#' }>
                                                     <S.SvgWrapper>
                                                         <DownloadIcon color = { theme.palette.purple.main } />
                                                     </S.SvgWrapper>
@@ -132,7 +132,7 @@ const DomainZone: FC<PropTypes> = () => {
                         setRowsPerPage = { setRowsPerPage }
                     />
                 </S.RowsPerPageWrapper>
-                <S.PageCountWrapper>{currentPage} of 3</S.PageCountWrapper>
+                <S.PageCountWrapper>{currentPage} of {tldData?.pagination.last_page}</S.PageCountWrapper>
                 <S.ChevronWrappers>
                     <S.SvgWrapper
                         $rotate = '-90'
