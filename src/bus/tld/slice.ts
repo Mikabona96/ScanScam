@@ -13,6 +13,11 @@ const initialState = {
     isLoading: false,
     data:      null,
     error:     null,
+    csv:       {
+        isLoading: false,
+        error:     null,
+        data:      null,
+    },
 };
 
 export const tldSlice = createSlice<types.TldState, typeof reducers>({

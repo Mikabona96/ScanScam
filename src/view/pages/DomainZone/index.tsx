@@ -12,6 +12,9 @@ import { ErrorBoundary } from '../../components';
 import { CustomSelect, SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
 import { ChevronIcon, DownloadIcon, SearchIcon } from '@/assets/images/icons';
 
+// Constants
+import { API_SCAM_SCAN_URL } from '@/init';
+
 // Styles
 import * as S from './styles';
 
@@ -107,14 +110,22 @@ const DomainZone: FC<PropTypes> = () => {
                                             <S.Td>{item.registrar}</S.Td>
                                             <S.Td>{`${formatDate(item.last_update)}`}</S.Td>
                                             <S.Td>
-                                                <S.Link
-                                                    download = 'example.csv'
-                                                    href = { '#' }>
-                                                    <S.SvgWrapper>
-                                                        <DownloadIcon color = { theme.palette.purple.main } />
-                                                    </S.SvgWrapper>
-                                                    Download
-                                                </S.Link>
+                                                {
+                                                    item.tld && item.tld.trim()
+                                                        ? (
+                                                            <S.Link
+                                                                download = 'example.csv'
+                                                                href = { `${API_SCAM_SCAN_URL}/kdb/tlds/download?tld=${item.tld}` }>
+                                                                <S.SvgWrapper>
+                                                                    <DownloadIcon
+                                                                        color = { theme.palette.purple.main }
+                                                                    />
+                                                                </S.SvgWrapper>
+                                                                Download
+                                                            </S.Link>
+                                                        )
+                                                        : <span>No data</span>
+                                                }
                                             </S.Td>
                                         </S.Tr>
                                     );

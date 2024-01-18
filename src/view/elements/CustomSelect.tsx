@@ -48,6 +48,8 @@ const ChevronWrapper = styled.div<{$open?: boolean}>`
 const OptionsWrapper = styled.ul<{$open?: boolean}>`
     position: absolute;
     bottom: calc(100% + 12px);
+    height: 132px;
+    overflow-y: scroll;
     left: 0;
     display: ${({ $open }) => $open ? 'flex' : 'none'};
     flex-direction: column;
@@ -56,6 +58,22 @@ const OptionsWrapper = styled.ul<{$open?: boolean}>`
     border: 1px solid ${({ $open, theme }) => $open ? theme.palette.purple.main : '#F5F5F5'};
     border-radius: 8px;
     background: #fff;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: ${({ theme }) => theme.palette.purple.main};
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+        margin: 4px 0px;
+    }
+
+    scrollbar-color: ${({ theme }) => theme.palette.purple.main} #f1f1f1;
+    scrollbar-width: thin;
 `;
 
 const Option = styled.li`
@@ -72,6 +90,11 @@ const Option = styled.li`
         background-color: ${({ theme }) => theme.text.purple.main};
         color: #fff;
     }
+    &:active {
+        font-family: ${MyFonts.THICCCBOI.semiBold};
+        background-color: ${({ theme }) => theme.text.purple.main};
+        color: #fff;
+    }
     &:last-child {
         border: 0
     }
@@ -81,7 +104,9 @@ export const CustomSelect: FC<PropTypes> = ({ rowsPerPage = 6, setRowsPerPage })
     const [ isOpen, setIsOen ] = useState(false);
 
     return (
-        <Container onClick = { () => setIsOen(!isOpen) }>
+        <Container
+            $open = { isOpen }
+            onClick = { () => setIsOen(!isOpen) }>
             {rowsPerPage}
             <ChevronWrapper
                 $open = { isOpen }>
