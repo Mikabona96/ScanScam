@@ -49,12 +49,13 @@ export const WebAppLayout = () => {
         },
     ];
 
-    // useEffect(() => {
-    //     if (isMobileOpen && width > breakpoints.lg) {
-    //         overflowHandler(true);
-    //         setIsMobileOpen(false);
-    //     }
-    // }, [ width ]);
+    useEffect(() => {
+        if (width >= breakpoints.lg) {
+            isMobileOpen && overflowHandler(true);
+        } else {
+            isMobileOpen && overflowHandler(false);
+        }
+    }, [ width ]);
 
     const handleMobileMenu = () => {
         setIsMobileOpen(!isMobileOpen);

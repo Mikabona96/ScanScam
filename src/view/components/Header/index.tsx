@@ -1,5 +1,5 @@
 // Core
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 // Bus
 // import {} from '../../../bus/'
@@ -13,10 +13,11 @@ import Logo from '@/assets/images/icons/logo.png';
 // Styles
 import * as S from './styles';
 import { Button, CustomLink } from '@/view/elements';
-import { useOverflowHidden, useScroll } from '@/tools/hooks';
+import { useComponentWidth, useOverflowHidden, useScroll } from '@/tools/hooks';
 import { useLocation } from 'react-router-dom';
 import { MenuIcon } from '@/assets/images/icons/menuIcon';
 import { HeaderSearchBar } from '../HeaderSearchBar';
+import { breakpoints } from '@/assets';
 
 
     // Types
@@ -31,6 +32,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
     const [ isOpen, setIsOpen ] = useState(false);
     const scrolled = useScroll();
     const overflowHandler = useOverflowHidden();
+    const { ref, width } = useComponentWidth();
 
     const location = useLocation();
 
@@ -62,9 +64,19 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
         },
     ];
 
+    useEffect(() => {
+        if (width >= breakpoints.lg) {
+            overflowHandler(true);
+        } else {
+            isOpen && overflowHandler(false);
+        }
+    }, [ width ]);
+
     return (
 
-        <S.Header $scrolled = { scrolled } >
+        <S.Header
+            $scrolled = { scrolled }
+            ref = { ref } >
             <S.MenuIcon onClick = { () => {
                 setIsOpen(true);
                 overflowHandler(isOpen);

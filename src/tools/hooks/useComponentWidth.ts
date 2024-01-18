@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 
 export const useComponentWidth = () => {
@@ -7,7 +7,7 @@ export const useComponentWidth = () => {
 
     let timerId = 0;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!ref.current) {
             return;
         }

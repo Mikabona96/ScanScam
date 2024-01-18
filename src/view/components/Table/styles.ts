@@ -86,6 +86,7 @@ export const Tdkey = styled.td<{$alignValues?: 'close' | 'far'}>`
     line-height: 17px;
     display: flex;
     align-items: center;
+    overflow-wrap: anywhere;
 `;
 
 export const TdValue = styled(Tdkey)`
