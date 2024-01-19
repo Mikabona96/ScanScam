@@ -57,11 +57,9 @@ export const WebAppLayout = () => {
         }
     }, [ width ]);
 
-    useEffect(() => {
-        overflowHandler(true);
-    }, []);
-
     const handleMobileMenu = () => {
+        // eslint-disable-next-line max-statements-per-line
+        if (width >= breakpoints.lg) { return; }
         setIsMobileOpen(!isMobileOpen);
         if (isMobileOpen) {
             overflowHandler(true);
