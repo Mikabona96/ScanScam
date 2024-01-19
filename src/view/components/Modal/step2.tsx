@@ -105,7 +105,6 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                         name = 'checkbox'
                         render = { ({ field: { onChange, onBlur }}) => (
                             <S.CheckBox
-                                checked = { recieveUpds }
                                 type = 'checkbox'
                                 onBlur = { onBlur }
                                 onChange = { onChange }
@@ -125,11 +124,12 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                     const areFieldsValid = await trigger([ 'email' ]);
                     const areFieldsValid2 = await trigger([ 'checkbox' ]);
                     const areFieldsValid3 = await trigger([ 'recieveUpdates' ]);
+                    const areFieldsValid4 = await trigger([ 'url' ]);
+                    const areFieldsValid5 = await trigger([ 'description' ]);
 
-                    console.log(areFieldsValid, 'email');
-                    console.log(areFieldsValid2, 'checkbox');
-                    console.log(areFieldsValid3, 'recieveUpdates');
-                    if (!areFieldsValid) {
+                    if (
+                        !areFieldsValid && !areFieldsValid2 && !areFieldsValid3 && !areFieldsValid4 && !areFieldsValid5
+                    ) {
                         return;
                     }
                     setStep(2);
