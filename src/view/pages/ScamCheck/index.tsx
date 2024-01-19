@@ -1,5 +1,5 @@
 // Core
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 // Bus
 // import {} from '../../../bus/'
 
@@ -12,6 +12,8 @@ import { Button, ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle, S
 import { InfoIcon } from '@/assets/images/icons';
 import { useScamCheck } from '@/bus/scamcheck';
 import { returnStatusText } from './returnStatusText';
+import { ModalContext } from '@/layouts';
+import { useOverflowHidden } from '@/tools/hooks';
 
 // Types
 type PropTypes = {
@@ -21,6 +23,9 @@ type PropTypes = {
 const ScamCheck: FC<PropTypes> = () => {
     // const data = false;
     const { fetchScamCheck, scamchek: { scamCheck, isLoading, error }} = useScamCheck();
+    const context = useContext(ModalContext);
+    const overflowHandler = useOverflowHidden();
+
     const domainData = [
         { key: 'Registrar', value: `${scamCheck.Domain.registrar || '-'}` },
         { key: 'Registration date', value: `${scamCheck.Domain.registrationDate || '-'}` },
@@ -128,7 +133,12 @@ const ScamCheck: FC<PropTypes> = () => {
                                     Report any issues or concerns about this website.
                                     Your feedback helps improve our scam-checking service.
                                 </S.ReportSubtitle>
-                                <Button>Submit Report</Button>
+                                <Button onClick = { () => {
+                                    context?.setModalActive(!context.isModalActive);
+                                    overflowHandler(false);
+                                } }>
+                                    Submit Report
+                                </Button>
                             </S.ReportScamWrapper>
                         </S.DataContainer>
                     )

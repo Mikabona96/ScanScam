@@ -8,6 +8,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // import {} from '../../../bus/'
 import { useWhoisquery } from '@/bus/whoisquery';
 
+// Contants
+import * as book from '@/view/routes/book';
+
 // Styles
 import * as S from './styles';
 
@@ -15,10 +18,10 @@ import * as S from './styles';
 import { SearchIcon } from '@/assets/images/icons';
 
 //
-import { inithialState, ipv4Regex, schema, urlRegex } from './static';
+import { inithialState, /*ipv4Regex,*/ schema, urlRegex } from './static';
 import { schema as schemaDomain } from './staticDomain';
 import { useScamCheck } from '@/bus/scamcheck';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Types
 type PropTypes = {
@@ -29,21 +32,22 @@ type PropTypes = {
 
 export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL (e.g., www.example.com)', scamCheck = false }) => {
     const theme = useTheme();
-    const { fetchWhoisqueryIp, fetchWhoisqueryDomain, whoisquery: { error: whoisQueryError }} = useWhoisquery();
+    const { /* fetchWhoisqueryIp, fetchWhoisqueryDomain, */ whoisquery: { error: whoisQueryError }} = useWhoisquery();
     const { scamchek: { error: scamCheckError }} = useScamCheck();
     const { fetchScamCheck } = useScamCheck();
     const { pathname } = useLocation();
+    const navigate = useNavigate();
     const [ value, setValue ] = useState('');
     const {  control, handleSubmit, formState: { errors }} = useForm({ values: inithialState, resolver: yupResolver(scamCheck ? schemaDomain : schema), mode: 'onBlur' });
 
-    const WhoisquerryHandler = (ipOrUrl: string) => {
-        if (ipOrUrl.match(urlRegex)) {
-            fetchWhoisqueryDomain(ipOrUrl);
-        }
-        if (ipOrUrl.match(ipv4Regex)) {
-            fetchWhoisqueryIp(ipOrUrl);
-        }
-    };
+    // const WhoisquerryHandler = (ipOrUrl: string) => {
+    //     if (ipOrUrl.match(urlRegex)) {
+    //         fetchWhoisqueryDomain(ipOrUrl);
+    //     }
+    //     if (ipOrUrl.match(ipv4Regex)) {
+    //         fetchWhoisqueryIp(ipOrUrl);
+    //     }
+    // };
 
     const fetchScamCheckHandler = (value: string) => {
         if (value.match(urlRegex)) {
@@ -54,7 +58,8 @@ export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain o
     const onSubmit: SubmitHandler<{urlOrIp?: string | undefined}> = ({ urlOrIp }) => {
         const ipOrUrl = urlOrIp?.trim();
         if (ipOrUrl) {
-            scamCheck ? fetchScamCheckHandler(ipOrUrl) : WhoisquerryHandler(ipOrUrl);
+            scamCheck ? fetchScamCheckHandler(ipOrUrl) : null;
+            scamCheck ? navigate(`${book.SCAM_CHECK}`) : navigate(`${book.WHOIS_QUERY}#${ipOrUrl}`);
         }
     };
 

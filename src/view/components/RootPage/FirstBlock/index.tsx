@@ -1,10 +1,14 @@
 // Core
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 // Bus
 // import {} from '../../../bus/'
 
 // Elements
 import { SectionSubtitle } from '@/view/elements';
+
+// Constants
+import * as book from '@/view/routes/book';
 
 // Styles
 import * as S from './styles';
@@ -18,6 +22,8 @@ type PropTypes = {
 }
 
 export const FirstBlock: FC<PropTypes> = () => {
+    const navigate = useNavigate();
+
     return (
         <S.Container>
             <S.Block>
@@ -26,7 +32,7 @@ export const FirstBlock: FC<PropTypes> = () => {
                     Instant <S.TitleGradient>Scam Check</S.TitleGradient>
                 </S.Title>
                 <SectionSubtitle>Enter the domain or URL below to ensure a scam-free experience</SectionSubtitle>
-                <SearchBar />
+                <SearchBar submitFunction = { (ipOrUrl) => navigate(`${book.WHOIS_QUERY}#${ipOrUrl}`) } />
             </S.Block>
         </S.Container>
     );
