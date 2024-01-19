@@ -1,10 +1,10 @@
 // Core
-import React, { FC, useState } from 'react';
+import React, { FC, useState, MouseEvent } from 'react';
 import Lightbox, { ControllerRef } from 'yet-another-react-lightbox';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 
-// Bus
-// import {} from '../../../bus/'
+// Tools
+import { useOverflowHidden } from '@/tools/hooks';
 
 // Styles
 import 'yet-another-react-lightbox/styles.css';
@@ -13,7 +13,6 @@ import { LinkIcon } from '@/assets/images/icons';
 
 // Types
 type PropTypes = {
-    /* type props here */
     screenshots: {
         screenshot: {
             isLoading: boolean;
@@ -33,6 +32,22 @@ export const Screenshot: FC<PropTypes> = ({ screenshots, websiteText }) => {
     const [ open, setOpen ] = useState(false);
     const [ openText, setOpenText ] = useState(false);
     const ref = React.useRef<ControllerRef>(null);
+    const overflowHandler = useOverflowHidden();
+
+    const closeModal = (event: MouseEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLDivElement;
+        if (target.classList.contains('modal')) {
+            setOpenText(false);
+            overflowHandler(true);
+        }
+    };
+
+    function splitWebText(text: string) {
+        const pattern = /(?<=[\.!\?])/g;
+        const replacedText = text.replace(pattern, '\n');
+
+        return replacedText;
+    }
 
     return (
         <S.Container>
@@ -40,7 +55,12 @@ export const Screenshot: FC<PropTypes> = ({ screenshots, websiteText }) => {
             <S.Description>
                 Explore visual snapshots to preview the appearance of the website.
                 Click on an image to open the full-size version.
-                <S.Link onClick = { () => setOpenText(true) }><LinkIcon /> View website text</S.Link>
+                <S.Link onClick = { () => {
+                    setOpenText(true);
+                    overflowHandler(false);
+                } }>
+                    <LinkIcon /> View website text
+                </S.Link>
             </S.Description>
             {screenshots.screenshot.screenshot ? (
                 <S.ImageWrapper onClick = { () => setOpen(true) }>
@@ -66,7 +86,22 @@ export const Screenshot: FC<PropTypes> = ({ screenshots, websiteText }) => {
                 />
             )}
             {
-                openText && websiteText && <pre style = {{ width: '100%' }}>{websiteText}</pre>
+                openText && websiteText && (
+
+                    <S.WebModal
+                        className = 'modal'
+                        onClick = { closeModal }>
+                        <S.CloseModal onClick = { () => {
+                            setOpenText(false);
+                            overflowHandler(true);
+                        } }>
+                            &times;
+                        </S.CloseModal>
+                        <S.WebTextWrapper>
+                            <S.WebText>{splitWebText(websiteText)}</S.WebText>
+                        </S.WebTextWrapper>
+                    </S.WebModal>
+                )
             }
         </S.Container>
     );
