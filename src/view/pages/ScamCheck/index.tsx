@@ -11,6 +11,7 @@ import * as S from './styles';
 import { Button, ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
 import { InfoIcon } from '@/assets/images/icons';
 import { useScamCheck } from '@/bus/scamcheck';
+import { returnStatusText } from './returnStatusText';
 
 // Types
 type PropTypes = {
@@ -76,10 +77,9 @@ const ScamCheck: FC<PropTypes> = () => {
                                     <S.ScamInfoDescription>
                                         <ChipScamStatus $status = { scamCheck.status === 'allowlist' ? 'Safe' : 'Unclassified' } />
                                         <S.ScamInfoText>
-                                            This website is deemed safe for users.
-                                            It has not exhibited any suspicious or harmful behavior,
-                                            and interactions with the site are unlikely to pose a
-                                            threat to your online safety.
+                                            {
+                                                returnStatusText(scamCheck.status)
+                                            }
                                         </S.ScamInfoText>
                                     </S.ScamInfoDescription>
                                 </S.ScamInfo>
