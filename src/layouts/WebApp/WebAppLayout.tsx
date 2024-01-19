@@ -50,10 +50,6 @@ export const WebAppLayout = () => {
     ];
 
     useEffect(() => {
-        overflowHandler(true);
-    });
-
-    useEffect(() => {
         if (width >= breakpoints.lg) {
             isMobileOpen && overflowHandler(true);
         } else {

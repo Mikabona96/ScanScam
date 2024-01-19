@@ -28,7 +28,7 @@ export const SideBar = styled.aside<{$open?: boolean}>`
     ${({ theme }) => theme.media('max').lg} {
         min-height: 100vh;
         display: ${({ $open }) => $open ? 'flex' : 'none'};
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         animation-name: ${appearanceMobileHeader};
@@ -57,7 +57,10 @@ export const Overlay = styled.div<{$isOpen?: boolean}>`
     display: none;
     z-index: 9999;
     ${({ theme }) => theme.media('max').lg} {
-        display: ${({ $isOpen }) => $isOpen ? 'block' : 'none'}
+        display: ${({ $isOpen }) => $isOpen ? 'block' : 'none'};
+        position: fixed;
+        top: 0;
+        left: 0;
     }
 `;
 

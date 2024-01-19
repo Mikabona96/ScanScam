@@ -20,11 +20,6 @@ export type Tld = {
 export type TldState = {
     isLoading: boolean
     data: Tld | null
-    csv: {
-        isLoading: boolean
-        error: any
-        data: any
-    }
     error: any
 }
 
