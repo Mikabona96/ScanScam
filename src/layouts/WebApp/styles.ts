@@ -234,12 +234,3 @@ export const CustomLink = css`
         display: none;
     }
 `;
-
-export const SearchBarWrapper = styled.div`
-    width: 100%;
-    max-width: 432px;
-    ${({ theme }) => theme.media('max').md} {
-        max-width: 288px;
-        width: 100%;
-    }
-`;

@@ -56,3 +56,23 @@ export const Input = styled.input`
         width: calc(100% - 20px);
     }
 `;
+
+
+export const SearchBarWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 432px;
+    ${({ theme }) => theme.media('max').md} {
+        max-width: 288px;
+        width: 100%;
+    }
+`;
+
+export const SerachError = styled.span`
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    font-family: ${MyFonts.THICCCBOI.regular};
+    color: ${({ theme }) => theme.palette.error};
+`;

@@ -16,8 +16,6 @@ const fetchWhoisqueryDomainAction = createAction('whoisquery/FETCH_WHOISQUERY_DO
 export const fetchWhoisqueryDomain = createAsyncThunk<types.Whoisquery, /* payload type => */ string>(
     fetchWhoisqueryDomainAction.type,
     async (payload) => {
-        console.log('fetchWhoisqueryDomain payload', payload); /* Demonstration */
-
         const result = await customFetch<types.Whoisquery>({
             successStatusCode: 200,
             fetch:             () => fetch(`${API_WHOIS_QUERY_URL}/whois/${payload}?live=false`, {

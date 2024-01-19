@@ -17,6 +17,7 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
     builder /* CASES */
         .addCase(fetchScamCheck.pending, (/* state => */state) => {
             state.isLoading = true;
+            state.error = null;
         })
         .addCase(fetchScamCheck.fulfilled, (/* state => */state, action) => {
             const server = action.payload?.server;
@@ -37,6 +38,7 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             state.scamCheck.Ip.country = server?.whois?.json_format?.Country || '-';
             state.scamCheck.Ip.registrant = server?.whois?.json_format?.OrgName || '-';
             state.isLoading = false;
+            state.error = null;
         })
         .addCase(fetchScamCheck.rejected, (/* state => */state, action) => {
             state.error = action.error.message;

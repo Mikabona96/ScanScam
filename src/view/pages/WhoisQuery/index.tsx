@@ -1,5 +1,5 @@
 // Core
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 // Bus
 // import {} from '../../../bus/'
@@ -12,6 +12,7 @@ import * as S from './styles';
 import { SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
 import { useWhoisquery } from '@/bus/whoisquery';
 import { ipv4Regex, urlRegex } from '@/view/components/SearchBar/static';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Types
 type PropTypes = {
@@ -21,6 +22,9 @@ type PropTypes = {
 const WhoisQuery: FC<PropTypes> = () => {
     const [ isRaw, setIsRaw ] = useState(false);
     const { whoisquery: { whoisQuery, isLoading }, fetchWhoisqueryDomain, fetchWhoisqueryIp } = useWhoisquery();
+    const { hash, pathname } = useLocation();
+    const navigate = useNavigate();
+
 
     const submitFunction = (ipOrUrl: string) => {
         if (ipOrUrl) {
@@ -32,6 +36,12 @@ const WhoisQuery: FC<PropTypes> = () => {
             }
         }
     };
+
+    useEffect(() => {
+        if (hash) {
+            submitFunction(hash.replace('#', '').trim());
+        }
+    }, [ hash ]);
 
     if (isLoading) {
         return <Spinner loading = { isLoading } />;
@@ -53,7 +63,7 @@ const WhoisQuery: FC<PropTypes> = () => {
                         </S.TextWrapper>
                         <SearchBar
                             placeholder = 'Enter a domain or IP address'
-                            submitFunction = { submitFunction }
+                            submitFunction = { (ipOrUrl) => navigate(`${pathname}#${ipOrUrl}`) }
                         />
                     </>
                 ) : (

@@ -1,3 +1,4 @@
+/* eslint-disable no-undefined */
 // Core
 import React, { FC } from 'react';
 
@@ -44,15 +45,15 @@ export const ResultIP: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
         <S.Container>
             <TopRow
                 isRaw = { isRaw }
-                location = 'Vienna, Austria'
+                location = { `${whoisQuery?.parsed?.addresses[ 0 ]?.country}, ${whoisQuery?.parsed?.addresses[ 0 ]?.address.split(',')[ 1 ]}` }
                 setIsRaw = { setIsRaw }
-                title = '213.227.164.85'
+                title = { `${whoisQuery?.parsed?.ip}` }
             />
             <Table
                 withMap
                 alignValues = 'close'
                 data = { geoData }
-                location = { [ Number(geoData[ 3 ].value), Number(geoData[ 2 ].value) ] }
+                location = { geoData[ 3 ].value && geoData[ 3 ].value !== '-' ? [ Number(geoData[ 3 ].value), Number(geoData[ 2 ].value) ] : undefined }
                 title = 'Geolocation'
                 variant = '2'
             />

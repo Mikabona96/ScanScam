@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { LatLngExpression } from 'leaflet';
+import { v4 as uuidv4 } from 'uuid';
 
 // Bus
 // import {} from '../../../bus/'
@@ -61,7 +62,7 @@ export const Table: FC<PropTypes> = ({ title, data, variant = '1', alignValues, 
                                         }
 
                                         return (
-                                            <S.Tr key = { key }>
+                                            <S.Tr key = { uuidv4() }>
                                                 <S.Tdkey $alignValues = { variant === '2' ? alignValues : void 0 }>{key}</S.Tdkey>
                                                 <S.TdValue $alignValues = { variant === '2' ? alignValues : void 0 }>{val}</S.TdValue>
                                             </S.Tr>
@@ -88,7 +89,7 @@ export const Table: FC<PropTypes> = ({ title, data, variant = '1', alignValues, 
                     }
                 </S.Table>
                 {
-                    withMap && open && (
+                    withMap && location && open && (
                         <S.MapWrapper>
                             <MapContainer
                                 center = { location as LatLngExpression }

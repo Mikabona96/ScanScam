@@ -112,12 +112,12 @@ const ScamCheck: FC<PropTypes> = () => {
                                 <S.TablesContainer>
                                     <Table
                                         data = { domainData }
-                                        footerLink = '/whois-query'
+                                        footerLink = { `/whois-query#${scamCheck.domain}` }
                                         title = 'Domain'
                                     />
                                     <Table
                                         data = { ipData }
-                                        footerLink = '/whois-query'
+                                        footerLink = { `/whois-query#${scamCheck.Ip.ip}` }
                                         title = 'IP'
                                     />
                                 </S.TablesContainer>

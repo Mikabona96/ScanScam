@@ -16,22 +16,26 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.WhoisqueryS
     builder /* CASES */
         .addCase(fetchWhoisqueryDomain.pending, (/* state => */state) => {
             state.isLoading = true;
+            state.error = null;
         })
         .addCase(fetchWhoisqueryDomain.fulfilled, (/* state => */state, action) => {
             state.whoisQuery = action.payload;
             state.isLoading = false;
+            state.error = null;
         })
         .addCase(fetchWhoisqueryDomain.rejected, (/* state => */state, action) => {
             state.error = action.error.message;
             state.isLoading = false;
         });
-    builder /* CASES */
+    builder /* IP CASES */
         .addCase(fetchWhoisqueryIp.pending, (/* state => */state) => {
             state.isLoading = true;
+            state.error = null;
         })
         .addCase(fetchWhoisqueryIp.fulfilled, (/* state => */state, action) => {
             state.whoisQuery = action.payload;
             state.isLoading = false;
+            state.error = null;
         })
         .addCase(fetchWhoisqueryIp.rejected, (/* state => */state, action) => {
             state.error = action.error.message;

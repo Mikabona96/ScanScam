@@ -57,6 +57,10 @@ export const WebAppLayout = () => {
         }
     }, [ width ]);
 
+    useEffect(() => {
+        overflowHandler(true);
+    }, []);
+
     const handleMobileMenu = () => {
         setIsMobileOpen(!isMobileOpen);
         if (isMobileOpen) {
@@ -82,12 +86,10 @@ export const WebAppLayout = () => {
                         <MenuIcon />
                     </S.SvgWrapper>
                     {((whoisQuery && pathname === '/whois-query') || (scamCheck.domain && pathname === '/scam-check')) && (
-                        <S.SearchBarWrapper>
-                            <HeaderSearchBar
-                                placeholder = 'Type a new website to check'
-                                scamCheck = { pathname === '/scam-check' }
-                            />
-                        </S.SearchBarWrapper>
+                        <HeaderSearchBar
+                            placeholder = 'Type a new website to check'
+                            scamCheck = { pathname === '/scam-check' }
+                        />
                     )}
                     <CustomLink
                         $styles = { S.CustomLink }
