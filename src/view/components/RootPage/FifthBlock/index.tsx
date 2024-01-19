@@ -119,10 +119,12 @@ export const FifthBlock: FC<PropTypes> = () => {
                     {
                         cards.map((card, idx) => {
                             return (
-                                <Card
-                                    card = { card }
-                                    key = { card.title + idx }
-                                />
+                                <S.CardWrapper
+                                    key = { card.title + idx }>
+                                    <Card
+                                        card = { card }
+                                    />
+                                </S.CardWrapper>
                             );
                         })
                     }

@@ -74,3 +74,11 @@ export const Button = css`
     margin: 0 auto;
     margin-top: 48px;
 `;
+
+
+export const CardWrapper = styled.div`
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+`;
