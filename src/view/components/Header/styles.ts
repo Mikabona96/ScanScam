@@ -143,6 +143,7 @@ export const ScamReportButton = css`
     white-space: nowrap;
     ${({ theme }) => theme.media('max').lg} {
         margin-left: 0;
+        width: 160px;
     }
 `;
 
@@ -212,8 +213,17 @@ export const ColumnLinkStyles = css`
 
 export const OpenAppBtn = css`
     padding: 0;
-`;
 
+    ${({ theme }) => theme.media('max').lg} {
+        width: 160px;
+    }
+
+    button {
+        ${({ theme }) => theme.media('max').lg} {
+            width: 100%;
+        }
+    }
+`;
 
 export const LocalAnchorLink = styled.span`
     font-family: ${MyFonts.THICCCBOI.medium};
