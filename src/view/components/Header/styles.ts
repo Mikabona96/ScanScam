@@ -167,25 +167,26 @@ export const Overlay = styled.div<{$isOpen?: boolean}>`
 `;
 
 export const SearchBarColumnStyles = css`
-        max-width: 432px;
-        width: 100%;
-    `;
+    max-width: 432px;
+    width: 100%;
+`;
 
 export const LinkStyles = ($active?: boolean) => css`
-        color: ${({ theme }) => $active ? theme.palette.purple.main : theme.text.black.main};
-        margin-right: 8px;
-        white-space: nowrap;
-        font-family: ${MyFonts.THICCCBOI.medium};
-        animation-name: ${appearanceAnimation};
-        animation-duration: 1.5s;
-        transition: all.3s ease;
-        &:hover {
-            color: ${({ theme }) => theme.text.purple.main};
-        }
-        &:active {
-            color: ${({ theme }) => theme.palette.purple.dark};
-        }
-    `;
+    color: ${({ theme }) => $active ? theme.palette.purple.main : theme.text.black.main};
+    margin-right: 8px;
+    white-space: nowrap;
+    font-family: ${MyFonts.THICCCBOI.medium};
+    animation-name: ${appearanceAnimation};
+    animation-duration: 1.5s;
+    transition: all.3s ease;
+    &:hover {
+        color: ${({ theme }) => theme.text.purple.main};
+    }
+    &:active {
+        color: ${({ theme }) => theme.palette.purple.dark};
+    }
+`;
+
 export const MenuIcon = styled.div`
     display: none;
     ${({ theme }) => theme.media('max').lg} {
@@ -201,7 +202,7 @@ export const MenuIcon = styled.div`
 export const linkWrapperStyles = css`
     height: 324px; 
     width: 100%;
-    justify-content: space-between
+    justify-content: space-between;
 `;
 
 export const ColumnLinkStyles = css`
