@@ -21,7 +21,7 @@ type PropTypes = {
 
 const WhoisQuery: FC<PropTypes> = () => {
     const [ isRaw, setIsRaw ] = useState(false);
-    const { whoisquery: { whoisQuery, isLoading }, fetchWhoisqueryDomain, fetchWhoisqueryIp } = useWhoisquery();
+    const { whoisquery: { whoisQuery, isLoading, error }, fetchWhoisqueryDomain, fetchWhoisqueryIp } = useWhoisquery();
     const { hash, pathname } = useLocation();
     const navigate = useNavigate();
 
@@ -33,6 +33,9 @@ const WhoisQuery: FC<PropTypes> = () => {
             }
             if (ipOrUrl.match(ipv4Regex)) {
                 fetchWhoisqueryIp(ipOrUrl);
+            }
+            if (!ipOrUrl.match(urlRegex) && !ipOrUrl.match(ipv4Regex)) {
+                navigate(pathname);
             }
         }
     };
@@ -65,6 +68,12 @@ const WhoisQuery: FC<PropTypes> = () => {
                             placeholder = 'Enter a domain or IP address'
                             submitFunction = { (ipOrUrl) => navigate(`${pathname}#${ipOrUrl}`) }
                         />
+                        {error && (
+                            <SectionSubtitle $styles = { S.ErrorMesage }>
+                                No scrape available for {hash ? hash.slice(1) : `${hash.slice(1).match(ipv4Regex) ? hash.slice(1) : 'url'}`}.
+                            </SectionSubtitle>
+                        )
+                        }
                     </>
                 ) : (
                     <>

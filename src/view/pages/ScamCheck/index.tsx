@@ -1,5 +1,5 @@
 // Core
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 // Bus
 // import {} from '../../../bus/'
 
@@ -14,6 +14,7 @@ import { useScamCheck } from '@/bus/scamcheck';
 import { returnStatusText } from './returnStatusText';
 import { ModalContext } from '@/layouts';
 import { useOverflowHidden } from '@/tools/hooks';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Types
 type PropTypes = {
@@ -25,6 +26,8 @@ const ScamCheck: FC<PropTypes> = () => {
     const { fetchScamCheck, scamchek: { scamCheck, isLoading, error }} = useScamCheck();
     const context = useContext(ModalContext);
     const overflowHandler = useOverflowHidden();
+    const { pathname, hash } = useLocation();
+    const navigate = useNavigate();
 
     const domainData = [
         { key: 'Registrar', value: `${scamCheck.Domain.registrar || '-'}` },
@@ -37,12 +40,18 @@ const ScamCheck: FC<PropTypes> = () => {
         { key: 'Country', value: `${scamCheck.Ip.country || '-'}` },
         { key: 'Registrant', value: `${scamCheck.Ip.registrant || '-'}` },
     ];
+    useEffect(() => {
+        if (hash) {
+            fetchScamCheck(hash.replace('#', '').trim());
+        }
+    }, [ hash ]);
 
     if (isLoading) {
         return (
             <Spinner loading = { isLoading } />
         );
     }
+
 
     return (
         <S.Container>
@@ -58,10 +67,10 @@ const ScamCheck: FC<PropTypes> = () => {
                                     Enter a website URL to check if it's safe
                                 </SectionSubtitle>
                             </S.TextWrapper>
-                            <SearchBar submitFunction = { fetchScamCheck } />
+                            <SearchBar submitFunction = { (url) => navigate(`${pathname}#${url}`) } />
                             {error && (
                                 <SectionSubtitle $styles = { S.ErrorMesage }>
-                                    No scrape available for this url.
+                                    No scrape available for {hash ? hash.slice(1) : 'this url'}.
                                 </SectionSubtitle>
                             )
                             }

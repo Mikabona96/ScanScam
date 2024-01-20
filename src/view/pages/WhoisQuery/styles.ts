@@ -30,3 +30,12 @@ export const SubtitleStyles = css`
 
 export const InfoContainer = styled.div`
 `;
+
+export const ErrorMesage = css`
+    color: ${({ theme }) => theme.palette.error};
+    ${({ theme }) => theme.media('min').xs} {
+        font-size: 14px;
+        line-height: 24px;
+        text-align: left;
+    }
+`;
