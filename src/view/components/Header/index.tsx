@@ -52,7 +52,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
         },
         {
             label: 'Tools',
-            link:  '#tools',
+            link:  '/#tools',
         },
         {
             label: 'Blog',
@@ -71,6 +71,14 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
             window.scrollTo({ behavior: 'smooth', top: section.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (headerHeight ? headerHeight : 0) });
         }
     };
+
+    useEffect(() => {
+        if (location.hash === '#tools') {
+            scrollToSection('#tools');
+        }
+
+        console.log(location.hash);
+    }, [ location.hash ]);
 
     useEffect(() => {
         if (width >= breakpoints.lg) {
@@ -120,14 +128,16 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
 
                                     if (idx === 1) {
                                         return (
-                                            <S.LocalAnchorLink
+                                            <CustomLink
+                                                $styles = { styles }
                                                 key = { link.label + idx }
+                                                label = { link.label }
+                                                to = { link.link }
                                                 onClick = { () => {
-                                                    scrollToSection(link.link);
                                                     handleMobileMenu();
-                                                } }>
-                                                {link.label}
-                                            </S.LocalAnchorLink>
+                                                    scrollToSection(link.link);
+                                                } }
+                                            />
                                         );
                                     }
 
