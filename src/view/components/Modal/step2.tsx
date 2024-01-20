@@ -121,18 +121,10 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                 $styles = { S.Button }
                 type = 'submit'
                 onClick = { async () => {
-                    const areFieldsValid = await trigger([ 'email' ]);
-                    const areFieldsValid2 = await trigger([ 'checkbox' ]);
-                    const areFieldsValid3 = await trigger([ 'recieveUpdates' ]);
-                    const areFieldsValid4 = await trigger([ 'url' ]);
-                    const areFieldsValid5 = await trigger([ 'description' ]);
-
-                    if (
-                        !areFieldsValid && !areFieldsValid2 && !areFieldsValid3 && !areFieldsValid4 && !areFieldsValid5
-                    ) {
-                        return;
+                    const areFieldsValid = await trigger([ 'email', 'checkbox', 'description', 'recieveUpdates', 'url'  ]);
+                    if (areFieldsValid) {
+                        setStep(2);
                     }
-                    setStep(2);
                 } }>Submit a Report
             </Button>
         </>

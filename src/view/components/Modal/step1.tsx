@@ -52,10 +52,9 @@ export const Step1: FC<PropTypes> = ({ setStep, control, errors, trigger }) => {
                 type = 'button'
                 onClick = { async () => {
                     const areFieldsValid = await trigger([ 'url', 'description' ]);
-                    if (!areFieldsValid) {
-                        return;
+                    if (areFieldsValid) {
+                        setStep(1);
                     }
-                    setStep(1);
                 } }>Continue
             </Button>
         </>
