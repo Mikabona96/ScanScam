@@ -41,7 +41,7 @@ const ScamCheck: FC<PropTypes> = () => {
         { key: 'Registrant', value: `${scamCheck.Ip.registrant || '-'}` },
     ];
     useEffect(() => {
-        if (hash) {
+        if (hash && hash.replace('#', '').trim() !== scamCheck.domain) {
             fetchScamCheck(hash.replace('#', '').trim());
         }
     }, [ hash ]);
