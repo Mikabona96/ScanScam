@@ -1,6 +1,6 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.footer`
     padding: 32px 80px;
@@ -71,4 +71,12 @@ export const SocialLinks = styled.div`
     width: 120px;
     justify-content: space-between;
     align-items: center;
+`;
+
+export const EmailLinkStyles = css`
+    padding: 0;
+`;
+
+export const BookAMeetingStyles = css`
+    text-decoration: underline;
 `;

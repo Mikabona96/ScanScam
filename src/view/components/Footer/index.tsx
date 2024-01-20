@@ -26,12 +26,14 @@ export const Footer: FC<PropTypes> = () => {
                 />
                 <S.Links>
                     <CustomLink
+                        $styles = { S.EmailLinkStyles }
                         label = 'email_example@gmail.com'
                         to = 'mailto:email_example@gmail.com'
                     />
                     <S.Link>Im Staderfeld 63a, Neu Eliah, BW 96929</S.Link>
                     <S.Link>Schedule a virtual meeting:
                         <CustomLink
+                            $styles = { S.BookAMeetingStyles }
                             label = 'Book a Meeting'
                             to = '#'
                         />

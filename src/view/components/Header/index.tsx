@@ -52,7 +52,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
         },
         {
             label: 'Tools',
-            link:  '#',
+            link:  '#tools',
         },
         {
             label: 'Blog',
@@ -63,6 +63,14 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
             link:  '#',
         },
     ];
+
+    const scrollToSection = (sectionId: string | number) => {
+        const section = document.getElementById(`${sectionId}`);
+        const headerHeight = ref.current?.getBoundingClientRect().height;
+        if (section) {
+            window.scrollTo({ behavior: 'smooth', top: section.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (headerHeight ? headerHeight : 0) });
+        }
+    };
 
     useEffect(() => {
         if (width >= breakpoints.lg) {
@@ -109,6 +117,19 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                             {
                                 links.map((link, idx) => {
                                     const styles = S.LinkStyles(link.link === location.pathname);
+
+                                    if (idx === 1) {
+                                        return (
+                                            <S.LocalAnchorLink
+                                                key = { link.label + idx }
+                                                onClick = { () => {
+                                                    scrollToSection(link.link);
+                                                    handleMobileMenu();
+                                                } }>
+                                                {link.label}
+                                            </S.LocalAnchorLink>
+                                        );
+                                    }
 
                                     return (
                                         <CustomLink

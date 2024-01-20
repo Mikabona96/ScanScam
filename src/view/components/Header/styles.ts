@@ -212,3 +212,23 @@ export const ColumnLinkStyles = css`
 export const OpenAppBtn = css`
     padding: 0;
 `;
+
+
+export const LocalAnchorLink = styled.span`
+    font-family: ${MyFonts.THICCCBOI.medium};
+    color: ${({ theme }) => theme.text.gray.main};
+    padding: 8px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 8px;
+    animation-name: ${appearanceAnimation};
+    animation-duration: 1.5s;
+    transition: all.3s ease;
+    &:hover {
+            color: ${({ theme }) => theme.text.purple.main};
+    }
+`;
