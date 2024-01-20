@@ -1,5 +1,5 @@
 // Core
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 
 // Bus
 // import {} from '../../../bus/'
@@ -14,7 +14,7 @@ import Logo from '@/assets/images/icons/logo.png';
 import * as S from './styles';
 import { Button, CustomLink } from '@/view/elements';
 import { useComponentWidth, useOverflowHidden, useScroll } from '@/tools/hooks';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { MenuIcon } from '@/assets/images/icons/menuIcon';
 import { HeaderSearchBar } from '../HeaderSearchBar';
 import { breakpoints } from '@/assets';
@@ -33,6 +33,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
     const scrolled = useScroll();
     const overflowHandler = useOverflowHidden();
     const { ref, width } = useComponentWidth();
+    const navigate = useNavigate();
 
     const location = useLocation();
 
@@ -52,7 +53,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
         },
         {
             label: 'Tools',
-            link:  '/#tools',
+            link:  '#tools',
         },
         {
             label: 'Blog',
@@ -72,12 +73,10 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
         }
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (location.hash === '#tools') {
             scrollToSection('#tools');
         }
-
-        console.log(location.hash);
     }, [ location.hash ]);
 
     useEffect(() => {
@@ -128,16 +127,17 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
 
                                     if (idx === 1) {
                                         return (
-                                            <CustomLink
-                                                $styles = { styles }
+                                            <S.LocalAnchorLink
                                                 key = { link.label + idx }
-                                                label = { link.label }
-                                                to = { link.link }
                                                 onClick = { () => {
-                                                    handleMobileMenu();
+                                                    if (location.pathname !== '/') {
+                                                        navigate(`/${link.link}`);
+                                                    }
                                                     scrollToSection(link.link);
-                                                } }
-                                            />
+                                                    handleMobileMenu();
+                                                } }>
+                                                {link.label}
+                                            </S.LocalAnchorLink>
                                         );
                                     }
 
