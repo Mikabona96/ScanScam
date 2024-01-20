@@ -1,5 +1,5 @@
 // Core
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 // Components
 import { ErrorBoundary, FifthBlock, FirstBlock, FourthBlock, SecondBlock, ThirdBlock } from '@/view/components';
@@ -7,8 +7,11 @@ import { ErrorBoundary, FifthBlock, FirstBlock, FourthBlock, SecondBlock, ThirdB
 // Styles
 import * as S from './styles';
 import { Button } from '@/view/elements';
+import { ModalLandingContext } from '@/layouts';
 
 const Root: FC = () => {
+    const context = useContext(ModalLandingContext);
+
     return (
         <S.Container>
             <FirstBlock />
@@ -17,7 +20,8 @@ const Root: FC = () => {
                     <S.Text>Keep the web safe – report suspicious activity</S.Text>
                     <Button
                         $styles = { S.Button }
-                        $variant = 'white_outlined'>Report a Scam
+                        $variant = 'white_outlined'
+                        onClick = { () => context?.setModalActive(!context.isModalActive) }>Report a Scam
                     </Button>
                 </S.BottomTextWrapper>
             </S.Bottom>
