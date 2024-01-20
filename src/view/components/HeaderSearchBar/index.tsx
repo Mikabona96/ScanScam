@@ -59,7 +59,7 @@ export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain o
         const ipOrUrl = urlOrIp?.trim();
         if (ipOrUrl) {
             scamCheck ? fetchScamCheckHandler(ipOrUrl) : null;
-            scamCheck ? navigate(`${book.SCAM_CHECK}`) : navigate(`${book.WHOIS_QUERY}#${ipOrUrl}`);
+            scamCheck ? navigate(`${book.SCAM_CHECK}#${ipOrUrl}`) : navigate(`${book.WHOIS_QUERY}#${ipOrUrl}`);
         }
     };
 

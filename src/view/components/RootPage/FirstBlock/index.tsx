@@ -32,7 +32,7 @@ export const FirstBlock: FC<PropTypes> = () => {
                     Instant <S.TitleGradient>Scam Check</S.TitleGradient>
                 </S.Title>
                 <SectionSubtitle>Enter the domain or URL below to ensure a scam-free experience</SectionSubtitle>
-                <SearchBar submitFunction = { (ipOrUrl) => navigate(`${book.WHOIS_QUERY}#${ipOrUrl}`) } />
+                <SearchBar submitFunction = { (ipOrUrl) => navigate(`${book.SCAM_CHECK}#${ipOrUrl}`) } />
             </S.Block>
         </S.Container>
     );

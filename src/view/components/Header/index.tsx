@@ -109,7 +109,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                 <S.Column
                     $show = { scrolled }
                     $styles = { S.SearchBarColumnStyles }>
-                    <HeaderSearchBar />
+                    <HeaderSearchBar scamCheck />
                 </S.Column>
                 <S.Column>
                     <S.LinksWrapper $show>
