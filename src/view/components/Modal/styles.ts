@@ -128,6 +128,7 @@ const InputFields = css`
     outline: 0;
     border: 1px solid ${({ theme }) => theme.palette.gray.lightGrey};
     border-radius: 2px;
+    font-family: ${MyFonts.THICCCBOI.regular};
 
     &::placeholder {
         font-family: ${MyFonts.THICCCBOI.regular};

@@ -64,6 +64,10 @@ export const Link = styled.p`
     font-weight: 400;
     line-height: 24px;
     cursor: pointer;
+
+    ${({ theme }) => theme.media('max').sm} {
+        text-align: center;
+    }
 `;
 
 export const SocialLinks = styled.div`
@@ -80,3 +84,4 @@ export const EmailLinkStyles = css`
 export const BookAMeetingStyles = css`
     text-decoration: underline;
 `;
+
