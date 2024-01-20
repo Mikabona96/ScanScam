@@ -60,7 +60,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
         },
         {
             label: 'Contacts',
-            link:  '#',
+            link:  '#contacts',
         },
     ];
 
@@ -119,6 +119,19 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                                     const styles = S.LinkStyles(link.link === location.pathname);
 
                                     if (idx === 1) {
+                                        return (
+                                            <S.LocalAnchorLink
+                                                key = { link.label + idx }
+                                                onClick = { () => {
+                                                    scrollToSection(link.link);
+                                                    handleMobileMenu();
+                                                } }>
+                                                {link.label}
+                                            </S.LocalAnchorLink>
+                                        );
+                                    }
+
+                                    if (idx === 3) {
                                         return (
                                             <S.LocalAnchorLink
                                                 key = { link.label + idx }

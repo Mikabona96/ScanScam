@@ -18,7 +18,7 @@ type PropTypes = {
 
 export const Footer: FC<PropTypes> = () => {
     return (
-        <S.Container>
+        <S.Container id = '#contacts'>
             <S.Wrapper>
                 <img
                     src = { Logo }
