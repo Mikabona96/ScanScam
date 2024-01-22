@@ -176,7 +176,8 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
                         </Button>
                         <CustomLink
                             $styles = { S.OpenAppBtn }
-                            to = '/scam-check'>
+                            to = '/scam-check'
+                            onClick = { () => overflowHandler(true) }>
                             <Button>Open App</Button>
                         </CustomLink>
                     </S.LinksWrapper>

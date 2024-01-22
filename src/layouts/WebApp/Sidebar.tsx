@@ -1,14 +1,18 @@
 // Core
 import React, { FC } from 'react';
 
+// Hooks
+import { useBasePath, useOverflowHidden } from '@/tools/hooks';
+
+// Elements
+import { CustomLink } from '@/view/elements';
+
 // Styles
 import * as S from './styles';
 
 // Images
 import Logo from '@/assets/images/icons/logoTransparency.png';
-import { CustomLink } from '@/view/elements';
 import { DomainZone, Logout, ScamCheck, WhoisQuery } from '@/assets/images/icons';
-import { useBasePath } from '@/tools/hooks';
 
 // Types
 type PropTypes = {
@@ -18,6 +22,7 @@ type PropTypes = {
 
 export const Sidebar: FC<PropTypes> = ({ isMobileOpen, handleMobileMenu }) => {
     const pathname = useBasePath();
+    const overflowHandler = useOverflowHidden();
     const links = [
         {
             id:    1,
@@ -46,7 +51,8 @@ export const Sidebar: FC<PropTypes> = ({ isMobileOpen, handleMobileMenu }) => {
 
                 <S.LogoContainer>
                     <CustomLink
-                        to = '/'>
+                        to = '/'
+                        onClick = { () => overflowHandler(true) }>
                         <img
                             src = { Logo }
                             style = {{ width: '72px', height: '48px' }}
