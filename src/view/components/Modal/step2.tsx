@@ -78,7 +78,7 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
                 />
 
                 {recieveUpds && <S.Divider/>}
-                <S.InputWrapper style = {{ display: recieveUpds ? 'block' : 'none' }}>
+                <S.InputWrapper style = {{ display: recieveUpds ? 'flex' : 'none' }}>
                     <S.TextLabel>Share your email for updates</S.TextLabel>
                     <Controller
                         control = { control }
