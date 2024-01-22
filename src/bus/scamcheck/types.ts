@@ -1,6 +1,26 @@
 // Core
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 
+
+export type ChartInfo = {
+    domain: {
+        protocol?: string,
+        subdomain?: string,
+        domain: string,
+        tld: string,
+        path?: string,
+        query: any,
+        fragment: string,
+        parameters: any[]
+    },
+    scamScore: number,
+    category: [
+        {
+            name: string,
+            confidence: number
+        }
+    ]
+}
 interface IDomain {
     protocol?: string,
     subdomain?: string,
@@ -80,6 +100,10 @@ export type ScamCheckState = {
             country: string | null
             registrant: string | null
         }
+    }
+    chart: {
+        domain: number | null
+        website: number | null
     }
     error: any
 }

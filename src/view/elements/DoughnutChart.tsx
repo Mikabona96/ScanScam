@@ -10,11 +10,12 @@ import { MyFonts } from '@/assets/fonts';
 //Styles
 import { defaultTheme } from '@/assets';
 import styled from 'styled-components';
+import { SkeletonContainer } from '../pages/ScamCheck/ChartSkeleton';
 
 // Types
 type PropTypes = {
     /* type props here */
-    data: number
+    data: number | null
 }
 
 
@@ -31,6 +32,14 @@ const Container = styled.div`
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const DoughnutChart: FC<PropTypes> = ({ data }) => {
+    if (!data) {
+        return (
+            <Container>
+                <SkeletonContainer />
+            </Container>
+        );
+    }
+
     const status = data <= 33 ? 'low' : data <= 66 && data > 33 ? 'moderate' : 'high';
     const color = status === 'low' ? '#067647' : status === 'moderate' ? '#DF9300' : '#B42318';
     const backgroundColor = status === 'low' ? '#ECFDF3' : status === 'moderate' ? '#FFFBF1' : '#FEF3F2';

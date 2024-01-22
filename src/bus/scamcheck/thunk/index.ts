@@ -8,6 +8,8 @@ import { useDispatch } from '../../../tools/hooks';
 import { fetchScamCheck } from './fetchScamcheck';
 import { fetchScreenshot } from './fetchScreenshot';
 import { fetchScreenshotFullsize } from './fetchScreenshotfullsize';
+import { fetchDomainChartInfo } from './fetchDomainChartInfo';
+import { fetchWebsiteChartInfo } from './fetchWebsiteChartInfo';
 
 // Types
 import * as types from '../types';
@@ -68,6 +70,14 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             state.scamCheck.screenshots.screenshot_fullsize.error = action.error.message;
             state.scamCheck.screenshots.screenshot_fullsize.isLoading = false;
         });
+    builder /* CASES */
+        .addCase(fetchDomainChartInfo.fulfilled, (/* state => */state, action) => {
+            state.chart.domain = Number(action.payload.scamScore.toFixed(3));
+        });
+    builder /* CASES */
+        .addCase(fetchWebsiteChartInfo.fulfilled, (/* state => */state, action) => {
+            state.chart.website = Number(action.payload.scamScore.toFixed(3));
+        });
 };
 
 // Hook
@@ -77,6 +87,8 @@ export const useScamcheckThunk = () => {
         void dispatch(fetchScamCheck(payload));
         void dispatch(fetchScreenshot(payload));
         void dispatch(fetchScreenshotFullsize(payload));
+        void dispatch(fetchDomainChartInfo(payload));
+        void dispatch(fetchWebsiteChartInfo(payload));
     };
 
     return {

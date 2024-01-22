@@ -40,6 +40,10 @@ const initialState = {
             registrant: null,
         },
     },
+    chart: {
+        domain:  null,
+        website: null,
+    },
     error: null,
 };
 

@@ -23,7 +23,7 @@ type PropTypes = {
 
 const ScamCheck: FC<PropTypes> = () => {
     // const data = false;
-    const { fetchScamCheck, scamchek: { scamCheck, isLoading, error }} = useScamCheck();
+    const { fetchScamCheck, scamchek: { scamCheck, isLoading, error, chart }} = useScamCheck();
     const context = useContext(ModalContext);
     const overflowHandler = useOverflowHidden();
     const { pathname, hash } = useLocation();
@@ -51,7 +51,6 @@ const ScamCheck: FC<PropTypes> = () => {
             <Spinner loading = { isLoading } />
         );
     }
-
 
     return (
         <S.Container>
@@ -102,10 +101,10 @@ const ScamCheck: FC<PropTypes> = () => {
                                     <S.DoughnutChartsBlock>
                                         <S.DoughnutChartsContainer>
                                             <DoughnutChart
-                                                data = { 15 }
+                                                data = { chart.domain }
                                             />
                                             <DoughnutChart
-                                                data = { 37 }
+                                                data = { chart.website }
                                             />
                                         </S.DoughnutChartsContainer>
                                         <S.Statuses>
