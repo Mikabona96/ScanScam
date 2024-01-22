@@ -156,8 +156,9 @@ export const Header = styled.header`
 export const SvgWrapper = styled.div`
     width: 24px;
     height: 24px;
-    ${({ theme }) => theme.media('min').lg} {
-        display: none;
+    display: none;
+    ${({ theme }) => theme.media('max').lg} {
+        display: block;
     }
 `;
 
