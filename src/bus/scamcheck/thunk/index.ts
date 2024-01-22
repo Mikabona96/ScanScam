@@ -26,7 +26,7 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             const domain = action.payload?.domain;
 
             state.scamCheck.domain = `${domain?.subdomain}.${domain?.domain}.${domain?.tld}` || '-';
-            // state.scamCheck.lustUpdate = (whois?.json_format[ '>>> Last update of WHOIS database' ] || '').split('<')[ 0 ].trim() || '-';
+            // state.scamCheck.lastUpdate = (whois?.json_format[ '>>> Last update of WHOIS database' ] || '').split('>')[ 0 ].trim() || '-';
             state.scamCheck.name = code?.title || '-';
             state.scamCheck.websiteText = code?.text || '-';
             // Domain
