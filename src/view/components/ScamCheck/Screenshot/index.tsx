@@ -10,6 +10,7 @@ import { useOverflowHidden } from '@/tools/hooks';
 import 'yet-another-react-lightbox/styles.css';
 import * as S from './styles';
 import { LinkIcon } from '@/assets/images/icons';
+import { Button } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -63,11 +64,19 @@ export const Screenshot: FC<PropTypes> = ({ screenshots, websiteText }) => {
                 </S.Link>
             </S.Description>
             {screenshots.screenshot.screenshot ? (
-                <S.ImageWrapper onClick = { () => setOpen(true) }>
+                <S.ImageWrapper>
                     <img
                         alt = 'site_screenshot'
                         src = { screenshots.screenshot.screenshot }
+                        onClick = { () => setOpen(true) }
                     />
+                    <S.ImageOverlay>
+                        <Button
+                            $styles = { S.ButtonStyles }
+                            $variant = 'outlined'
+                            onClick = { () => setOpen(true) }>Open full-size image
+                        </Button>
+                    </S.ImageOverlay>
                 </S.ImageWrapper>
             ) : <S.Description>{`${screenshots.screenshot.error}`}</S.Description>}
             { screenshots.screenshot_fullsize.screenshot && (

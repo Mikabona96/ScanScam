@@ -1,6 +1,6 @@
 // Core
 import { MyFonts } from '@/assets/fonts';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
     width: 100%;
@@ -54,11 +54,35 @@ export const Link = styled.div`
 
 export const ImageWrapper = styled.div`
     padding: 24px;
+    position: relative;
     cursor: pointer;
     img {
         width: 100%;
     }
 `;
+
+export const ImageOverlay = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    display: flex;
+
+    transition: all.3s ease;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    ${({ theme }) => theme.media('max').lg} {
+        display: none;
+    }
+`;
+
 export const WebModal = styled.div`
     position: fixed;
     left: 0;
@@ -114,4 +138,11 @@ export const WebText = styled.pre`
     font-weight: 500;
     line-height: 24px;
     text-wrap: wrap;
+`;
+
+
+export const ButtonStyles = css`
+    background-color: #fff;
+    border: 0;
+    margin: auto;
 `;
