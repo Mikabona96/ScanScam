@@ -2,6 +2,8 @@
 // Core
 import React, { FC, useState, useRef } from 'react';
 import Slider, { Settings } from 'react-slick';
+import { useNavigate } from 'react-router-dom';
+import { BLOG } from '@/view/routes/book';
 
 // Bus
 // import {} from '../../../bus/'
@@ -68,6 +70,7 @@ const cards = [
 
 export const FifthBlock: FC<PropTypes> = () => {
     const [ currentSlide, setCurrentSlide ] = useState(0);
+    const navigate = useNavigate();
     const ref = useRef<Slider>(null);
     const settings: Settings = {
         dots:           false,
@@ -151,7 +154,10 @@ export const FifthBlock: FC<PropTypes> = () => {
                     onClick = { () => ref.current?.slickNext() }
                 />
             </S.Navigation>
-            <Button $styles = { S.Button } >Read More on Our Blog</Button>
+            <Button
+                $styles = { S.Button }
+                onClick = { () => navigate(BLOG) } >Read More on Our Blog
+            </Button>
         </S.Container>
     );
 };

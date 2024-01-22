@@ -31,6 +31,8 @@ export const Input = styled.input<{$error?: boolean}>`
     border: 1px solid ${({ theme }) => theme.palette.gray.lightGrey};
     outline: 0;
     font-size: 16px;
+    font-family: ${MyFonts.THICCCBOI.medium};
+    
     &::placeholder {
         font-family: ${MyFonts.THICCCBOI.regular};
         font-style: normal;

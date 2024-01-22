@@ -22,6 +22,8 @@ export const Wrapper = styled.ul`
     ${({ theme }) => theme.media('max').md} {
         flex-direction: column;
         align-items: center;
+        gap: 10px;
+
         & img {
             display: block;
         }
@@ -63,7 +65,6 @@ export const Link = styled.p`
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
-    cursor: pointer;
 
     ${({ theme }) => theme.media('max').sm} {
         text-align: center;
@@ -79,9 +80,11 @@ export const SocialLinks = styled.div`
 
 export const EmailLinkStyles = css`
     padding: 0;
+    cursor: pointer;
 `;
 
 export const BookAMeetingStyles = css`
     text-decoration: underline;
+    cursor: pointer;
 `;
 
