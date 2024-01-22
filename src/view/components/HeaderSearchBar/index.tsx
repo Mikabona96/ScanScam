@@ -22,6 +22,7 @@ import { inithialState, /*ipv4Regex,*/ schema, urlRegex } from './static';
 import { schema as schemaDomain } from './staticDomain';
 import { useScamCheck } from '@/bus/scamcheck';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useOverflowHidden } from '@/tools/hooks';
 
 // Types
 type PropTypes = {
@@ -37,6 +38,7 @@ export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain o
     const { fetchScamCheck } = useScamCheck();
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const overflowHandler = useOverflowHidden();
     const [ value, setValue ] = useState('');
     const {  control, handleSubmit, formState: { errors }} = useForm({ values: inithialState, resolver: yupResolver(scamCheck ? schemaDomain : schema), mode: 'onBlur' });
 
@@ -58,6 +60,7 @@ export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain o
     const onSubmit: SubmitHandler<{urlOrIp?: string | undefined}> = ({ urlOrIp }) => {
         const ipOrUrl = urlOrIp?.trim();
         if (ipOrUrl) {
+            overflowHandler(true);
             scamCheck ? fetchScamCheckHandler(ipOrUrl) : null;
             scamCheck ? navigate(`${book.SCAM_CHECK}#${ipOrUrl}`) : navigate(`${book.WHOIS_QUERY}#${ipOrUrl}`);
         }
