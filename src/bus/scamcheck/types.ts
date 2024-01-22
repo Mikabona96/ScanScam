@@ -74,7 +74,7 @@ export type ScamCheckState = {
     isLoading: boolean
     scamCheck: {
         domain: string | null
-        lastUpdate: string | Date | null
+        lastUpdate: string | null
         name: string | null
         status: 'allowlist' | 'blocklist' | 'watchlist' | 'scamscanlist' | 'trusted' | null
         screenshots: {

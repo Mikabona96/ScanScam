@@ -1,20 +1,26 @@
 // Core
 import React, { FC, useContext, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
 // Bus
 // import {} from '../../../bus/'
+import { useScamCheck } from '@/bus/scamcheck';
+
+// Hooks
+import { useOverflowHidden } from '@/tools/hooks';
 
 // Components
 import { ErrorBoundary, Screenshot, SearchBar, Table } from '../../components';
+import { Button, ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
+import { ModalContext } from '@/layouts';
+import { InfoIcon } from '@/assets/images/icons';
 
 // Styles
 import * as S from './styles';
-import { Button, ChipScamStatus, DoughnutChart, SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
-import { InfoIcon } from '@/assets/images/icons';
-import { useScamCheck } from '@/bus/scamcheck';
+
+// Helpers
 import { returnStatusText } from './returnStatusText';
-import { ModalContext } from '@/layouts';
-import { useOverflowHidden } from '@/tools/hooks';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { formatDate } from './formatDate';
 
 // Types
 type PropTypes = {
@@ -78,7 +84,10 @@ const ScamCheck: FC<PropTypes> = () => {
                     : (
                         <S.DataContainer>
                             <S.SiteInfo>
-                                <S.Domain>{`${scamCheck.domain || '-'}`}</S.Domain>
+                                <S.DomainTimeWrapper>
+                                    <S.Domain>{`${scamCheck.domain || '-'}`}</S.Domain>
+                                    <S.Time>Last Update: {formatDate(scamCheck.lastUpdate?.split('<<<')[ 0 ] || `${new Date()}`)}</S.Time>
+                                </S.DomainTimeWrapper>
                                 <S.SiteName>{`${scamCheck.name || '-'}`}</S.SiteName>
                                 <S.SiteDescription>
                                     Search the world's information, including webpages, images, videos, and more
@@ -97,7 +106,14 @@ const ScamCheck: FC<PropTypes> = () => {
                                     </S.ScamInfoDescription>
                                 </S.ScamInfo>
                                 <S.ScamInfo>
-                                    <S.ScamInfoHeader>AI Scam Score</S.ScamInfoHeader>
+                                    <S.ScamInfoHeader>AI Scam Score
+                                        <a
+                                            id = 'chart_tooltip'
+                                            style = {{ display: 'flex', alignItems: 'center' }}
+                                            onClick = { (event) => { event.preventDefault(); } }>
+                                            <InfoIcon />
+                                        </a>
+                                    </S.ScamInfoHeader>
                                     <S.DoughnutChartsBlock>
                                         <S.DoughnutChartsContainer>
                                             <DoughnutChart
@@ -113,7 +129,11 @@ const ScamCheck: FC<PropTypes> = () => {
                                             <S.StatusText $status = 'high'>High risk</S.StatusText>
                                         </S.Statuses>
                                     </S.DoughnutChartsBlock>
-                                    <S.Info><InfoIcon /> Indicates the likelihood of scams based on AI analysis</S.Info>
+                                    <Tooltip
+                                        anchorSelect = '#chart_tooltip'
+                                        place = 'bottom'>
+                                        <S.Info>Indicates the likelihood of scams based on AI analysis</S.Info>
+                                    </Tooltip>
                                 </S.ScamInfo>
                             </S.ScamInfoWrapper>
                             <Screenshot

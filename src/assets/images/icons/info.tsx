@@ -4,6 +4,7 @@ export const InfoIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
         fill = 'none'
         height = { 20 }
+        style = {{ cursor: 'pointer' }}
         width = { 20 }
         xmlns = 'http://www.w3.org/2000/svg'
         { ...props }>

@@ -39,6 +39,7 @@
         "react-router-dom": "^6.15.0",
         "react-slick": "^0.29.0",
         "react-spinners": "^0.13.8",
+        "react-tooltip": "^5.26.0",
         "slick-carousel": "^1.8.1",
         "styled-components": "^6.0.7",
         "styled-reset": "^4.5.1",

@@ -22,13 +22,21 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             state.error = null;
         })
         .addCase(fetchScamCheck.fulfilled, (/* state => */state, action) => {
+            state.isLoading = false;
             const server = action.payload?.server;
             const whois = action.payload?.whois;
             const code = action.payload?.code;
             const domain = action.payload?.domain;
 
             state.scamCheck.domain = `${domain?.subdomain}.${domain?.domain}.${domain?.tld}` || '-';
-            // state.scamCheck.lastUpdate = (whois?.json_format[ '>>> Last update of WHOIS database' ] || '').split('>')[ 0 ].trim() || '-';
+            try {
+                const isLastUpdateExists = whois?.json_format[ '>>> Last update of WHOIS database' ];
+                if (isLastUpdateExists) {
+                    state.scamCheck.lastUpdate = (whois?.json_format[ '>>> Last update of WHOIS database' ]).split('>>>')[ 0 ] || '-';
+                }
+            } catch (error) {
+                return;
+            }
             state.scamCheck.name = code?.title || '-';
             state.scamCheck.websiteText = code?.text || '-';
             // Domain
@@ -39,7 +47,6 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             state.scamCheck.Ip.ip = server?.ip || '-';
             state.scamCheck.Ip.country = server?.whois?.json_format?.Country || '-';
             state.scamCheck.Ip.registrant = server?.whois?.json_format?.OrgName || '-';
-            state.isLoading = false;
             state.error = null;
         })
         .addCase(fetchScamCheck.rejected, (/* state => */state, action) => {

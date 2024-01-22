@@ -42,6 +42,13 @@ export const SubtitleStyles = css`
 
 export const SiteInfo = styled.div``;
 
+export const DomainTimeWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+`;
+
 export const Domain = styled.h3`
     font-family: ${MyFonts.THICCCBOI.regular};
     color: ${({ theme }) => theme.text.black.main};
@@ -50,6 +57,15 @@ export const Domain = styled.h3`
     font-weight: 400;
     line-height: 32px;
     margin-bottom: 24px;
+`;
+
+export const Time = styled.p`
+    font-family: ${MyFonts.THICCCBOI.regular};
+    color: ${({ theme }) => theme.palette.gray.info};
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
 `;
 
 export const SiteName = styled.p`
@@ -94,7 +110,11 @@ const Text = css`
     line-height: 17px;
 `;
 
+
 export const ScamInfoHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
     height: 44px;
     padding: 12px 24px;
     border-bottom: 1px solid #F5F5F5;
@@ -166,13 +186,6 @@ export const StatusText = styled.p<{$status: 'low' | 'high' | 'moderate'}>`
 `;
 
 export const Info = styled.div`
-    display: flex;
-    align-items: center;
-    margin-left: 24px;
-    margin-top: 16px;
-    gap: 4px;
-    color: ${({ theme }) => theme.palette.gray.info};
-
     font-family: ${MyFonts.THICCCBOI.regular};
     font-size: 12px;
     font-style: normal;
