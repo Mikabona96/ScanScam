@@ -34,6 +34,10 @@ export const Private: FC = () => {
                 element = { <Pages.DomainZone /> }
                 path = { book.DOMAIN_ZONE }
             />
+            <Route
+                element = { <Pages.AboutUs /> }
+                path = { book.ABOUT_US }
+            />
             {/* MarkerGen route */}
             <Route
                 element = {

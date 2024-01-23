@@ -49,7 +49,7 @@ export const Header: FC<PropTypes> = ({ setModalActive, isModalActive }) => {
     const links = [
         {
             label: 'About Us',
-            link:  '#',
+            link:  ROUTES.ABOUT_US,
         },
         {
             label: 'Tools',

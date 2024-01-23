@@ -21,6 +21,10 @@ export const Public: FC = () => {
                     element = { <Pages.Blog /> }
                     path = { `${book.BLOG}/:id?` }
                 />
+                <Route
+                    element = { <Pages.AboutUs /> }
+                    path = { book.ABOUT_US }
+                />
             </Route>
             <Route element = { <WebAppLayout /> }>
                 <Route
