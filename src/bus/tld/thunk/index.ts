@@ -31,6 +31,6 @@ export const useTldThunk = () => {
     const dispatch = useDispatch();
 
     return {
-        fetchTld: (payload = { page: 1, per_page: 10 }) => void dispatch(fetchTld(payload)),
+        fetchTld: (payload = { page: 1, per_page: 10, q: '' }) => void dispatch(fetchTld(payload)),
     };
 };

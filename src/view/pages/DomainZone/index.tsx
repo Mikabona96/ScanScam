@@ -26,17 +26,18 @@ type PropTypes = {
 const DomainZone: FC<PropTypes> = () => {
     const theme = useTheme();
     const [ isActive, setIsActive ] = useState(false);
+    const [ searchVal, setSearchVal ] = useState('');
     const [ rowsPerPage, setRowsPerPage ] = useState(6);
     const [ currentPage, setCurrentPage ] = useState(1);
 
     const { fetchTld, tld: { data: tldData, isLoading }} = useTld();
 
     useEffect(() => {
-        fetchTld({ page: currentPage, per_page: rowsPerPage });
+        fetchTld({ page: currentPage, per_page: rowsPerPage, q: '' });
     }, []);
 
     useEffect(() => {
-        fetchTld({ page: currentPage, per_page: rowsPerPage });
+        fetchTld({ page: currentPage, per_page: rowsPerPage, q: '' });
     }, [ currentPage, rowsPerPage ]);
 
     const formatDate = (date: string | Date) => {
@@ -58,6 +59,16 @@ const DomainZone: FC<PropTypes> = () => {
             setCurrentPage((prevState) => prevState - 1);
         }
     };
+
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchVal(event.target.value);
+    };
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetchTld({ page: currentPage, per_page: rowsPerPage, q: searchVal });
+        }, 2000);
+    }, [ searchVal ]);
 
     if (isLoading) {
         return (
@@ -84,7 +95,9 @@ const DomainZone: FC<PropTypes> = () => {
                 </S.SvgWrapper>
                 <S.Input
                     placeholder = 'Search for domain zone...'
+                    value = { searchVal }
                     onBlur = { () => setIsActive(false) }
+                    onChange = { handleSearch }
                     onFocus = { () => setIsActive(true) }
                 />
             </S.SearchBar>
