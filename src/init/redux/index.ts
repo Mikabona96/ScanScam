@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 // MarkerGen reducers
+import reportForDomain from '../../bus/reportForDomain/slice';
 import tld from '../../bus/tld/slice';
 import whoisquery from '../../bus/whoisquery/slice';
 import scamcheck from '../../bus/scamcheck/slice';
@@ -18,6 +19,7 @@ import {
 export const store = configureStore({
     reducer: {
         // MarkerGen add reducer
+        reportForDomain,
         scamcheck,
         tld,
         whoisquery,

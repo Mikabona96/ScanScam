@@ -14,8 +14,9 @@ import * as S from './styles';
 import { CloseIcon, SuccessIcon, WarningIcon } from '@/assets/images/icons';
 import { Step1 } from './step1';
 import { Step2 } from './step2';
-import { inithialState, schema } from './static';
+import { IFormState, inithialState, schema } from './static';
 import { Button } from '@/view/elements';
+import { useReportForDomain } from '@/bus/reportForDomain';
 
 // Types
 type PropTypes = {
@@ -28,10 +29,20 @@ const MODAL_CONTAINER_ID = 'modal-container-id';
 export const Modal: FC<PropTypes> = ({ onClose }) => {
     const [ isMounted, setMounted ] = useState(false);
     const [ step, setStep ] = useState(0);
+    const { fetchReportForDomain } = useReportForDomain();
 
     const {  control, handleSubmit, formState: { errors }, trigger, setValue } = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = ({ checkbox, description, url, email }: IFormState) => {
+        const result = {
+            url:             url,
+            comment:         description,
+            email:           email ? email : '',
+            source:          '',
+            contact_allowed: checkbox,
+            tags:            null,
+        };
+
+        fetchReportForDomain(result);
     };
 
     const formTitles = [ 'Report a Scam', 'Report a Scam', 'Report Submitted' ];
