@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 // Core
 import React, { FC, useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -97,7 +98,7 @@ const ScamCheck: FC<PropTypes> = () => {
                                 <S.ScamInfo>
                                     <S.ScamInfoHeader>Status</S.ScamInfoHeader>
                                     <S.ScamInfoDescription>
-                                        <ChipScamStatus $status = { scamCheck.status === 'allowlist' ? 'Safe' : 'Unclassified' } />
+                                        <ChipScamStatus $status = { scamCheck.status === 'allowlist' ? 'Safe' : scamCheck.status === 'blocklist' ? 'Scam' : 'Unclassified' } />
                                         <S.ScamInfoText>
                                             {
                                                 returnStatusText(scamCheck.status)

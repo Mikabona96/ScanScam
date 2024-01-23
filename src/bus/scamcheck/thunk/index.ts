@@ -10,6 +10,7 @@ import { fetchScreenshot } from './fetchScreenshot';
 import { fetchScreenshotFullsize } from './fetchScreenshotfullsize';
 import { fetchDomainChartInfo } from './fetchDomainChartInfo';
 import { fetchWebsiteChartInfo } from './fetchWebsiteChartInfo';
+import { fetchStatus } from './fetchStatus';
 
 // Types
 import * as types from '../types';
@@ -85,6 +86,13 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
         .addCase(fetchWebsiteChartInfo.fulfilled, (/* state => */state, action) => {
             state.chart.website = Number(action.payload.scamScore.toFixed(3));
         });
+    builder /* CASES */
+        .addCase(fetchStatus.fulfilled, (/* state => */state, action) => {
+            state.scamCheck.status = action.payload.status;
+        })
+        .addCase(fetchStatus.rejected, (/* state => */state) => {
+            state.scamCheck.status = null;
+        });
 };
 
 // Hook
@@ -96,6 +104,7 @@ export const useScamcheckThunk = () => {
         void dispatch(fetchScreenshotFullsize(payload));
         void dispatch(fetchDomainChartInfo(payload));
         void dispatch(fetchWebsiteChartInfo(payload));
+        void dispatch(fetchStatus(payload));
     };
 
     return {
