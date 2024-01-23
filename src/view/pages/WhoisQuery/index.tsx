@@ -70,7 +70,7 @@ const WhoisQuery: FC<PropTypes> = () => {
                         />
                         {error && (
                             <SectionSubtitle $styles = { S.ErrorMesage }>
-                                No scrape available for {hash ? hash.slice(1) : `${hash.slice(1).match(ipv4Regex) ? hash.slice(1) : 'url'}`}.
+                                No data available for {hash ? hash.slice(1) : `${hash.slice(1).match(ipv4Regex) ? hash.slice(1) : 'url'}`}.
                             </SectionSubtitle>
                         )
                         }

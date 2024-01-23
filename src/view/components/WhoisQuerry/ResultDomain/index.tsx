@@ -36,6 +36,9 @@ export const ResultDomain: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
         { key: 'Updated on', value: whoisQuery?.parsed?.date?.updated_date || '-' },
     ];
     const NameServers = (val: string[] | any) => {
+        if (!val) {
+            return [{ key: '-', value: '-' }];
+        }
         if (typeof val[ 0 ] === 'string') {
             return val.map((value: string) => {
                 return { key: value, value };
