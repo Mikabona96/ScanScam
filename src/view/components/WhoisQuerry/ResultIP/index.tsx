@@ -10,6 +10,7 @@ import * as S from './styles';
 import { TopRow } from '../TopRow';
 import { Table } from '../../Table';
 import { useWhoisquery } from '@/bus/whoisquery';
+import { Parser } from '../ResultDomain/parse-text';
 
 // Types
 type PropTypes = {
@@ -49,26 +50,34 @@ export const ResultIP: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
                 setIsRaw = { setIsRaw }
                 title = { `${whoisQuery?.parsed?.ip}` }
             />
-            <Table
-                withMap
-                alignValues = 'close'
-                data = { geoData }
-                location = { geoData[ 3 ].value && geoData[ 3 ].value !== '-' ? [ Number(geoData[ 3 ].value), Number(geoData[ 2 ].value) ] : undefined }
-                title = 'Geolocation'
-                variant = '2'
-            />
-            <Table
-                alignValues = 'close'
-                data = { summary }
-                title = 'Summary'
-                variant = '2'
-            />
-            <Table
-                alignValues = 'close'
-                data = { ipNet }
-                title = 'IP Net'
-                variant = '2'
-            />
+            {
+                !isRaw ? (
+                    <>
+                        <Table
+                            withMap
+                            alignValues = 'close'
+                            data = { geoData }
+                            location = { geoData[ 3 ].value && geoData[ 3 ].value !== '-' ? [ Number(geoData[ 3 ].value), Number(geoData[ 2 ].value) ] : undefined }
+                            title = 'Geolocation'
+                            variant = '2'
+                        />
+                        <Table
+                            alignValues = 'close'
+                            data = { summary }
+                            title = 'Summary'
+                            variant = '2'
+                        />
+                        <Table
+                            alignValues = 'close'
+                            data = { ipNet }
+                            title = 'IP Net'
+                            variant = '2'
+                        />
+                    </>
+                ) : (
+                    <Parser rawData = { whoisQuery?.raw } />
+                )
+            }
         </S.Container>
     );
 };

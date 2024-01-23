@@ -16,7 +16,7 @@ export const Parser = (props: IProps): React.ReactNode => {
     let positionEnd = 0;
     while (positionStart <= rawData.length - 1) {
         positionEnd = rawData.indexOf('\n', positionStart);
-        if (positionEnd > 0) {
+        if (positionEnd >= 0) {
             resultArray.push(rawData.slice(positionStart, positionEnd));
             positionStart = positionEnd + 1;
         } else {
