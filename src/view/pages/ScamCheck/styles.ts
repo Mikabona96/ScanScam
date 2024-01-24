@@ -95,11 +95,11 @@ export const ScamInfoWrapper = styled.div`
     }
 `;
 
-export const ScamInfo = styled.div`
+export const ScamInfo = styled.div<{$wide?: boolean}>`
     border: 1px solid #F5F5F5;
     border-radius: 4px;
     box-shadow: 0px 2px 12px 0px rgba(101, 101, 101, 0.03);
-    max-width: 486px;
+    max-width: ${({ $wide }) => $wide ? '530px' : '486px'};
     padding-bottom: 10px;
     width: 100%;
     min-height: 254px;
@@ -150,6 +150,7 @@ export const DoughnutChartsBlock = styled.div`
 
 export const DoughnutChartsContainer = styled.div`
     display: flex;
+    gap: 28px;
 `;
 
 export const DoughnutChartWrapper = styled.div`

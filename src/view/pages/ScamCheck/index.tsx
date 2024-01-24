@@ -106,7 +106,7 @@ const ScamCheck: FC<PropTypes> = () => {
                                         </S.ScamInfoText>
                                     </S.ScamInfoDescription>
                                 </S.ScamInfo>
-                                <S.ScamInfo>
+                                <S.ScamInfo $wide>
                                     <S.ScamInfoHeader>AI Scam Score
                                         <a
                                             id = 'chart_tooltip'
@@ -119,9 +119,11 @@ const ScamCheck: FC<PropTypes> = () => {
                                         <S.DoughnutChartsContainer>
                                             <DoughnutChart
                                                 data = { chart.domain }
+                                                text = 'Domain name based'
                                             />
                                             <DoughnutChart
                                                 data = { chart.website }
+                                                text = 'Website data based'
                                             />
                                         </S.DoughnutChartsContainer>
                                         <S.Statuses>
