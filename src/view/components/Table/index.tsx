@@ -54,6 +54,9 @@ export const Table: FC<PropTypes> = ({ title, data, variant = '1', alignValues, 
                             <S.Tbody>
                                 {
                                     data.map(({ key, value }) => {
+                                        if (typeof value !== 'string') {
+                                            return void 0;
+                                        }
                                         let val = value ? value : '';
                                         if (Array.isArray(value)) {
                                             value.forEach((string) => {

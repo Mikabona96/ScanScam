@@ -69,6 +69,7 @@ export const ResultDomain: FC<PropTypes> = ({ isRaw, setIsRaw }) => {
         ];
     };
 
+    console.log(getContactData('registrant'));
 
     return (
         <S.Container>

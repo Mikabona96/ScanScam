@@ -11,7 +11,7 @@ import { ErrorBoundary, ResultDomain, ResultIP, SearchBar } from '../../componen
 import * as S from './styles';
 import { SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
 import { useWhoisquery } from '@/bus/whoisquery';
-import { ipv4Regex, urlRegex } from '@/view/components/SearchBar/static';
+import { ipv4Regex, domainRegex } from '@/view/components/SearchBar/static';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 // Types
@@ -28,13 +28,13 @@ const WhoisQuery: FC<PropTypes> = () => {
 
     const submitFunction = (ipOrUrl: string) => {
         if (ipOrUrl) {
-            if (ipOrUrl.match(urlRegex)) {
+            if (ipOrUrl.match(domainRegex)) {
                 fetchWhoisqueryDomain(ipOrUrl);
             }
             if (ipOrUrl.match(ipv4Regex)) {
                 fetchWhoisqueryIp(ipOrUrl);
             }
-            if (!ipOrUrl.match(urlRegex) && !ipOrUrl.match(ipv4Regex)) {
+            if (!ipOrUrl.match(domainRegex) && !ipOrUrl.match(ipv4Regex)) {
                 navigate(pathname);
             }
         }
@@ -53,7 +53,7 @@ const WhoisQuery: FC<PropTypes> = () => {
     return (
         <S.Container>
             {
-                !whoisQuery ? (
+                !hash || (!hash && !whoisQuery) ? (
                     <>
                         <S.TextWrapper>
                             <SectionTitle $styles = { S.TitleStyles }>

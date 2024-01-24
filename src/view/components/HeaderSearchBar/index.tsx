@@ -69,7 +69,7 @@ export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain o
     return (
         <S.SearchBarWrapper>
             <S.SearchBar
-                $error = { !!errors.urlOrIp?.message }
+                $error = { !!errors.urlOrIp?.message && !!value }
                 onSubmit = { (event) => {
                     event.preventDefault();
                     handleSubmit(onSubmit)();
