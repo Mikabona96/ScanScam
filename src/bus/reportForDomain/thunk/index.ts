@@ -13,8 +13,18 @@ import * as types from '../types';
 // Reducers
 export const extraReducers = (builder: ActionReducerMapBuilder<types.ReportForDomainState>) => {
     builder /* CASES */
-        .addCase(fetchReportForDomain.fulfilled, (/* state => */__, action) => {
-            return action.payload;
+        .addCase(fetchReportForDomain.pending, (/* state => */state) => {
+            state.isLoading = true;
+        })
+        .addCase(fetchReportForDomain.fulfilled, (/* state => */state) => {
+            state.isLoading = false;
+            state.ok = true;
+            state.error = false;
+        })
+        .addCase(fetchReportForDomain.rejected, (/* state => */state) => {
+            state.isLoading = false;
+            state.error = true;
+            state.ok = false;
         });
 };
 

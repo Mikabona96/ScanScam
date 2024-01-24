@@ -11,8 +11,12 @@ export type ReportPayload = {
 };
 
 // State
-export type ReportForDomain = Array<any>
-export type ReportForDomainState = ReportForDomain | null
+export type ReportForDomain = {
+    ok: boolean
+    error: boolean
+    isLoading: boolean
+}
+export type ReportForDomainState = ReportForDomain
 
 // Contracts
 export type BaseContact<T = any> = CaseReducer<ReportForDomainState, PayloadAction<T>>

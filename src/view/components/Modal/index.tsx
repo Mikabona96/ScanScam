@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 // Core
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 import type { MouseEventHandler } from 'react';
@@ -29,7 +30,8 @@ const MODAL_CONTAINER_ID = 'modal-container-id';
 export const Modal: FC<PropTypes> = ({ onClose }) => {
     const [ isMounted, setMounted ] = useState(false);
     const [ step, setStep ] = useState(0);
-    const { fetchReportForDomain } = useReportForDomain();
+    const [ failedRequest, setFailedRequest ] = useState(false);
+    const { fetchReportForDomain, reportForDomain: { error, ok, isLoading }} = useReportForDomain();
 
     const {  control, handleSubmit, formState: { errors }, trigger, setValue } = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
     const onSubmit = ({ checkbox, description, url, email }: IFormState) => {
@@ -41,9 +43,26 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
             contact_allowed: checkbox,
             tags:            null,
         };
-
-        fetchReportForDomain(result);
+        const checkValue = async () => {
+            const areFieldsValid = await trigger([ 'email', 'checkbox', 'description', 'recieveUpdates', 'url'  ]);
+            if (areFieldsValid) {
+                fetchReportForDomain(result);
+            }
+        };
+        checkValue();
     };
+
+    useEffect(() => {
+        if (!isLoading) {
+            if (error) {
+                setFailedRequest(true);
+                setStep(2);
+            }
+            if (ok) {
+                setStep(2);
+            }
+        }
+    }, [ isLoading ]);
 
     const formTitles = [ 'Report a Scam', 'Report a Scam', 'Report Submitted' ];
     const formTexts = [
@@ -65,11 +84,13 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
 
             if (target instanceof Node && rootRef.current === target) {
                 onClose?.();
+                setStep(0);
             }
         };
         const handleEscapePress = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 onClose?.();
+                setStep(0);
             }
         };
 
@@ -86,6 +107,7 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
     const handleClose: MouseEventHandler<HTMLButtonElement>
     = useCallback(() => {
         onClose?.();
+        setStep(0);
     }, [ onClose ]);
 
     useEffect(() => {
@@ -94,6 +116,7 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
         }
         let timerId = setTimeout(() => {
             onClose?.();
+            setStep(0);
         }, 5000);
 
         return () => {
@@ -119,9 +142,9 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
                                 handleSubmit(onSubmit)();
                             }
                             }>
-                                {step < 2 ? <WarningIcon /> : <SuccessIcon />}
-                                <S.Title>{formTitles[ step ]}</S.Title>
-                                <S.Text>{formTexts[ step ]}</S.Text>
+                                {step < 2 ? <WarningIcon /> : failedRequest ? <WarningIcon /> : <SuccessIcon />}
+                                <S.Title>{failedRequest ? 'Report Not Submitted' : formTitles[ step ]}</S.Title>
+                                <S.Text>{ failedRequest ? 'Your report hasn\'t been successfully submitted' : formTexts[ step ]}</S.Text>
                                 {step < 2 && <S.Divider />}
                                 <S.StepWrapper $display = { step === 0 }>
                                     <Step1
@@ -135,9 +158,7 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
                                     <Step2
                                         control = { control }
                                         errors = { errors }
-                                        setStep = { setStep }
                                         setValue = { setValue }
-                                        trigger = { trigger }
                                     />
                                 </S.StepWrapper>
                                 {
@@ -146,7 +167,10 @@ export const Modal: FC<PropTypes> = ({ onClose }) => {
                                         <Button
                                             $styles = { S.Button }
                                             type = 'button'
-                                            onClick = { onClose }>Close
+                                            onClick = { () => {
+                                                onClose?.();
+                                                setStep(0);
+                                            } }>Close
                                         </Button>
                                     )
                                 }

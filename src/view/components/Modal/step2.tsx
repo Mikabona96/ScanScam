@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useState } from 'react';
 
 import * as S from './styles';
-import { Control, Controller, FieldErrors, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
+import { Control, Controller, FieldErrors, UseFormSetValue } from 'react-hook-form';
 import { IFormState } from './static';
 import { Button } from '@/view/elements';
 
 type PropTypes = {
-    setStep: React.Dispatch<React.SetStateAction<number>>
     control: Control<IFormState, any>
     errors: FieldErrors<IFormState>
-    trigger: UseFormTrigger<IFormState>
     setValue: UseFormSetValue<IFormState>
 }
 
-export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setValue }) => {
+export const Step2: FC<PropTypes> = ({ control, errors, setValue }) => {
     const [ recieveUpds, setRecieveUpds ] = useState(true);
     const [ email, setEmail ] = useState('');
 
@@ -119,13 +117,7 @@ export const Step2: FC<PropTypes> = ({ setStep, control, errors, trigger, setVal
             )}
             <Button
                 $styles = { S.Button }
-                type = 'submit'
-                onClick = { async () => {
-                    const areFieldsValid = await trigger([ 'email', 'checkbox', 'description', 'recieveUpdates', 'url'  ]);
-                    if (areFieldsValid) {
-                        setStep(2);
-                    }
-                } }>Submit a Report
+                type = 'submit'>Submit a Report
             </Button>
         </>
     );

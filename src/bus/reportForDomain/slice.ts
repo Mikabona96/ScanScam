@@ -10,7 +10,11 @@ import * as reducers from './reducers';
 // MarkerGen import extraReducers
 import { extraReducers } from './thunk';
 
-const initialState = null;
+const initialState = {
+    error:     false,
+    isLoading: false,
+    ok:        false,
+};
 
 export const reportForDomainSlice = createSlice<types.ReportForDomainState, typeof reducers>({
     name: 'reportForDomain',
