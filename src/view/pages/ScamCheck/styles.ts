@@ -143,7 +143,7 @@ export const DoughnutChartsBlock = styled.div`
     padding: 36px 24px 0px;
     gap: 48px;
     align-items: center;
-    ${({ theme }) => theme.media('max').sm} {
+    @media (max-width: 690px) {
         flex-direction: column;
     }
 `;
