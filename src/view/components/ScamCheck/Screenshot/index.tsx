@@ -9,8 +9,8 @@ import { useOverflowHidden } from '@/tools/hooks';
 // Styles
 import 'yet-another-react-lightbox/styles.css';
 import * as S from './styles';
-import { LinkIcon } from '@/assets/images/icons';
-import { Button } from '@/view/elements';
+import { LinkIcon, WarningIcon } from '@/assets/images/icons';
+import { Button, SectionSubtitle } from '@/view/elements';
 
 // Types
 type PropTypes = {
@@ -78,7 +78,16 @@ export const Screenshot: FC<PropTypes> = ({ screenshots, websiteText }) => {
                         </Button>
                     </S.ImageOverlay>
                 </S.ImageWrapper>
-            ) : <S.Description>{`${screenshots.screenshot.error}`}</S.Description>}
+            ) : (
+                <S.NoImage>
+                    <WarningIcon
+                        height = { 130 }
+                        width = { 130 }
+                    />
+                    <SectionSubtitle $styles = { S.ErrorMesageStyles }>Failed to load image</SectionSubtitle>
+                </S.NoImage>
+            )
+            }
             { screenshots.screenshot_fullsize.screenshot && (
                 <Lightbox
                     carousel = {{ finite: true }}
