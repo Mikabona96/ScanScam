@@ -1,6 +1,6 @@
 /* eslint-disable max-statements-per-line */
 // Core
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@/view/elements';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
@@ -23,6 +23,7 @@ type PropTypes = {
 
 export const SearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL (e.g., www.example.com)', submitFunction }) => {
     const {  control, handleSubmit, formState: { errors }} = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
+    const [ val, setVal ] = useState('');
     const onSubmit: SubmitHandler<{urlOrIp?: string | undefined}> = ({ urlOrIp }) => {
         const ipOrUrl = urlOrIp?.trim();
         if (submitFunction) {
@@ -40,12 +41,13 @@ export const SearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL 
                 name = 'urlOrIp'
                 render = { ({ field: { onChange, onBlur }}) => (
                     <S.Input
-                        $error = { !!errors.urlOrIp?.message }
+                        $error = { !!errors.urlOrIp?.message && !!val }
                         autoCapitalize = 'none'
                         placeholder = { placeholder }
                         onBlur = { onBlur }
                         onChange = { (event) => {
                             event.target.value = event.target.value.trim();
+                            setVal(event.target.value);
                             onChange(event);
                         } }
                     />
