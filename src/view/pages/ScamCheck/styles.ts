@@ -47,6 +47,11 @@ export const DomainTimeWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.media('max').md} {
+        flex-direction: column;
+        gap: 16px;
+    }
 `;
 
 export const Domain = styled.h3`
@@ -56,7 +61,6 @@ export const Domain = styled.h3`
     font-style: normal;
     font-weight: 400;
     line-height: 32px;
-    margin-bottom: 24px;
 `;
 
 export const Time = styled.p`
