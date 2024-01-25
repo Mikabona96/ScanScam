@@ -102,8 +102,16 @@ export type ScamCheckState = {
         }
     }
     chart: {
-        domain: number | null
-        website: number | null
+        domain: {
+            isLoading: boolean
+            error: boolean
+            data: null | number
+        }
+        website: {
+            isLoading: boolean
+            error: boolean
+            data: null | number
+        }
     }
     error: any
 }

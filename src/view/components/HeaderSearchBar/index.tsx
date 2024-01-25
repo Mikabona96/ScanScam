@@ -18,11 +18,12 @@ import * as S from './styles';
 import { SearchIcon } from '@/assets/images/icons';
 
 //
-import { inithialState, /*ipv4Regex,*/ schema, urlRegex } from './static';
+import { inithialState, /*ipv4Regex,*/ schema } from './static';
 import { schema as schemaDomain } from './staticDomain';
 import { useScamCheck } from '@/bus/scamcheck';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useOverflowHidden } from '@/tools/hooks';
+import { domainRegex } from '../SearchBar/static';
 
 // Types
 type PropTypes = {
@@ -52,7 +53,7 @@ export const HeaderSearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain o
     // };
 
     const fetchScamCheckHandler = (value: string) => {
-        if (value.match(urlRegex)) {
+        if (value.match(domainRegex)) {
             fetchScamCheck(value);
         }
     };

@@ -41,8 +41,16 @@ const initialState = {
         },
     },
     chart: {
-        domain:  null,
-        website: null,
+        domain: {
+            isLoading: false,
+            error:     false,
+            data:      null,
+        },
+        website: {
+            isLoading: false,
+            error:     false,
+            data:      null,
+        },
     },
     error: null,
 };

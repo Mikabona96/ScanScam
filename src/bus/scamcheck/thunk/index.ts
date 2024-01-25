@@ -29,7 +29,7 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             const code = action.payload?.code;
             const domain = action.payload?.domain;
 
-            state.scamCheck.domain = `${domain?.subdomain}.${domain?.domain}.${domain?.tld}` || '-';
+            state.scamCheck.domain = `${domain?.subdomain && domain?.subdomain + '.'}${domain?.domain && domain?.domain + '.'}${domain?.tld}` || '-';
             try {
                 const isLastUpdateExists = whois?.json_format[ '>>> Last update of WHOIS database' ];
                 if (isLastUpdateExists) {
@@ -79,12 +79,34 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             state.scamCheck.screenshots.screenshot_fullsize.isLoading = false;
         });
     builder /* CASES */
+        .addCase(fetchDomainChartInfo.pending, (/* state => */state) => {
+            state.chart.domain.isLoading = true;
+            state.chart.domain.error = false;
+        })
         .addCase(fetchDomainChartInfo.fulfilled, (/* state => */state, action) => {
-            state.chart.domain = Number(action.payload.scamScore.toFixed(3));
+            state.chart.domain.data = Number(action.payload.scamScore.toFixed(3));
+            state.chart.domain.isLoading = false;
+            state.chart.domain.error = false;
+        })
+        .addCase(fetchDomainChartInfo.rejected, (/* state => */state) => {
+            state.chart.domain.isLoading = false;
+            state.chart.domain.error = true;
+            state.chart.domain.data = null;
         });
     builder /* CASES */
+        .addCase(fetchWebsiteChartInfo.pending, (/* state => */state) => {
+            state.chart.website.isLoading = true;
+            state.chart.website.error = false;
+        })
         .addCase(fetchWebsiteChartInfo.fulfilled, (/* state => */state, action) => {
-            state.chart.website = Number(action.payload.scamScore.toFixed(3));
+            state.chart.website.data = Number(action.payload.scamScore.toFixed(3));
+            state.chart.website.isLoading = false;
+            state.chart.website.error = false;
+        })
+        .addCase(fetchWebsiteChartInfo.rejected, (/* state => */state) => {
+            state.chart.website.isLoading = false;
+            state.chart.website.error = true;
+            state.chart.website.data = null;
         });
     builder /* CASES */
         .addCase(fetchStatus.fulfilled, (/* state => */state, action) => {

@@ -62,7 +62,7 @@ const ScamCheck: FC<PropTypes> = () => {
     return (
         <S.Container>
             {
-                !scamCheck.domain
+                !hash || (!hash && !scamCheck.domain)
                     ? (
                         <>
                             <S.TextWrapper>
