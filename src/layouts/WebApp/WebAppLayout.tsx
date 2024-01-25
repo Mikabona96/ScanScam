@@ -23,7 +23,7 @@ export const ModalContext = createContext<IContext | null>(null);
 export const WebAppLayout = () => {
     const { whoisquery: { whoisQuery }} = useWhoisquery();
     const { scamchek: { scamCheck }} = useScamCheck();
-    const { pathname } = useLocation();
+    const { pathname, hash } = useLocation();
     const { ref, width } = useComponentWidth();
     const [ isMobileOpen, setIsMobileOpen ] = useState(false);
     const [ isModalActive, setModalActive ] = useState(false);
@@ -93,7 +93,7 @@ export const WebAppLayout = () => {
                         <S.SvgWrapper onClick = { handleMobileMenu }>
                             <MenuIcon />
                         </S.SvgWrapper>
-                        {((whoisQuery && pathname === '/whois-query') || (scamCheck.domain && pathname === '/scam-check')) && (
+                        {((whoisQuery && pathname === '/whois-query') || (scamCheck.domain && hash && pathname === '/scam-check')) && (
                             <HeaderSearchBar
                                 placeholder = 'Type a new website to check'
                                 scamCheck = { pathname === '/scam-check' }

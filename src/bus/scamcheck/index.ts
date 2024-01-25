@@ -2,10 +2,10 @@
 // import { useEffect } from 'react';
 
 // Tools
-import { /*useDispatch*/ useSelector } from '../../tools/hooks'; /* Typed selector */
+import { useDispatch, useSelector } from '../../tools/hooks'; /* Typed selector */
 
 // Slice
-// import { whoisqueryActions } from './slice';
+import { whoisqueryActions } from './slice';
 
 // Types
 // import { WhoisqueryDomain } from './types';
@@ -17,7 +17,7 @@ export const useScamCheck = () => {
     // MarkerGen api hook
     const scamcheckThunk = useScamcheckThunk();  /* Thunk api hook */
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const scamchek = useSelector((state) => state.scamcheck);
 
     // useEffect(() => {
@@ -27,7 +27,7 @@ export const useScamCheck = () => {
 
     return {
         scamchek,
-        // setWhoisquery: (payload: WhoisqueryDomain) => dispatch(whoisqueryActions.setWhoisquery(payload)),
+        setScamCheckToInitial: () => dispatch(whoisqueryActions.setScamcheckToInitial()),
         ...scamcheckThunk,
     };
 };

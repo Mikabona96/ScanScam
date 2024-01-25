@@ -159,6 +159,6 @@ export const NoImage = styled.div`
 
 
 export const ErrorMesageStyles = css`
-    color: ${({ theme }) => theme.palette.error};
+    color: ${({ theme }) => theme.text.gray.main};
     margin-bottom: 12px;
 `;

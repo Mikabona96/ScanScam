@@ -9,7 +9,7 @@ import * as reducers from './reducers';
 // MarkerGen import extraReducers
 import { extraReducers } from './thunk';
 
-const initialState = {
+export const initialState = {
     isLoading: false,
     scamCheck: {
         domain:      null,

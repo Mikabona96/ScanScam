@@ -30,15 +30,7 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             const domain = action.payload?.domain;
 
             state.scamCheck.domain = `${domain?.subdomain && domain?.subdomain + '.'}${domain?.domain && domain?.domain + '.'}${domain?.tld}` || '-';
-            try {
-                const isLastUpdateExists = whois?.json_format[ '>>> Last update of WHOIS database' ];
-                if (isLastUpdateExists) {
-                    state.scamCheck.lastUpdate = (whois?.json_format[ '>>> Last update of WHOIS database' ]).split('>>>')[ 0 ] || '-';
-                }
-            } catch (error) {
-                return;
-            }
-            state.scamCheck.name = code?.title || '-';
+            state.scamCheck.name = (code && code?.title) || '-';
             state.scamCheck.websiteText = code?.text || '-';
             // Domain
             state.scamCheck.Domain.registrar = whois?.parsed?.registrar?.name || '-';
@@ -49,6 +41,16 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
             state.scamCheck.Ip.country = server?.whois?.json_format?.Country || '-';
             state.scamCheck.Ip.registrant = server?.whois?.json_format?.OrgName || '-';
             state.error = null;
+
+            // Date
+            try {
+                const isLastUpdateExists = whois?.json_format[ '>>> Last update of WHOIS database' ];
+                if (isLastUpdateExists) {
+                    state.scamCheck.lastUpdate = (whois?.json_format[ '>>> Last update of WHOIS database' ]).split('>>>')[ 0 ] || '-';
+                }
+            } catch (error) {
+                state.scamCheck.lastUpdate = null;
+            }
         })
         .addCase(fetchScamCheck.rejected, (/* state => */state, action) => {
             state.error = action.error.message;
@@ -65,6 +67,7 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
         .addCase(fetchScreenshot.rejected, (/* state => */state, action) => {
             state.scamCheck.screenshots.screenshot.error = action.error.message;
             state.scamCheck.screenshots.screenshot.isLoading = false;
+            state.scamCheck.screenshots.screenshot.screenshot = null;
         });
     builder /* CASES */
         .addCase(fetchScreenshotFullsize.pending, (/* state => */state) => {
@@ -77,6 +80,7 @@ export const extraReducers = (builder: ActionReducerMapBuilder<types.ScamCheckSt
         .addCase(fetchScreenshotFullsize.rejected, (/* state => */state, action) => {
             state.scamCheck.screenshots.screenshot_fullsize.error = action.error.message;
             state.scamCheck.screenshots.screenshot_fullsize.isLoading = false;
+            state.scamCheck.screenshots.screenshot_fullsize.screenshot = null;
         });
     builder /* CASES */
         .addCase(fetchDomainChartInfo.pending, (/* state => */state) => {

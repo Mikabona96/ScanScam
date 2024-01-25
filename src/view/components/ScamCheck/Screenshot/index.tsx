@@ -54,14 +54,19 @@ export const Screenshot: FC<PropTypes> = ({ screenshots, websiteText }) => {
         <S.Container>
             <S.Header>Screenshots</S.Header>
             <S.Description>
-                Explore visual snapshots to preview the appearance of the website.
-                Click on an image to open the full-size version.
-                <S.Link onClick = { () => {
-                    setOpenText(true);
-                    overflowHandler(false);
-                } }>
-                    <LinkIcon /> View website text
-                </S.Link>
+                {screenshots.screenshot.screenshot
+                    && 'Explore visual snapshots to preview the appearance of the website. Click on an image to open the full-size version.'
+                }
+                {websiteText && websiteText !== '-'
+                && (
+                    <S.Link onClick = { () => {
+                        setOpenText(true);
+                        overflowHandler(false);
+                    } }>
+                        <LinkIcon /> View website text
+                    </S.Link>
+                )
+                }
             </S.Description>
             {screenshots.screenshot.screenshot ? (
                 <S.ImageWrapper>
@@ -84,7 +89,7 @@ export const Screenshot: FC<PropTypes> = ({ screenshots, websiteText }) => {
                         height = { 130 }
                         width = { 130 }
                     />
-                    <SectionSubtitle $styles = { S.ErrorMesageStyles }>Failed to load image</SectionSubtitle>
+                    <SectionSubtitle $styles = { S.ErrorMesageStyles }>No image</SectionSubtitle>
                 </S.NoImage>
             )
             }

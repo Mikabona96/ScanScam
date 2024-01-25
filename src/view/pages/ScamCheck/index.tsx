@@ -30,7 +30,7 @@ type PropTypes = {
 
 const ScamCheck: FC<PropTypes> = () => {
     // const data = false;
-    const { fetchScamCheck, scamchek: { scamCheck, isLoading, error, chart }} = useScamCheck();
+    const { fetchScamCheck, setScamCheckToInitial, scamchek: { scamCheck, isLoading, error, chart }} = useScamCheck();
     const context = useContext(ModalContext);
     const overflowHandler = useOverflowHidden();
     const { pathname, hash } = useLocation();
@@ -53,6 +53,12 @@ const ScamCheck: FC<PropTypes> = () => {
         }
     }, [ hash ]);
 
+    useEffect(() => {
+        if (!hash) {
+            setScamCheckToInitial();
+        }
+    }, [ hash ]);
+
     if (isLoading) {
         return (
             <Spinner loading = { isLoading } />
@@ -62,7 +68,7 @@ const ScamCheck: FC<PropTypes> = () => {
     return (
         <S.Container>
             {
-                !hash || (!hash && !scamCheck.domain)
+                !hash || (!hash && !scamCheck.domain) || (hash && !scamCheck.domain && error)
                     ? (
                         <>
                             <S.TextWrapper>
@@ -87,7 +93,7 @@ const ScamCheck: FC<PropTypes> = () => {
                             <S.SiteInfo>
                                 <S.DomainTimeWrapper>
                                     <S.Domain>{`${scamCheck.domain || '-'}`}</S.Domain>
-                                    <S.Time>Last Update: {formatDate(scamCheck.lastUpdate?.split('<<<')[ 0 ] || `${new Date()}`)}</S.Time>
+                                    <S.Time>{'Last Update: ' + formatDate(scamCheck.lastUpdate?.split('<<<')[ 0 ] || '')}</S.Time>
                                 </S.DomainTimeWrapper>
                                 <S.SiteName>{`${scamCheck.name || '-'}`}</S.SiteName>
                                 <S.SiteDescription>

@@ -11,8 +11,9 @@ import { ErrorBoundary, ResultDomain, ResultIP, SearchBar } from '../../componen
 import * as S from './styles';
 import { SectionSubtitle, SectionTitle, Spinner } from '@/view/elements';
 import { useWhoisquery } from '@/bus/whoisquery';
-import { ipv4Regex, domainRegex } from '@/view/components/SearchBar/static';
+import { domainRegex } from '@/view/components/SearchBar/static';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ipv4Regex } from '@/view/components/SearchBar/ipOrDomain';
 
 // Types
 type PropTypes = {
@@ -65,6 +66,7 @@ const WhoisQuery: FC<PropTypes> = () => {
                             </SectionSubtitle>
                         </S.TextWrapper>
                         <SearchBar
+                            whois
                             placeholder = 'Enter a domain or IP address'
                             submitFunction = { (ipOrUrl) => navigate(`${pathname}#${ipOrUrl}`) }
                         />

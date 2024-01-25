@@ -13,16 +13,18 @@ import * as S from './styles';
 
 //
 import { inithialState, schema } from './static';
+import { schema as IpOrDomainSchema } from './ipOrDomain';
 
 // Types
 type PropTypes = {
     /* type props here */
     placeholder?: string
     submitFunction?: (ipOrUrl: string) => void
+    whois?: boolean
 }
 
-export const SearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL (e.g., www.example.com)', submitFunction }) => {
-    const {  control, handleSubmit, formState: { errors }} = useForm({ values: inithialState, resolver: yupResolver(schema), mode: 'onBlur' });
+export const SearchBar: FC<PropTypes> = ({ placeholder = 'Enter a domain or URL (e.g., www.example.com)', submitFunction, whois = false }) => {
+    const {  control, handleSubmit, formState: { errors }} = useForm({ values: inithialState, resolver: yupResolver(whois ? IpOrDomainSchema : schema), mode: 'onBlur' });
     const [ val, setVal ] = useState('');
     const onSubmit: SubmitHandler<{urlOrIp?: string | undefined}> = ({ urlOrIp }) => {
         const ipOrUrl = urlOrIp?.trim();
