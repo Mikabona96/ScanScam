@@ -93,7 +93,7 @@ export const WebAppLayout = () => {
                         <S.SvgWrapper onClick = { handleMobileMenu }>
                             <MenuIcon />
                         </S.SvgWrapper>
-                        {((whoisQuery && pathname === '/whois-query') || (scamCheck.domain && hash && pathname === '/scam-check')) && (
+                        {((whoisQuery && hash && pathname === '/whois-query') || (scamCheck.domain && hash && pathname === '/scam-check')) && (
                             <HeaderSearchBar
                                 placeholder = 'Type a new website to check'
                                 scamCheck = { pathname === '/scam-check' }
