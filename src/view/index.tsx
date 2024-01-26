@@ -15,7 +15,6 @@ import { GlobalStyles, defaultTheme, FontStyles } from '../assets';
 export const AppContainer = styled.div`
     margin: 0 auto;
     height: 100vh;
-    max-width: 1440px;
     width: 100%;
 `;
 

@@ -8,7 +8,6 @@ import { MyFonts } from '@/assets/fonts';
 export const Container = styled.section`
     display: flex;
     flex-direction: column;
-    max-width: 1441px;
     width: 100%;
     max-height: 837px;
     height: 100%;

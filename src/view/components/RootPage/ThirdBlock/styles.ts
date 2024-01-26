@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 export const Container = styled.section`
     width: 100%;
     padding: 0 24px;
+    display: flex;
+    justify-content: center;
 `;
 
 export const Wrapper = styled.div`

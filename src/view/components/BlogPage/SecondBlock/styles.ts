@@ -35,6 +35,7 @@ export const CardsWrapper = styled.div`
     margin-top: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    place-items: center;
     ${({ theme }) => theme.media('max').xl} {
         font-size: 20px;
         margin-bottom: 24px;

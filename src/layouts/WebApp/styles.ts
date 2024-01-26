@@ -129,11 +129,13 @@ export const LinkStyles = css`
 export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 1224px;
-    width: 100%;
+    width: calc(100% - 216px);
     /* height: fit-content; */
     min-height: 100vh;
     background: ${({ theme }) => theme.palette.gray.background};
+    ${({ theme }) => theme.media('max').lg} {
+        width: 100%;
+    }
 `;
 
 export const Header = styled.header`

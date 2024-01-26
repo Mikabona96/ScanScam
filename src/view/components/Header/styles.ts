@@ -24,7 +24,6 @@ export const appearanceMobileHeader = keyframes`
 
 export const Header = styled.header<{$scrolled: boolean}>`
     position: fixed;
-    max-width: 1440px;
     width: 100%;
     top: 0; /* required */
     padding: 24px 80px;
